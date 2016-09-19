@@ -1,7 +1,7 @@
 var webpack = require("webpack");
 var gulp = require("gulp");
 var gutil = require("gutil");
-var configPath = "./config.js";
+var webpackConfigPath = "./webpack_config.js";
 
 function log(err, stats) {
     if(err) throw new gutil.PluginError("webpack", err);
@@ -9,9 +9,9 @@ function log(err, stats) {
 }
 
 gulp.task("prod", function() {
-    webpack(require(configPath)("prod"), log);
+    webpack(require(webpackConfigPath)("prod"), log);
 });
 
 gulp.task("dev", function() {
-    webpack(require(configPath)("dev"), log);
+    webpack(require(webpackConfigPath)("dev"), log);
 });
