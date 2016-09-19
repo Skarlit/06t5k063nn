@@ -8,10 +8,7 @@ module.exports = function(env) {
     env == "prod" ? PRODUCTION : "";
     return {
         context: __dirname,
-        entry: {
-            app: "./src/js/app.js",
-            lib: ["react", "react-dom", "redux"]
-        },
+        entry: entry(env),
         output: output(env),
         module: {
             loaders: loaders(env)
@@ -21,14 +18,24 @@ module.exports = function(env) {
     };
 };
 
+function entry() {
+    var e =  {
+        app: ["./src/js/app.js"],
+        lib: ["react", "react-dom", "redux"]
+    };
+    return e;
+}
+
 function output(env) {
     if (env == PRODUCTION) {
         return {
-            path: path.join(__dirname, "../dist/js")
+            path: path.join(__dirname, "../dist/js"),
+            filename: "[name].js"
         };
     } else {
         return {
-            path: path.join(__dirname, "./dist/js")
+            path: path.join(__dirname, "../public/js"),
+            filename: "[name].js"
         };
     }
 }
