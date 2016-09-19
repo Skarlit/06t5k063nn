@@ -8,15 +8,15 @@ module.exports = function(config) {
         basePath: ".",
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ["jasmine", "requirejs"],
+        frameworks: ["mocha"],
 
 
     // list of files / patterns to load in the browser
         files: [
             "test/test-main.js",
             "test/hello_world_spec.js",
-            {pattern: "src/**/*.js", included: false},
-            {pattern: "test/**/*_spec.js", included: false}
+            {pattern: "src/**/*.js", watched: false},
+            {pattern: "test/**/*_spec.js", watched: false}
         ],
 
 
@@ -29,22 +29,23 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            "src/**/*.js": ["babel"],
-            "test/**/*.js": ["babel"]
+            "src/**/*.js": ["webpack",  "sourcemap"],
+            "test/**/*.js": ["webpack",  "sourcemap"]
         },
 
-        babelPreprocessor: {
-            options: {
-                presets: ["es2015", "react"],
-                sourceMap: "inline"
-            },
-            filename: function (file) {
-                return file.originalPath.replace(/\.js$/, ".es5.js");
-            },
-            sourceFileName: function (file) {
-                return file.originalPath;
+        webpack: {
+            devtool: "inline-source-map", //just do inline source maps instead of the default
+            module: {
+                loaders: [{ test: /\.js$/, loader: "babel-loader" }]
             }
         },
+
+        webpackMiddleware: {
+  // webpack-dev-middleware configuration
+  // i. e.
+            stats: "errors-only"
+        },
+
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
