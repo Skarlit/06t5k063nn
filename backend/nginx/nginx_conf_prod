@@ -1,0 +1,9 @@
+upstream backend {
+  server app_server.com;
+}
+
+server {
+  location / {
+    proxy_pass http://backend;
+  }
+}
