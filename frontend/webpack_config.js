@@ -21,7 +21,7 @@ module.exports = function(env) {
 function entry() {
     var e =  {
         app: ["./src/js/app.js"],
-        lib: ["react", "react-dom", "redux"]
+        lib: ["react", "react-dom", "redux", "react-redux", "react-router-redux", "axios"]
     };
     return e;
 }
@@ -34,7 +34,7 @@ function output(env) {
         };
     } else {
         return {
-            path: path.join(__dirname, "../public/js"),
+            path: path.join(__dirname, "../app_server/app/assets/javascripts"),
             filename: "[name].js"
         };
     }
