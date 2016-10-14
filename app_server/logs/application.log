@@ -1,0 +1,4 @@
+2016-09-18 20:41:03,457 [INFO] from application in ForkJoinPool-1-worker-1 - Creating Pool for datasource 'default'
+2016-09-18 20:41:03,552 [INFO] from play.api.db.DefaultDBApi in ForkJoinPool-1-worker-1 - Database [default] connected at jdbc:postgresql://localhost/niji
+2016-09-18 20:41:03,731 [INFO] from application in ForkJoinPool-1-worker-1 - ApplicationTimer demo: Starting application at 2016-09-19T03:41:03.730Z
+2016-09-18 20:41:03,884 [INFO] from play.api.Play in ForkJoinPool-1-worker-1 - Application started (Dev)
