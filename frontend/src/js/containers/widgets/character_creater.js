@@ -1,4 +1,4 @@
-import FileImport from "../../components/file_import";
+import FileImport from "../../components/image_import";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state, ownProps) => {

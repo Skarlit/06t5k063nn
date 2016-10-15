@@ -21,7 +21,7 @@ module.exports = function(env) {
 function entry() {
   var e =  {
     app: ["./src/js/app.js"],
-    lib: ["react", "react-dom", "redux", "react-redux", "react-router-redux", "axios", "font-awesome-webpack", "animate.css", "purecss"]
+    lib: ["react", "react-dom", "redux", "react-redux", "react-router-redux", "axios", "font-awesome-webpack", "animate.css", "skeleton-css-webpack"]
   };
   return e;
 }
@@ -59,7 +59,8 @@ function plugins(env) {
   var p = [
     new CommonsChunkPlugin("lib", "lib.js"),
     new webpack.ProvidePlugin({
-      React: "react"
+      React: "react",
+      Radium: "radium"
     })
   ];
   if (env == PRODUCTION) {
