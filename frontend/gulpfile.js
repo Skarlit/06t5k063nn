@@ -39,19 +39,18 @@ gulp.task("server", function() {
         changeOrigin: false,
         secure: false
       },
-      "^/((?!api/).)*$": {
-        "target": {
-          "host": "localhost",
-          "protocol": "http:",
-          "port": 80
-        },
-        ignorePath: true,
-        changeOrigin: false,
-        secure: false
-      }
+      // "^/((?!api/).)*$": {
+      //   "target": {
+      //     "host": "localhost",
+      //     "protocol": "http:",
+      //     "port": 80
+      //   },
+      //   ignorePath: true,
+      //   changeOrigin: false,
+      //   secure: false
+      // }
     },
         // Can also be an array, or: contentBase: "http://localhost/",
-    historyApiFallback: false,
         // Set this as true if you want to access dev server from arbitrary url.
         // This is handy if you are using a html5 router.
     setup: function(app) {

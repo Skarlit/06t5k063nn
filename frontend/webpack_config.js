@@ -21,7 +21,7 @@ module.exports = function(env) {
 function entry() {
   var e =  {
     app: ["./src/js/app.js"],
-    lib: ["react", "react-dom", "redux", "react-redux", "react-router-redux", "axios", "font-awesome-webpack", "animate.css"]
+    lib: ["react", "react-dom", "redux", "react-redux", "react-router-redux", "axios", "font-awesome-webpack", "animate.css", "purecss"]
   };
   return e;
 }
@@ -35,6 +35,7 @@ function output(env) {
   } else {
     return {
       path: path.join(__dirname, "../app_server/app/assets/javascripts"),
+      publicPath: "/assets/",
       filename: "[name].js"
     };
   }
@@ -56,7 +57,10 @@ function plugins(env) {
   var webpack = require("webpack");
   var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
   var p = [
-    new CommonsChunkPlugin("lib", "lib.js")
+    new CommonsChunkPlugin("lib", "lib.js"),
+    new webpack.ProvidePlugin({
+      React: "react"
+    })
   ];
   if (env == PRODUCTION) {
     var UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
