@@ -31,11 +31,11 @@ class ImageImport extends React.Component {
     document.addEventListener("dragover", this.preventDefault);
   }
   componentWillUnmount() {
-    document.removeListener("dragenter", this.onDragEnter);
-    document.removeListener("dragend", this.onDragEnd);
-    document.removeListener("dragleave", this.onDragLeave);
-    document.removeListener("drop", this.preventDefault);
-    document.removeListener("dragover", this.onDragEnd);
+    document.removeEventListener("dragenter", this.onDragEnter);
+    document.removeEventListener("dragend", this.onDragEnd);
+    document.removeEventListener("dragleave", this.onDragLeave);
+    document.removeEventListener("drop", this.preventDefault);
+    document.removeEventListener("dragover", this.onDragEnd);
   }
   shouldComponentUpdate(prevProp, prevState) {
     return this.state.mode != prevState.mode || this.state.hover != prevState.hover;
@@ -65,8 +65,8 @@ class ImageImport extends React.Component {
 
     var file = e.nativeEvent.dataTransfer.files[0];
     if (/image/.test(file.type)) {
-      readImageFile(file, (e) => {
-        console.log(e);
+      readImageFile(file, (e, fileBlob) => {
+        this.props.onImageLoaded(fileBlob);
         this.setState({mode: SUCCESS});
       })
     } else{
@@ -77,11 +77,9 @@ class ImageImport extends React.Component {
     e.preventDefault();
   }
   onMouseEnter() {
-    console.log('hover');
     this.setState({hover: true});
   }
   onMouseLeave() {
-    console.log('stop hover');
     this.setState({hover: false});
   }
   onDropZoneDragEnter() {
@@ -191,6 +189,10 @@ const styles = {
   uploadBtn: {
     fontSize: 15
   }
+}
+
+ImageImport.propTypes = {
+  onImageLoaded: React.PropTypes.func.isRequired
 }
 
 export default ImageImport;

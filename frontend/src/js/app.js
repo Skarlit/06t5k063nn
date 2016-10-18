@@ -5,6 +5,7 @@ import { browserHistory } from "react-router";
 import { syncHistoryWithStore, routerReducer } from "react-router-redux";
 import Routes from "./routes";
 import CharacterCreationReducer from "./reducers/character_creation_reducer";
+import SearchReducer from "./reducers/search_reducer";
 
 window.onload = () => {
   var rootEl = document.createElement("div");
@@ -13,6 +14,7 @@ window.onload = () => {
   const store = createStore(
       combineReducers({
         characterCreation: CharacterCreationReducer,
+        search: SearchReducer,
         routing: routerReducer,
       })
     );

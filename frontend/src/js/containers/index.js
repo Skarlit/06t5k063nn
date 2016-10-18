@@ -3,9 +3,14 @@ import { Link } from "react-router";
 
 export default class extends React.Component {
   render() {
-    return <h2> <Link to="/create">Create</Link>
-    <Link to="/404">not found</Link>
-      { this.props.children }
-    </h2>;
+    return <div>
+      <nav>
+        <Link to="/create">Create</Link>
+        <Link to="/search">Search</Link>
+      </nav>
+      <div>
+        { this.props.children }
+      </div>
+    </div>;
   }
 }

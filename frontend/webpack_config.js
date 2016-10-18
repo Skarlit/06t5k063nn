@@ -60,7 +60,8 @@ function plugins(env) {
     new CommonsChunkPlugin("lib", "lib.js"),
     new webpack.ProvidePlugin({
       React: "react",
-      Radium: "radium"
+      Radium: "radium",
+      Immutable: "immutable"
     })
   ];
   if (env == PRODUCTION) {
