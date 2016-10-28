@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Router, Route } from "react-router";
-import Index from "./containers/index.js";
-import CharacterCreater from "./containers/widgets/character_creater";
-import Search from "./containers/search";
-import NotFound from "./components/errors/not_found";
+import Index from "./pages/index.js";
+import CharacterCreater from "./character_creation/character_creater";
+import Search from "./pages/search_page";
+import NotFound from "./pages/not_found";
 
 export default (store, history) => {
   return (

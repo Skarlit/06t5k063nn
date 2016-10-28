@@ -76,6 +76,8 @@ function plugins(env) {
         warnings: false
       }
     }));
+  } else {
+    p.push(new webpack.HotModuleReplacementPlugin());
   }
 
   return p;

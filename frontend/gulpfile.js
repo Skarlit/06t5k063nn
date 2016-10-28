@@ -21,7 +21,9 @@ gulp.task("server", function() {
   var path = require("path");
   var config = require(webpackConfigPath)("dev");
   config.output.path = path.join(__dirname, "../tmp");
+  // config.entry.app.unshift("webpack/hot/only-dev-server");
   config.entry.app.unshift("webpack-dev-server/client?http://localhost:8080/");
+  // config.entry.app.unshift("react-hot-loader/patch");
   var compiler = webpack(config);
   var server = new WebpackDevServer(compiler, {
         // webpack-dev-server options
@@ -39,28 +41,10 @@ gulp.task("server", function() {
         changeOrigin: false,
         secure: false
       },
-      // "^/((?!api/).)*$": {
-      //   "target": {
-      //     "host": "localhost",
-      //     "protocol": "http:",
-      //     "port": 80
-      //   },
-      //   ignorePath: true,
-      //   changeOrigin: false,
-      //   secure: false
-      // }
     },
-        // Can also be an array, or: contentBase: "http://localhost/",
-        // Set this as true if you want to access dev server from arbitrary url.
-        // This is handy if you are using a html5 router.
+    // hot: true,
     setup: function(app) {
-          // Here you can access the Express app object and add your own custom middleware to it.
-          // For example, to define custom handlers for some paths:
-          // app.get('/some/path', function(req, res) {
-          //   res.json({ custom: 'response' });
-          // });
     },
-        // pass [static options](http://expressjs.com/en/4x/api.html#express.static) to inner express server
     staticOptions: {
     },
     historyApiFallback: true,
