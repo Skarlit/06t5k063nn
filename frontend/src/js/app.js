@@ -1,4 +1,3 @@
-import React from "react";
 import { render } from "react-dom";
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import { browserHistory } from "react-router";
@@ -7,6 +6,8 @@ import thunk from "redux-thunk";
 import Routes from "./routes";
 import CharacterCreationReducer from "./character_creation/character_creation_reducer";
 import SearchReducer from "./search/search_reducer";
+
+require("../css/base.scss");
 
 window.onload = () => {
   var rootEl = document.createElement("div");

@@ -7,7 +7,6 @@ const ACTIVATE = 3;
 const SUCCESS = 4;
 const ERROR = 5;
 
-@Radium
 class ImageImport extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +20,7 @@ class ImageImport extends React.Component {
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onDropZoneDragEnter = this.onDropZoneDragEnter.bind(this);
     this.onDropZoneDragLeave = this.onDropZoneDragLeave.bind(this);
-    this.preventDefault = (e) => {e.preventDefault()};
+    this.preventDefault = (e) => {e.preventDefault();};
 
     this.enterCounter = 0;
     this.enterDropZoneCounter = 0;
@@ -68,7 +67,7 @@ class ImageImport extends React.Component {
       readImageFile(file, (e, fileBlob) => {
         this.props.onImageLoaded(fileBlob);
         this.setState({mode: SUCCESS});
-      })
+      });
     } else{
       this.setState({mode: ERROR});
     }
@@ -84,59 +83,59 @@ class ImageImport extends React.Component {
   }
   onDropZoneDragEnter() {
     this.enterDropZoneCounter++;
-    this.setState({mode: ACTIVATE})
+    this.setState({mode: ACTIVATE});
   }
   onDropZoneDragLeave() {
     this.enterDropZoneCounter--;
     if (this.enterDropZoneCounter == 0) {
-      this.setState({mode: DRAGSTART})
+      this.setState({mode: DRAGSTART});
     }
   }
   render() {
     var view = null;
     switch(this.state.mode) {
-      case DEFAULT:
-        var fileButton;
-        if (this.state.hover) {
+    case DEFAULT:
+      var fileButton;
+      if (this.state.hover) {
 
-          fileButton = <div style={styles.clickMessage}>
+        fileButton = <div style={styles.clickMessage}>
             <div>Click Here</div>
             <div>Or</div>
             <div>Drag to upload</div>
-          </div>
-        } else {
-          fileButton = <div>
+          </div>;
+      } else {
+        fileButton = <div>
             <i style={styles.addFileGlyph} className="fa fa-plus" aria-hidden="true"></i>
-          </div>
-        }
-        view = (
+          </div>;
+      }
+      view = (
           <div onMouseEnter= {this.onMouseEnter} onMouseLeave={this.onMouseLeave} style={{position: "relative", width: "100%", height: "100%"}}>
             <FileInput onChange={this.onFileInputChange} style={styles.fileInputStyle}>
               {fileButton}
             </FileInput>
           </div>
-        )
+        );
       break;
-      case ACTIVATE:
-      case DRAGSTART:
-        view = (
+    case ACTIVATE:
+    case DRAGSTART:
+      view = (
           <div>
             <div style={{position: "relative"}} className="bounce infinite">
             <i className="fa fa-arrow-circle-down" aria-hidden="true" style={{fontSize: 70}}></i>
             <div>{"Drop Image Here"}</div>
             </div>
           </div>
-        )
+        );
       break;
-      case ERROR:
-        view = (
+    case ERROR:
+      view = (
           <div style={{fontSize: 20, color: "#aa3939"}}>Unsupported Format : (</div>
-        )
+        );
       break;
-      case SUCCESS:
-        view = (
+    case SUCCESS:
+      view = (
           <div style={{fontSize: 20, color: "#378B2E"}}> Upload Succeeded </div>
-        )
+        );
       break;
     }
 
@@ -189,10 +188,10 @@ const styles = {
   uploadBtn: {
     fontSize: 15
   }
-}
+};
 
 ImageImport.propTypes = {
   onImageLoaded: React.PropTypes.func.isRequired
-}
+};
 
 export default ImageImport;

@@ -1,5 +1,3 @@
-
-@Radium
 class FileInput extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +12,7 @@ class FileInput extends React.Component {
     return <div onClick={this.onClick} style={this.props.style || {}} >
         {this.props.children}
         <input ref="input" type="file" onChange={this.props.onChange} style={{display: "none"}}/>
-    </div>
+    </div>;
   }
 }
 

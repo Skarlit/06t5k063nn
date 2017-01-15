@@ -1,15 +1,18 @@
 var path = require("path");
+
+
 var PRODUCTION = "production";
 
 /*global __dirname */
 /*eslint no-undef: "error"*/
 
 module.exports = function(env) {
-  env == "prod" ? PRODUCTION : "";
+  env = env == "prod" ? PRODUCTION : "";
   return {
     context: __dirname,
     entry: entry(env),
     output: output(env),
+    devtool: env == PRODUCTION ? "cheap-module-source-map" : "source-map",
     module: {
       loaders: loaders(env)
     },
@@ -21,7 +24,9 @@ module.exports = function(env) {
 function entry() {
   var e =  {
     app: ["./src/js/app.js"],
-    lib: ["react", "react-dom", "redux", "react-redux", "react-router-redux", "axios", "font-awesome-webpack", "animate.css", "skeleton-css-webpack"]
+    lib: ["react", "react-dom", "redux", "react-router",
+      "react-redux", "react-router-redux", "axios",
+      "react-router", "immutable"]
   };
   return e;
 }
@@ -47,9 +52,12 @@ function loaders() {
     exclude: /(node_modules|bower_components)/,
     loader: "babel"
   },
-  { test: /\.css$/, loader: "style-loader!css-loader" },
+  {
+    test: /\.scss$/,
+    loaders: ["style-loader", "css-loader", "sass-loader"]
+  },
   { test: /\.png$/, loader: "url-loader?limit=100000" },
-  { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+  { test: /\.off(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
   { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }];
 }
 

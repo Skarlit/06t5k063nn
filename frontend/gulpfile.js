@@ -22,7 +22,7 @@ gulp.task("server", function() {
   var config = require(webpackConfigPath)("dev");
   config.output.path = path.join(__dirname, "../tmp");
   // config.entry.app.unshift("webpack/hot/only-dev-server");
-  config.entry.app.unshift("webpack-dev-server/client?http://localhost:8080/");
+  config.entry.lib.unshift("webpack-dev-server/client?http://localhost:8080/");
   // config.entry.app.unshift("react-hot-loader/patch");
   var compiler = webpack(config);
   var server = new WebpackDevServer(compiler, {
