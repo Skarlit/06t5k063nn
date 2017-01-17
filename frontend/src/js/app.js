@@ -7,7 +7,7 @@ import Routes from "./routes";
 import CharacterCreationReducer from "./character_creation/character_creation_reducer";
 import SearchReducer from "./search/search_reducer";
 
-require("../css/base.scss");
+require("../css/app.scss");
 
 window.onload = () => {
   var rootEl = document.createElement("div");
@@ -39,5 +39,14 @@ window.onload = () => {
     // Create an enhanced history that syncs navigation events with the store
   const history = syncHistoryWithStore(browserHistory, store);
 
-  render(Routes(store, history), rootEl);
+  render(Routes(store, history), rootEl, () => {
+    FB.getLoginStatus(function(response) {
+      if (response.status === "connected") {
+        console.log("Logged in.");
+      }
+      else {
+        FB.login();
+      }
+    });
+  });
 };

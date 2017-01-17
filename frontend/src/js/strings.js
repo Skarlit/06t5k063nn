@@ -1,4 +1,5 @@
 export default {
+  HOME: "ホーム",
   CHAR_SEARCH_DESCR: "キャラクターを検索",
   CHAR_SEARCH_OPTION: "オプション",
   CHAR_SEARCH_RESULT: "検索結果",

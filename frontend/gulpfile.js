@@ -1,7 +1,10 @@
 var webpack = require("webpack");
 var gulp = require("gulp");
 var gutil = require("gutil");
+var fs = require("fs");
+
 var webpackConfigPath = "./webpack_config.js";
+
 
 function log(err, stats) {
   if(err) throw new gutil.PluginError("webpack", err);
@@ -27,8 +30,13 @@ gulp.task("server", function() {
   var compiler = webpack(config);
   var server = new WebpackDevServer(compiler, {
         // webpack-dev-server options
+    https: true,
+    cert: fs.readFileSync("../configs/development/server.crt", "utf8"),
+    key: fs.readFileSync("../configs/development/server.key", "utf8"),
     contentBase: "./tmp",
     inline: true,
+    noInfo: true,
+    quiet: false,
     proxy: {
       "/index.html": {
         "target": {
@@ -49,8 +57,6 @@ gulp.task("server", function() {
     },
     historyApiFallback: true,
     clientLogLevel: "info",
-    quiet: false,
-    noInfo: false,
     watchOptions: {
       aggregateTimeout: 300,
       poll: 1000

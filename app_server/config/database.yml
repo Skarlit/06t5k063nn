@@ -11,8 +11,8 @@ default: &default
 
 development:
   <<: *default
-  url: postgresql://localhost/niji_dev
-  database: niji_dev
+  url: postgresql://localhost/yflist
+  database: yflist
   username: postgres
   password: postgres
 
@@ -21,11 +21,11 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: niji_test
-  url: postgresql://localhost/niji_test
+  database: yflist_test
+  url: postgresql://localhost/yflist
   username: postgres
   password: postgres
 
 production:
   <<: *default
-  database: niji
+  database: yflist_prod

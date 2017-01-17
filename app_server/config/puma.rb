@@ -43,5 +43,11 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 #   ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 # end
 
+ssl_bind '127.0.0.1', '9292', {
+  key: '../configs/development/server.key',
+  cert: '../configs/development/server.crt',
+  verify_mode: 'none'  
+}
+
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart

@@ -1,5 +1,5 @@
 class PageController < ApplicationController
   def home
-    render 'char_db'
+    render 'kyaralist'
   end
 end

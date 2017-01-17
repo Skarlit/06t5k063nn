@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rails s puma -b 'ssl://127.0.0.1:3000?key=../config/development/server.key&cert=../config/development/server.crt'
