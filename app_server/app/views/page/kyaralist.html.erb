@@ -3,6 +3,9 @@
 <% end %>
 
 <% content_for :content do %>
+  <script>
+    window.storeData = <%== render( file: 'json/store_data.json.jbuilder', locals: {}) %>
+  </script>
   <script crossOrigin="anonymous" src="<%= Rails.application.config.asset_host %>/assets/lib.js"></script>
-  <script crossOrigin="anonymous" src="<%= Rails.application.config.asset_host %>/assets/app.js"></script>
+  <script async crossOrigin="anonymous" src="<%= Rails.application.config.asset_host %>/assets/app.js"></script>
 <% end %>

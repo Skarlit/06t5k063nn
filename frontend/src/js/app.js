@@ -4,13 +4,14 @@ import { browserHistory } from "react-router";
 import { syncHistoryWithStore, routerReducer } from "react-router-redux";
 import thunk from "redux-thunk";
 import Routes from "./routes";
-import CharacterCreationReducer from "./character_creation/character_creation_reducer";
-import SearchReducer from "./search/search_reducer";
+import CharacterCreation from "./character_creation/exports";
+import Login from "./login/exports";
+import Search from "./search/exports";
 
 require("../css/app.scss");
 
-window.onload = () => {
-  var rootEl = document.createElement("div");
+let init = () => {
+  let rootEl = document.createElement("div");
   document.body.appendChild(rootEl);
     // Add the reducer to your store on the `routing` key
 
@@ -27,26 +28,32 @@ window.onload = () => {
     middlewares.push(logger);
   }
 
+  let initialState = {};
+  for(let key in window.storeData) {
+    initialState[key] = Immutable.fromJS(window.storeData[key]);
+  }
+
   const store = createStore(
       combineReducers({
-        characterCreation: CharacterCreationReducer,
-        search: SearchReducer,
+        login: Login.reducer,
+        characterCreation: CharacterCreation.reducer,
+        search: Search.reducer,
         routing: routerReducer,
       }),
+      initialState, // GLOBAL init Store Data
       compose(applyMiddleware(...middlewares))
     );
 
     // Create an enhanced history that syncs navigation events with the store
   const history = syncHistoryWithStore(browserHistory, store);
 
-  render(Routes(store, history), rootEl, () => {
-    FB.getLoginStatus(function(response) {
-      if (response.status === "connected") {
-        console.log("Logged in.");
-      }
-      else {
-        FB.login();
-      }
-    });
-  });
+  render(Routes(store, history), rootEl);
 };
+
+
+// Entry Point
+if (document.readyState == "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}

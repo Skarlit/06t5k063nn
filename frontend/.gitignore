@@ -1,3 +1,4 @@
 node_modules
 tmp/app.js
 tmp/lib.js
+build

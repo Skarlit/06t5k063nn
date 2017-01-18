@@ -37,19 +37,6 @@ gulp.task("server", function() {
     inline: true,
     noInfo: true,
     quiet: false,
-    proxy: {
-      "/index.html": {
-        "target": {
-          "host": "localhost",
-          "protocol": "http:",
-          "port": 80
-        },
-        pathRewrite: {"^/index.html": ""},
-        ignorePath: true,
-        changeOrigin: false,
-        secure: false
-      },
-    },
     // hot: true,
     setup: function(app) {
     },

@@ -1,8 +1,6 @@
-
-
 export default function (state, action) {
   if (typeof state == "undefined") {
-    state = Immutable.fromJS([1,2 ,3]);
+    state = Immutable.Map();
   }
   console.log(state);
   return state;

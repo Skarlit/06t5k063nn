@@ -1,4 +1,4 @@
-import LoginMenu from "../widgets/login/login_menu";
+import LoginMenu from "./components/login_menu";
 
 export default class extends React.Component {
   render() {

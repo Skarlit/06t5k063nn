@@ -16,7 +16,8 @@ module.exports = {
         "react"
     ],
     "globals": {
-        "React": true
+        "React": true,
+        "Immutable": true
     },
     "rules": {
         "indent": [

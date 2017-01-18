@@ -1,7 +1,8 @@
 var path = require("path");
 
 
-var PRODUCTION = "production";
+const PRODUCTION = "production";
+const devPublicPath = "https://localhost:8080/assets/";
 
 /*global __dirname */
 /*eslint no-undef: "error"*/
@@ -24,6 +25,8 @@ module.exports = function(env) {
 function entry() {
   var e =  {
     app: ["./src/js/app.js"],
+    search: ["./src/js/search/index.js"],
+    character_creation: ["./src/js/character_creation/index.js"],
     lib: ["react", "react-dom", "redux", "react-router",
       "react-redux", "react-router-redux", "axios",
       "react-router", "immutable"]
@@ -39,8 +42,8 @@ function output(env) {
     };
   } else {
     return {
-      path: path.join(__dirname, "../app_server/app/assets/javascripts"),
-      publicPath: "/assets/",
+      path: path.join(__dirname, "./build/"),
+      publicPath: devPublicPath,
       filename: "[name].js"
     };
   }

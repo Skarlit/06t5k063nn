@@ -4,9 +4,7 @@
     <%= yield :head %>
     <%= csrf_meta_tags %>
   </head>
-
   <body>
-    <%= render partial: "partials/facebook_sdk" %>
     <%= yield :content %>
   </body>
 </html>
