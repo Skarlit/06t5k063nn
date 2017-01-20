@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api, :defaults => { :format => 'json' } do
+    get 'strings' => 'app_strings#index'
+  end
+
   # get '/', to: 'page#home'
 
   get '(*url)' => 'page#home', :constraints => XHRConstraint.new

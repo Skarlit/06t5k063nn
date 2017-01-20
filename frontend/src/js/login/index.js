@@ -1,9 +1,6 @@
-import LoginMenu from "./components/login_menu";
-
-export default class extends React.Component {
-  render() {
-    return <div>
-      <LoginMenu />
-    </div>;
-  }
-}
+import reducer from "./reducer";
+import view from "./view";
+export default {
+  reducer: reducer,
+  view: view
+};

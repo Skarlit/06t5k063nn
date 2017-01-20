@@ -10,22 +10,22 @@ export default (store, history) => {
         <Route path="/" component={Index}>
           <Route path="create" getComponents = { (nextState, cb) => {
             require.ensure([], function (require) {
-              cb(null, require("./character_creation/index").default);
+              cb(null, require("./character_creation").default.view);
             });
           }} />
           <Route path="search"  getComponents = { (nextState, cb) => {
             require.ensure([], function (require) {
-              cb(null, require("./search/index").default);
+              cb(null, require("./search").default.view);
             });
           }}  />
           <Route path="mylist" getComponents = { (nextState, cb) => {
             require.ensure([], function (require) {
-              cb(null, require("./mylist/index").default);
+              cb(null, require("./mylist").default.view);
             });
           }}  />
           <Route path="login" getComponents = { (nextState, cb) => {
             require.ensure([], function (require) {
-              cb(null, require("./login/index").default);
+              cb(null, require("./login").default.view);
             });
           }} />
         </Route>
