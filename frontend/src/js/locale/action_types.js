@@ -1,1 +1,4 @@
-export const CHANGE = "LOCALE/CHANGE";
+export const REQUEST_STRINGS = "LOCALE/REQUEST_STRINGS";
+export const REQ_SUCCESS = "LOCALE/REQ_SUCCESS";
+export const REQ_FAIL = "LOCALE/REQ_FAIL";
+export const LOAD_STRINGS = "LOCALE/LOAD_STRINGS";

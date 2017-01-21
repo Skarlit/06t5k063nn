@@ -29,7 +29,7 @@ function entry() {
     character_creation: ["./src/js/character_creation/index.js"],
     lib: ["react", "react-dom", "redux", "react-router",
       "react-redux", "react-router-redux", "axios",
-      "react-router", "immutable", "redux-saga", "reselect"]
+      "react-router", "immutable", "redux-saga", "reselect", "babel-polyfill"]
   };
   return e;
 }

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, :defaults => { :format => 'json' } do
-    get 'strings' => 'app_strings#index'
+    get 'strings/:locale' => 'app_strings#index'
   end
 
   # get '/', to: 'page#home'

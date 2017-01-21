@@ -45,6 +45,9 @@ let init = () => {
       initialState, // GLOBAL init Store Data
       compose(applyMiddleware(...middlewares))
     );
+  console.log(Locale.sagas);
+  sagaMiddleware.run(Locale.sagas);
+
 
     // Create an enhanced history that syncs navigation events with the store
   const history = syncHistoryWithStore(browserHistory, store);
