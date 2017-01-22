@@ -1,4 +1,5 @@
 import * as ActionTypes from "./action_types";
+import Cookie from "js-cookie";
 
 export default function (state, action) {
   if (typeof state == "undefined") {
@@ -7,6 +8,7 @@ export default function (state, action) {
   switch(action.type) {
   case ActionTypes.LOAD_STRINGS:
     state = Immutable.fromJS(action.strings);
+    Cookie.set("locale", state.get("locale"));
   }
   return state;
 }
