@@ -1,0 +1,33 @@
+.fb-login-btn {
+  position: relative;
+  color: #fff;
+  background-color: #3b5998;
+  border-color: rgba(0,0,0,0.2);
+  max-width: 230px;
+  height: 40px;
+  line-height: 40px;
+  box-sizing: border-box;
+  padding-left: 40px;
+  border-radius: 2px;
+
+  .fa {
+    line-height: 40px;
+    text-align: center;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    top: 50%;
+    border-right: 1px solid rgba(0,0,0,0.2);
+    margin-top: -20px;
+    left: 0;
+  }
+
+  .text {
+    text-align: center;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #2d4373;
+  }
+}

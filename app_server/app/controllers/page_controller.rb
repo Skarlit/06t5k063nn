@@ -5,4 +5,8 @@ class PageController < ApplicationController
     @strings_partial = get_strings_partial_location(cookies[:locale])
     render 'kyaralist'
   end
+
+  def test
+    render 'test'
+  end
 end

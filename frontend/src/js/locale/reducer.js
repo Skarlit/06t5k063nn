@@ -8,7 +8,7 @@ export default function (state, action) {
   switch(action.type) {
   case ActionTypes.LOAD_STRINGS:
     state = Immutable.fromJS(action.strings);
-    Cookie.set("locale", state.get("locale"));
+    Cookie.set("locale", state.get("locale"), { secure: true });
   }
   return state;
 }

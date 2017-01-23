@@ -8,10 +8,12 @@ import CharacterCreation from "./character_creation";
 import Login from "./login";
 import Search from "./search";
 import Locale from "./locale";
+import Utility from "./utility";
 
 require("../css/app.scss");
 
 let init = () => {
+
   let rootEl = document.createElement("div");
   document.body.appendChild(rootEl);
     // Add the reducer to your store on the `routing` key
@@ -29,6 +31,8 @@ let init = () => {
     middlewares.push(logger);
   }
 
+  Login.init(window.storeData.login);
+
   let initialState = {};
   for(let key in window.storeData) {
     initialState[key] = Immutable.fromJS(window.storeData[key]);
@@ -40,6 +44,7 @@ let init = () => {
         login: Login.reducer,
         characterCreation: CharacterCreation.reducer,
         search: Search.reducer,
+        endpoints: Utility.nullReducer,
         routing: routerReducer,
       }),
       initialState, // GLOBAL init Store Data
