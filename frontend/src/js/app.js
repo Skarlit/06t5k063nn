@@ -10,8 +10,6 @@ import Search from "./search";
 import Locale from "./locale";
 import Utility from "./utility";
 
-require("../css/app.scss");
-
 let init = () => {
 
   let rootEl = document.createElement("div");

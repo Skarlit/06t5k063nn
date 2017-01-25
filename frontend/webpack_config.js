@@ -1,5 +1,5 @@
 var path = require("path");
-
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const PRODUCTION = "production";
 const devPublicPath = "https://localhost:8080/assets/";
@@ -29,7 +29,9 @@ function entry() {
     character_creation: ["./src/js/character_creation/index.js"],
     lib: ["react", "react-dom", "redux", "react-router",
       "react-redux", "react-router-redux", "axios",
-      "react-router", "immutable", "redux-saga", "reselect", "babel-polyfill"]
+      "react-router", "immutable", "redux-saga", "reselect", "babel-polyfill"],
+    app_style: ["./src/css/desktop.js"],
+    mobile_style: ["./src/css/mobile.js"]
   };
   return e;
 }
@@ -57,7 +59,8 @@ function loaders() {
   },
   {
     test: /\.scss$/,
-    loaders: ["style-loader", "css-loader", "sass-loader"]
+    loader: ExtractTextPlugin.extract(
+      "style-loader", "css-loader!postcss-loader!sass-loader")
   },
   { test: /\.png$/, loader: "url-loader?limit=100000" },
   { test: /\.off(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
@@ -67,13 +70,14 @@ function loaders() {
 function plugins(env) {
   var webpack = require("webpack");
   var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
+
   var p = [
     new CommonsChunkPlugin("lib", "lib.js"),
     new webpack.ProvidePlugin({
       React: "react",
-      Radium: "radium",
       Immutable: "immutable"
-    })
+    }),
+    new ExtractTextPlugin("[name].css")
   ];
   if (env == PRODUCTION) {
     var UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
@@ -86,6 +90,12 @@ function plugins(env) {
       compress: {
         warnings: false
       }
+    }));
+    var ManifestPlugin = require("webpack-manifest-plugin");
+    p.push(new ManifestPlugin({
+      fileName: "manifest.json",
+      basePath: "/assets/",
+      writeToFileEmit: true
     }));
   } else {
     p.push(new webpack.HotModuleReplacementPlugin());

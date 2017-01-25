@@ -1,6 +1,11 @@
 <% content_for :head do %>
   <title>KyaraList</title>
   <script async src="https://use.fontawesome.com/0fcd2e2f30.js"></script>
+  <% if @is_mobile %>
+
+  <% else %>
+     <link rel="stylesheet" type="text/css" href="<%= Rails.application.config.asset_host %>/assets/app_style.css">
+  <% end %>
 <% end %>
 
 <% content_for :content do %>
