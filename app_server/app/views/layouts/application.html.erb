@@ -3,6 +3,7 @@
   <head>
     <%= yield :head %>
     <%= csrf_meta_tags %>
+    <meta http-equiv="Content-Security-Policy" content="<%= Rails.application.config.security_policy %>">
   </head>
   <body>
     <%= yield :content %>

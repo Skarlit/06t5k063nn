@@ -3,6 +3,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const PRODUCTION = "production";
 const devPublicPath = "https://localhost:8080/assets/";
+const prodPublicPath = "https://kyaralist/assets/";
 
 /*global __dirname */
 /*eslint no-undef: "error"*/
@@ -18,6 +19,7 @@ module.exports = function(env) {
       loaders: loaders(env)
     },
     watch: env != PRODUCTION,
+    revision: env == PRODUCTION,
     plugins: plugins(env)
   };
 };
@@ -39,8 +41,9 @@ function entry() {
 function output(env) {
   if (env == PRODUCTION) {
     return {
-      path: path.join(__dirname, "../dist/js"),
-      filename: "[name].js"
+      path: path.join(__dirname, "./build/"),
+      publicPath: prodPublicPath,
+      filename: "[name]_[hash].js"
     };
   } else {
     return {
@@ -72,13 +75,18 @@ function plugins(env) {
   var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 
   var p = [
-    new CommonsChunkPlugin("lib", "lib.js"),
+    new CommonsChunkPlugin("lib", env == PRODUCTION ? "lib_[hash].js" : "lib.js"),
     new webpack.ProvidePlugin({
       React: "react",
       Immutable: "immutable"
     }),
-    new ExtractTextPlugin("[name].css")
+    new ExtractTextPlugin(env == PRODUCTION ? "[name]_[hash].css" : "[name].css")
   ];
+  var ManifestPlugin = require("webpack-manifest-plugin");
+  p.push(new ManifestPlugin({
+    fileName: "manifest.json",
+    writeToFileEmit: true
+  }));
   if (env == PRODUCTION) {
     var UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
     p.push(new webpack.DefinePlugin({
@@ -90,12 +98,6 @@ function plugins(env) {
       compress: {
         warnings: false
       }
-    }));
-    var ManifestPlugin = require("webpack-manifest-plugin");
-    p.push(new ManifestPlugin({
-      fileName: "manifest.json",
-      basePath: "/assets/",
-      writeToFileEmit: true
     }));
   } else {
     p.push(new webpack.HotModuleReplacementPlugin());

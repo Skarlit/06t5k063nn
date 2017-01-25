@@ -18,8 +18,6 @@ Rails.application.configure do
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
-  # Compress JavaScripts and CSS.
-  config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
@@ -83,4 +81,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.asset_host = ""
+  config.assets.prefix = "assets"
+  config.security_policy =   config.security_policy = "default-src 'self' https://cdn.fontawesome.com " \
+                             "https://fonts.googleapis.com " \
+                             "https://use.fontawesome.com "
 end

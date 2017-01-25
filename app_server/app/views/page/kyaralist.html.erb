@@ -1,11 +1,9 @@
 <% content_for :head do %>
   <title>KyaraList</title>
   <script async src="https://use.fontawesome.com/0fcd2e2f30.js"></script>
-  <% if @is_mobile %>
-
-  <% else %>
-     <link rel="stylesheet" type="text/css" href="<%= Rails.application.config.asset_host %>/assets/app_style.css">
-  <% end %>
+  <% stylesheet = @is_mobile ? "mobile.css" : "app_style.css" %>
+  <link rel="stylesheet" type="text/css"
+        href="<%= resolve_asset_path(stylesheet) %>"/>
 <% end %>
 
 <% content_for :content do %>
@@ -13,6 +11,6 @@
   <script>
     window.storeData = <%== render( file: 'json/store_data.json.jbuilder', locals: {strings_partial: @strings_partial}) %>
   </script>
-  <script crossOrigin="anonymous" src="<%= Rails.application.config.asset_host %>/assets/lib.js"></script>
-  <script async crossOrigin="anonymous" src="<%= Rails.application.config.asset_host %>/assets/app.js"></script>
+  <script src="<%= resolve_asset_path("lib.js") %>" crossorigin="anonymous"></script>
+  <script src="<%= resolve_asset_path("app.js") %>" crossorigin="anonymous" async></script>
 <% end %>
