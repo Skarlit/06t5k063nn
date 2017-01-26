@@ -4,8 +4,10 @@ import UserStatus from "./user_status";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    strings: state.strings
-
+    strings: state.strings,
+    loggedIn: state.login.getIn(["currentUser", "loggedIn"]),
+    userName: state.login.getIn(["currentUser", "name"]),
+    userImage: state.login.getIn(["currentUser", "image"])
   };
 };
 
@@ -20,7 +22,10 @@ const NavBar = class extends React.Component {
     let strings = this.props.strings;
     return  <div id="nav-bar">
       <div className="row">
-        <UserStatus strings={strings} />
+        <UserStatus strings={strings}
+          loggedIn={this.props.loggedIn}
+          userName={this.props.userName}
+          userImage={this.props.userImage}/>
       </div>
       <div className="row">
           <Link to="/">{strings.get("HOME")}</Link>

@@ -24,7 +24,16 @@ let init = () => {
       actionTransformer: (action) => ({
         ...action,
         type: String(action.type)
-      })
+      }),
+      stateTransformer: (state) => {
+        for(var k in state) {
+          if (state[k].toJS) {
+            console.log(k, state[k].toJS());
+          } else {
+            console.log(k, state[k]);
+          }
+        }
+      }
     });
     middlewares.push(logger);
   }

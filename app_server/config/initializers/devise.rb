@@ -272,6 +272,9 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
-  config.omniauth :facebook, ENV.fetch("FB_APP_KEY"), ENV.fetch("FB_APP_SECRET")
-  
+
+  # callback_url is default to devise omniauth callback path
+  config.omniauth :facebook, ENV.fetch("FB_APP_KEY"), ENV.fetch("FB_APP_SECRET"), secure_image_url: true
+
+
 end

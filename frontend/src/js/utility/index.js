@@ -1,3 +1,11 @@
 import nullReducer from "./null_reducer";
 
-export default {nullReducer};
+const httpRegex = /^(http)([^s])/;
+function filterHttpUrl(url) {
+  if (httpRegex.test(url)) {
+    return url.replace(httpRegex, "$1s$2");
+  }
+  return url;
+}
+
+export default {nullReducer, filterHttpUrl};

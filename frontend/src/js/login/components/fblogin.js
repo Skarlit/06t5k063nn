@@ -1,17 +1,20 @@
 import { connect } from "react-redux";
 import axios from "axios";
+import { loginViaFacebook } from "../actions";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    appId: state.login.getIn(["fb_sdk", "appId"]),
-    version: state.login.getIn(["fb_sdk", "version"]),
+    appId: state.login.getIn(["fbSdk", "appId"]),
+    version: state.login.getIn(["fbSdk", "version"]),
     oAuthCallbackUrl: state.endpoints.getIn(["oauth", "fbCallback"])
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-
+    login: function(user) {
+      dispatch(loginViaFacebook(user));
+    }
   };
 };
 
@@ -61,6 +64,7 @@ class FbLogin extends React.Component {
 
         })
         .then((data) => {
+          this.props.login(data);
           console.log(data);   // 'data' contains a 'user' object with 'email' and 'name' in it.
         })
         .catch(function (error) {

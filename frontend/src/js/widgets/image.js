@@ -4,7 +4,7 @@ const noop = () => {};
 class Image extends React.Component {
   render() {
     return <a onClick={this.props.onClick || noop}
-       className={"image " + this.props.classNames}
+       className={"image " + (this.props.classNames || "")}
        style={{
          width: this.props.width,
          height: this.props.height,

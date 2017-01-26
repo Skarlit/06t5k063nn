@@ -64,5 +64,6 @@ Rails.application.configure do
   config.security_policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' " \
                            "https://localhost:* wss://localhost:8080 https://cdn.fontawesome.com " \
                            "#{config.asset_host} https://fonts.googleapis.com " \
-                           "https://use.fontawesome.com https://fonts.gstatic.com"
+                           "https://use.fontawesome.com https://fonts.gstatic.com " \
+                           "https://connect.facebook.net https://*.facebook.com https://*.fbcdn.net"
 end
