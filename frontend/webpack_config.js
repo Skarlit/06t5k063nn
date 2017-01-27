@@ -14,9 +14,17 @@ module.exports = function(env) {
     context: __dirname,
     entry: entry(env),
     output: output(env),
+    resolve: {
+      modulesDirectories: ["node_modules", "spritesmith-generated"]
+    },
     devtool: env == PRODUCTION ? "cheap-module-source-map" : "source-map",
     module: {
       loaders: loaders(env)
+    },
+    postcss: function() {
+      return [
+        require("postcss-sprites")
+      ];
     },
     watch: env != PRODUCTION,
     revision: env == PRODUCTION,
@@ -29,11 +37,12 @@ function entry() {
     app: ["./src/js/app.js"],
     search: ["./src/js/search/index.js"],
     character_creation: ["./src/js/character_creation/index.js"],
-    lib: ["react", "react-dom", "redux", "react-router",
+    lib: ["react", "react-dom", "redux", "react-router", "react-modal",
       "react-redux", "react-router-redux", "axios",
       "react-router", "immutable", "redux-saga", "reselect", "babel-polyfill"],
     app_style: ["./src/css/desktop.js"],
     mobile_style: ["./src/css/mobile.js"]
+    // images: ["./src/img/images.js"]
   };
   return e;
 }
@@ -63,11 +72,19 @@ function loaders() {
   {
     test: /\.scss$/,
     loader: ExtractTextPlugin.extract(
-      "style-loader", "css-loader!postcss-loader!sass-loader")
+      "style-loader", "css-loader!postcss-loader!sass-loader!stylus-loader")
   },
-  { test: /\.png$/, loader: "url-loader?limit=100000" },
+  // { test: /\.png$/, loader: "url-loader?limit=100000" },
   { test: /\.off(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-  { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }];
+  { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
+  {test: /\.styl$/, loaders: [
+    "style",
+    "css",
+    "stylus"
+  ]},
+  {test: /\.(jpe?g|png|gif|svg)$/i, loaders: [
+    "file-loader?name=[hash].[ext]"
+  ]}];
 }
 
 function plugins(env) {
@@ -87,6 +104,7 @@ function plugins(env) {
     fileName: "manifest.json",
     writeToFileEmit: true
   }));
+
   if (env == PRODUCTION) {
     var UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
     p.push(new webpack.DefinePlugin({

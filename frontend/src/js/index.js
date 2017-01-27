@@ -1,4 +1,5 @@
-import NavBar from "./components/nav_bar";
+import NavBar from "./components/navbar";
+import Login from "./login";
 
 export default class extends React.Component {
   render() {

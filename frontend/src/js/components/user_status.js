@@ -10,10 +10,15 @@ export default class UserStatus extends React.Component {
     let strings = this.props.strings;
     let userImage = Utility.filterHttpUrl(this.props.userImage);
     return <div className="user-status">
-      <Image src={userImage} height="30px" width="30px"></Image>
-      <div>{this.props.userName}</div>
-      <Link to="/mylist">{strings.get("MY_LIST")}</Link>
-      <Link to="/logout">{strings.get("LOGOUT")}</Link>
+      <Link to="/mylist">{strings.get("MY_LIST")}
+        <i className="fa fa-th-list" aria-hidden="true"></i>
+      </Link>
+      <Link to="/logout">
+        {strings.get("LOGOUT")}
+        <i className="fa fa-sign-out" aria-hidden="true"></i>
+      </Link>
+      <div className="user-name">{this.props.userName}</div>
+      <Image src={userImage} className="user-icon"></Image>
       <Locale.view> </Locale.view>
     </div>;
   }

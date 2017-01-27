@@ -3,22 +3,21 @@ const noop = () => {};
 
 class Image extends React.Component {
   render() {
-    return <a onClick={this.props.onClick || noop}
-       className={"image " + (this.props.classNames || "")}
-       style={{
-         width: this.props.width,
-         height: this.props.height,
-         backgroundImage: `url(${this.props.src})`
-       }}>
-    </a>;
+    let style = {backgroundImage: `url(${this.props.src})`};
+    if (this.props.width) style.width = this.props.width;
+    if (this.props.height) style.height = this.props.height;
+    return <div onClick={this.props.onClick || noop}
+       className={"image " + (this.props.className || "")}
+       style={style}>
+    </div>;
   }
 }
 
 
 Image.propTypes = {
   src: React.PropTypes.string.isRequired,
-  width: React.PropTypes.string.isRequired,
-  height: React.PropTypes.string.isRequired,
+  width: React.PropTypes.string,
+  height: React.PropTypes.string,
   classNames: React.PropTypes.string,
   onClick: React.PropTypes.func
 };

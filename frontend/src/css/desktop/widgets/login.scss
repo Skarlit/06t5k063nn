@@ -1,0 +1,52 @@
+@import "../animation.scss";
+
+.login-modal-overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  &.open {
+    animation-name: fadeIn;
+    animation-duration: 150ms;
+  }
+
+  &.close {
+    animation-name: fadeOut;
+    animation-duration: 150ms;
+  }
+
+  .login-modal {
+    background-color: white;
+    position: absolute;
+    width: 350px;
+    max-width: 100%;
+    height: 450px;
+    max-height: 100%;
+    transform:translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 4px;
+    border: 1px solid rgb(180, 180, 180);
+  }
+
+  .content {
+    position: relative;
+    padding: 15px 25px;
+  }
+
+  .title {
+    text-align: center;
+    padding: 32px 10px;
+    font-size: 24px;
+    border-bottom: 1px solid #d8d8d8;
+  }
+
+  .btn-wrap {
+    margin: 0 auto;
+    padding: 40px 0;
+    box-sizing: border-box;
+  }
+}

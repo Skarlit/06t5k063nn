@@ -6,3 +6,15 @@ export function loginViaFacebook(user) {
     user: user
   };
 }
+
+export function showModal() {
+  return {
+    type: actionTypes.SHOW_MODAL
+  };
+}
+
+export function hideModal() {
+  return {
+    type: actionTypes.HIDE_MODAL
+  };
+}

@@ -57,7 +57,6 @@ let init = () => {
       initialState, // GLOBAL init Store Data
       compose(applyMiddleware(...middlewares))
     );
-  console.log(Locale.sagas);
   sagaMiddleware.run(Locale.sagas);
 
 

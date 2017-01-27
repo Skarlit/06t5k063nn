@@ -1,3 +1,3 @@
 import Image from "./image";
-
-export default {Image};
+import Text from "./text";
+export default {Image, Text};

@@ -2,6 +2,7 @@ import { Provider } from "react-redux";
 import { Router, Route } from "react-router";
 import Index from "./index";
 import NotFound from "./errors/404";
+import Login from "./login";
 
 export default (store, history) => {
   return (
@@ -23,11 +24,7 @@ export default (store, history) => {
               cb(null, require("./mylist").default.view);
             });
           }}  />
-          <Route path="login" getComponents = { (nextState, cb) => {
-            require.ensure([], function (require) {
-              cb(null, require("./login").default.view);
-            });
-          }} />
+          <Route path="/login" component={Login.view}/>
         </Route>
         <Route path="*" component={NotFound}/>
       </Router>

@@ -21,13 +21,13 @@ const NavBar = class extends React.Component {
   render() {
     let strings = this.props.strings;
     return  <div id="nav-bar">
-      <div className="row">
+      <div className="row user">
         <UserStatus strings={strings}
           loggedIn={this.props.loggedIn}
           userName={this.props.userName}
           userImage={this.props.userImage}/>
       </div>
-      <div className="row">
+      <div className="row pages">
           <Link to="/">{strings.get("HOME")}</Link>
           <Link to="/search">{strings.get("CHAR_SEARCH_DESCR")}</Link>
           <Link to="/create">{strings.get("CHAR_CREATION_DESCR")}</Link>
