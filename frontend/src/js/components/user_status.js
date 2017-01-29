@@ -1,5 +1,4 @@
 import {Link } from "react-router";
-import Locale from "../locale";
 import Widigets from "../widgets";
 import Utility from "../utility";
 
@@ -19,7 +18,7 @@ export default class UserStatus extends React.Component {
       </Link>
       <div className="user-name">{this.props.userName}</div>
       <Image src={userImage} className="user-icon"></Image>
-      <Locale.view> </Locale.view>
+
     </div>;
   }
   renderGuestUI() {

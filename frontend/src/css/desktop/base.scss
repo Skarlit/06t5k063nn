@@ -1,4 +1,6 @@
 @import url(https://fonts.googleapis.com/earlyaccess/mplus1p.css);
+@import "./constants.scss";
+
 
 html {
   font-family: 'Mplus 1p', "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif
@@ -25,4 +27,22 @@ a {
 .fadeOut {
   animation-name: fadeOut;
   animation-duration: 150ms;
+}
+
+
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding-bottom: $footer-height;
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: $footer-height;
+  background-color: $main-color;
 }

@@ -30,6 +30,39 @@ class Search extends React.Component {
             <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
             <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
             <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+            <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
         </ul>
       </div>
     </div>;
