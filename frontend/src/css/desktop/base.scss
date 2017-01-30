@@ -29,8 +29,6 @@ a {
   animation-duration: 150ms;
 }
 
-
-
 .app {
   position: relative;
   min-height: 100vh;
@@ -45,4 +43,11 @@ a {
   width: 100%;
   height: $footer-height;
   background-color: $main-color;
+  text-align: center;
+  color: $grey;
+
+  .disclaimer {
+    font-size: 12px;
+    padding: 15px 0;
+  }
 }

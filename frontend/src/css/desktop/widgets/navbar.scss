@@ -1,8 +1,8 @@
-#nav-bar {
+.nav-bar {
   .row {
     &.user {
       width: 100%;
-      height: 50px;
+      height: 64px;
       position: relative;
       background-color: $main-color;
       a, div {
@@ -19,7 +19,6 @@
       box-sizing: border-box;
       display: flex;
       align-items: center;
-      border-bottom: 4px solid #ff5353;
       box-sizing: border-box;
 
       a {
@@ -34,29 +33,5 @@
         background-color: #ff5353;
       }
     }
-  }
-
-  .user-status {
-    float: right;
-    display: flex;
-    height: 100%;
-    line-height: 50px;
-    margin-right: 5px;
-    padding: 4px 0;
-    box-sizing: border-box;
-  }
-  .user-icon {
-    background-position: center;
-    background-size: contain;
-    border: 1px solid #aaa;
-    border-radius: 100%;
-    width: 42px;
-    height: 42px;
-    box-sizing: border-box;
-  }
-  .user-name {
-    font-size: 18px;
-    font-weight: 600;
-    margin: 0 25px;
   }
 }

@@ -1,18 +1,39 @@
-.locale-btn {
-  display: flex;
-  width: 200px;
-  justify-content: space-around;
-  margin: 0 auto;
-  
-  .item {
-    width: 50px;
-    color: white;
-    text-align: center;
+@import "../constants.scss";
+
+.locale-wrapper {
+
+  .locale-title {
+    width: 250px;
+    padding: 20px 0 10px 0;
+    margin: 0 auto;
+    border-bottom: 1px solid;
   }
 
-  .icn-jp, .icn-en {
+  .locale-btn {
+    padding-top: 15px;
+    display: flex;
+    width: 200px;
+    justify-content: space-around;
     margin: 0 auto;
-    width: 32px;
-    height: 32px;
+    font-size: 12px;
+    font-weight: 600;
+
+    .item {
+      color: $grey;
+      width: 50px;
+      text-align: center;
+      flex-grow: 1;
+
+      &.current {
+        color: white;
+      }
+    }
+
+    .icn-jp, .icn-en {
+      margin: 0 auto;
+      width: 32px;
+      height: 32px;
+    }
   }
+
 }

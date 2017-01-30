@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => {
 const NavBar = class extends React.Component {
   render() {
     let strings = this.props.strings;
-    return  <div id="nav-bar">
+    return  <div className="nav-bar">
       <div className="row user">
         <UserStatus strings={strings}
           loggedIn={this.props.loggedIn}
