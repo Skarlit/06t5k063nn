@@ -60,12 +60,10 @@ class FbLogin extends React.Component {
         console.log(response.authResponse);
          // since we have cookies enabled, this request will allow omniauth to parse
          // out the auth code from the signed request in the fbsr_XXX cookie
-        axios.get(this.props.oAuthCallbackUrl, {
-
-        })
-        .then((data) => {
-          this.props.login(data);
-          console.log(data);   // 'data' contains a 'user' object with 'email' and 'name' in it.
+        axios.get(this.props.oAuthCallbackUrl, {})
+        .then((res) => {
+          this.props.login(res.data);
+          console.log(res.data);   // 'data' contains a 'user' object with 'email' and 'name' in it.
         })
         .catch(function (error) {
           console.log(error);

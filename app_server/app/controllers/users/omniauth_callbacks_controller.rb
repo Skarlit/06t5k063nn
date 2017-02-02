@@ -5,11 +5,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       sign_in @user, :event => :authentication #this will throw if @user is not activated
-      render 'api/users/current_user.json.jbuilder'
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
-      redirect_to new_user_registration_url
     end
+    render 'api/users/current_user.json.jbuilder'
   end
 
   def failure

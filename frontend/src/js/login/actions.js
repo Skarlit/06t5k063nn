@@ -7,6 +7,12 @@ export function loginViaFacebook(user) {
   };
 }
 
+export function deleteUserSession() {
+  return {
+    type: actionTypes.DELETE_USER_SESSION
+  };
+}
+
 export function showModal() {
   return {
     type: actionTypes.SHOW_MODAL

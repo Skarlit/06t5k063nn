@@ -1,7 +1,7 @@
 import { render } from "react-dom";
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import { browserHistory } from "react-router";
-import { syncHistoryWithStore, routerReducer } from "react-router-redux";
+import { routerMiddleware, syncHistoryWithStore, routerReducer } from "react-router-redux";
 import createSagaMiddleware from "redux-saga";
 import Routes from "./routes";
 import CharacterCreation from "./character_creation";
@@ -16,7 +16,9 @@ let init = () => {
   document.body.appendChild(rootEl);
     // Add the reducer to your store on the `routing` key
   const sagaMiddleware = createSagaMiddleware();
-  const middlewares = [sagaMiddleware];
+
+  const historyMiddleware = routerMiddleware(browserHistory);
+  const middlewares = [historyMiddleware, sagaMiddleware];
 
   if (process.env.NODE_ENV !== "production") {
     const createLogger = require("redux-logger");
@@ -58,6 +60,7 @@ let init = () => {
       compose(applyMiddleware(...middlewares))
     );
   sagaMiddleware.run(Locale.sagas);
+  sagaMiddleware.run(Login.sagas);
 
 
     // Create an enhanced history that syncs navigation events with the store

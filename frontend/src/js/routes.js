@@ -25,6 +25,7 @@ export default (store, history) => {
             });
           }}  />
           <Route path="/login" component={Login.view}/>
+          <Route path="/logout" component={Login.Logout}/>
         </Route>
         <Route path="*" component={NotFound}/>
       </Router>

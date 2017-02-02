@@ -8,6 +8,21 @@
 
   margin: 0 0 0 auto;
 
+  a.btn.login-btn {
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -20px;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #a0a0a0;
+
+    &:hover {
+      color: $light-green;
+    }
+  }
 
   .user-icon {
     position: absolute;

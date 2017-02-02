@@ -8,4 +8,8 @@ function filterHttpUrl(url) {
   return url;
 }
 
-export default {nullReducer, filterHttpUrl};
+function getCSRFToken() {
+  return document.querySelector("meta[name=\"csrf-token\"]").getAttribute("content");
+}
+
+export default {nullReducer, filterHttpUrl, getCSRFToken};

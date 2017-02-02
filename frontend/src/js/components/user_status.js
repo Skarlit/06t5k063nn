@@ -11,6 +11,9 @@ export default class UserStatus extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.close = this.close.bind(this);
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.toggled != this.state.toggled || nextProps.loggedIn != this.props.loggedIn;
+  }
   toggle() {
     this.setState({toggled: !this.state.toggled});
   }
@@ -48,7 +51,7 @@ export default class UserStatus extends React.Component {
   renderGuestUI() {
     let strings = this.props.strings;
     return <div className="user-status">
-      <Link to="/login">{strings.get("LOGIN")}</Link>
+        <Link className="btn login-btn" to="/login" >{strings.get("LOGIN")}</Link>
     </div>;
   }
   render() {
