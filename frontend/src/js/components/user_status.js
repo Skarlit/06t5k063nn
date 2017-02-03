@@ -14,11 +14,15 @@ export default class UserStatus extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return nextState.toggled != this.state.toggled || nextProps.loggedIn != this.props.loggedIn;
   }
-  toggle() {
+  toggle(e) {
+    e.preventDefault();
     this.setState({toggled: !this.state.toggled});
+    e.stopPropagation();
   }
-  close() {
+  close(e) {
+    e.preventDefault();
     this.setState({toggled: false});
+    e.stopPropagation();
   }
   renderMenuItem(string, glpyh, link, key) {
     return <Link key={key} to={link}>{string}
@@ -35,13 +39,15 @@ export default class UserStatus extends React.Component {
       this.renderMenuItem(strings.get("SETTING"), "fa fa-cog", "/profile/setting", "user-status-setting"),
       this.renderMenuItem(strings.get("LOGOUT"), "fa fa-sign-out", "/logout", "user-status-logout")
     ];
+    let backdrop = this.state.toggled ?
+        <div className="backdrop" onClick={this.close}></div> : null;
     return <div className="user-status">
       <div className={"menu " + (this.state.toggled ? "toggled" : "")}>
         <div className="slider">
           {menuItems}
         </div>
       </div>
-      <div className="backdrop" onClick={this.close}></div>
+      {backdrop}
       <a href="javascript://" className="status" onClick={this.toggle}>
         <div className="user-name">{this.props.userName}</div>
         <Image src={userImage} className="user-icon"></Image>

@@ -3,6 +3,7 @@ import { Router, Route } from "react-router";
 import Index from "./index";
 import NotFound from "./errors/404";
 import Login from "./login";
+import Character from "./character";
 
 export default (store, history) => {
   return (
@@ -24,6 +25,7 @@ export default (store, history) => {
               cb(null, require("./mylist").default.view);
             });
           }}  />
+          <Route path="character/:characterId" component={Character.view} />
           <Route path="/login" component={Login.view}/>
           <Route path="/logout" component={Login.Logout}/>
         </Route>

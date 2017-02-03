@@ -10,7 +10,6 @@ export default function (state, action) {
   switch(action.type) {
   case actionTypes.USER_LOGIN:
     state = state.update("currentUser", () => Immutable.fromJS(action.user));
-    state = state.update(["currentUser", "loggedIn"], () => true);
     break;
   case actionTypes.DELETE_USER_SESSION:
     state = state.update("currentUser", () => Immutable.Map());

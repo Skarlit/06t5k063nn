@@ -7,6 +7,7 @@ import Routes from "./routes";
 import CharacterCreation from "./character_creation";
 import Login from "./login";
 import Search from "./search";
+import Character from "./character";
 import Locale from "./locale";
 import Utility from "./utility";
 
@@ -27,15 +28,15 @@ let init = () => {
         ...action,
         type: String(action.type)
       }),
-      stateTransformer: (state) => {
-        for(var k in state) {
-          if (state[k].toJS) {
-            console.log(k, state[k].toJS());
-          } else {
-            console.log(k, state[k]);
-          }
-        }
-      }
+      // stateTransformer: (state) => {
+      //   for(var k in state) {
+      //     if (state[k].toJS) {
+      //       console.log(k, state[k].toJS());
+      //     } else {
+      //       console.log(k, state[k]);
+      //     }
+      //   }
+      // }
     });
     middlewares.push(logger);
   }
@@ -54,6 +55,7 @@ let init = () => {
         characterCreation: CharacterCreation.reducer,
         search: Search.reducer,
         endpoints: Utility.nullReducer,
+        characters: Character.reducer,
         routing: routerReducer,
       }),
       initialState, // GLOBAL init Store Data
