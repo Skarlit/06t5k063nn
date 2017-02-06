@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import Widigets from "../widgets";
 import Utility from "../utility";
+import Locale from "../locale";
 
+const { Text } = Locale;
 const { Image } = Widigets;
 
 export default class UserStatus extends React.Component {
@@ -24,8 +26,8 @@ export default class UserStatus extends React.Component {
     this.setState({ toggled: false });
     e.stopPropagation();
   }
-  renderMenuItem(string, glpyh, link, key) {
-    return (<Link key={key} to={link}>{string}
+  renderMenuItem(textKey, glpyh, link, key) {
+    return (<Link key={key} to={link}><Text textKey={textKey} />
       <i className={glpyh} aria-hidden="true" />
     </Link>);
   }
@@ -34,10 +36,10 @@ export default class UserStatus extends React.Component {
     const userImage = Utility.filterHttpUrl(this.props.userImage);
 
     const menuItems = [
-      this.renderMenuItem(strings.get("MY_LIST"), "fa fa-th-list", "/mylist", "user-status-mylist"),
-      this.renderMenuItem(strings.get("PROFILE"), "fa fa-user", "/profile", "user-status-profile"),
-      this.renderMenuItem(strings.get("SETTING"), "fa fa-cog", "/profile/setting", "user-status-setting"),
-      this.renderMenuItem(strings.get("LOGOUT"), "fa fa-sign-out", "/logout", "user-status-logout"),
+      this.renderMenuItem("MY_LIST", "fa fa-th-list", "/mylist", "user-status-mylist"),
+      this.renderMenuItem("PROFILE", "fa fa-user", "/profile", "user-status-profile"),
+      this.renderMenuItem("SETTING", "fa fa-cog", "/profile/setting", "user-status-setting"),
+      this.renderMenuItem("LOGOUT", "fa fa-sign-out", "/logout", "user-status-logout"),
     ];
     const backdrop = this.state.toggled ?
       <div className="backdrop" onClick={this.close} /> : null;

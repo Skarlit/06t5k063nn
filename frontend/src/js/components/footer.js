@@ -1,7 +1,6 @@
 import Locale from "../locale";
-import Widgets from "../widgets";
 
-const Text = Widgets.Text;
+const Text = Locale.Text;
 
 export default class Footer extends React.Component {
   render() {

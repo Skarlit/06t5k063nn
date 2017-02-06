@@ -2,7 +2,7 @@ import * as ActionTypes from "./action_types";
 import Cookie from "js-cookie";
 
 const initialState = Immutable.fromJS({
-  currentLanguage: {
+  current: {
 
   },
   cached: {
@@ -11,13 +11,21 @@ const initialState = Immutable.fromJS({
 });
 
 export default function (state = initialState, action) {
+  let newState = state;
   switch (action.type) {
     case ActionTypes.LOAD_STRINGS:
-      state = state.update("currentLanguage", Immutable.fromJS(action.strings));
-      if (!state.getIn(["cached", action.strings.locale])) {
-        state = state.updateIn(["cached", action.strings.locale], Immutable.fromJS(action.strings));
+      const currentLocale = state.getIn(["current", "locale"]);
+
+      // if current language not in cached, save it.
+      if (!state.getIn(["cached", currentLocale])) {
+        newState = state.updateIn(["cached", currentLocale], () => state.get("current"));
       }
+
+      newState = newState.update("current", () => Immutable.fromJS(action.strings));
       Cookie.set("locale", state.get("locale"), { secure: true });
+      break;
+    default:
+      break;
   }
-  return state;
+  return newState;
 }

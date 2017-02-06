@@ -1,16 +1,12 @@
 import Actions from "./actions";
 import { connect } from "react-redux";
-import Widgets from "../widgets";
-
-const Text = Widgets.Text;
+import Text from "./components/text";
+import { getCurrentLocale } from "./selectors";
 
 class LocaleBtn extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   static mapStateToProps(state, props) {
     return {
-      locale: state.strings.get("locale"),
+      locale: getCurrentLocale(state),
     };
   }
   static mapDispatchToProps(dispatch) {

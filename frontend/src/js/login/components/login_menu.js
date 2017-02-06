@@ -1,8 +1,8 @@
 import FbLogin from "./fblogin";
 import Modal from "react-modal";
-import Widgets from "../../widgets";
+import Locale from "../../locale";
 
-const Text = Widgets.Text;
+const Text = Locale.Text;
 const noop = () => {};
 const requestCloseFn = () => {};
 

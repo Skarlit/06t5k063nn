@@ -9,7 +9,7 @@ class Character extends React.Component {
 
     return {
       character,
-      name: FullNameSelector(character.get("name"), state.strings.get("locale")),
+      name: FullNameSelector(character.get("name"), state.language.get("locale")),
     };
   }
   render() {

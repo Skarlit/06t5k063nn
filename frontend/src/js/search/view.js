@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 const mapStateToProps = (state, ownProps) => ({
-  strings: state.strings,
+  strings: state.language.get("current"),
 });
 
 const mapDispatchToProps = (state, ownProps) => ({

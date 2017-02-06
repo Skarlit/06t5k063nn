@@ -27,15 +27,6 @@ const init = () => {
         ...action,
         type: String(action.type),
       }),
-      // stateTransformer: (state) => {
-      //   for(var k in state) {
-      //     if (state[k].toJS) {
-      //       console.log(k, state[k].toJS());
-      //     } else {
-      //       console.log(k, state[k]);
-      //     }
-      //   }
-      // }
     });
     middlewares.push(logger);
   }
@@ -50,7 +41,7 @@ const init = () => {
 
   const store = createStore(
       combineReducers({
-        strings: Locale.reducer,
+        language: Locale.reducer,
         login: Login.reducer,
         characterCreation: CharacterCreation.reducer,
         search: Search.reducer,

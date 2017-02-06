@@ -1,14 +1,14 @@
 import { Link } from "react-router";
 import { connect } from "react-redux";
 import UserStatus from "./user_status";
+import Locale from "../locale";
 
+const Text = Locale.Text;
 const mapStateToProps = (state, ownProps) => ({
-  strings: state.strings,
   loggedIn: state.login.getIn(["currentUser", "loggedIn"]),
   userName: state.login.getIn(["currentUser", "name"]),
   userImage: state.login.getIn(["currentUser", "image"]),
 });
-
 const mapDispatchToProps = dispatch => ({
 
 });
@@ -19,16 +19,15 @@ const NavBar = class extends React.Component {
     return (<div className="nav-bar">
       <div className="row user">
         <UserStatus
-          strings={strings}
           loggedIn={this.props.loggedIn}
           userName={this.props.userName}
           userImage={this.props.userImage}
         />
       </div>
       <div className="row pages">
-        <Link to="/">{strings.get("HOME")}</Link>
-        <Link to="/search">{strings.get("CHAR_SEARCH_DESCR")}</Link>
-        <Link to="/create">{strings.get("CHAR_CREATION_DESCR")}</Link>
+        <Link to="/"><Text textKey="HOME" /></Link>
+        <Link to="/search"><Text textKey="CHAR_SEARCH_DESCR" /></Link>
+        <Link to="/create"><Text textKey="CHAR_CREATION_DESCR" /></Link>
       </div>
     </div>);
   }

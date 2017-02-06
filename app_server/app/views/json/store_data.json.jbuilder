@@ -1,8 +1,11 @@
 json.login do
   json.partial! 'json/partials/login'
 end
-json.strings do
-  json.partial! strings_partial
+json.language do
+  json.current do
+    json.partial! strings_partial
+  end
+  json.set! :cached, {}
 end
 json.endpoints do
   json.partial! 'json/partials/endpoints'
