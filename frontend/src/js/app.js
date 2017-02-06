@@ -11,9 +11,8 @@ import Character from "./character";
 import Locale from "./locale";
 import Utility from "./utility";
 
-let init = () => {
-
-  let rootEl = document.createElement("div");
+const init = () => {
+  const rootEl = document.createElement("div");
   document.body.appendChild(rootEl);
     // Add the reducer to your store on the `routing` key
   const sagaMiddleware = createSagaMiddleware();
@@ -24,9 +23,9 @@ let init = () => {
   if (process.env.NODE_ENV !== "production") {
     const createLogger = require("redux-logger");
     const logger = createLogger({
-      actionTransformer: (action) => ({
+      actionTransformer: action => ({
         ...action,
-        type: String(action.type)
+        type: String(action.type),
       }),
       // stateTransformer: (state) => {
       //   for(var k in state) {
@@ -43,8 +42,9 @@ let init = () => {
 
   Login.init(window.storeData.login);
 
-  let initialState = {};
-  for(let key in window.storeData) {
+  const initialState = {};
+  // TODO: Compose data;
+  for (const key in window.storeData) {
     initialState[key] = Immutable.fromJS(window.storeData[key]);
   }
 
@@ -59,7 +59,7 @@ let init = () => {
         routing: routerReducer,
       }),
       initialState, // GLOBAL init Store Data
-      compose(applyMiddleware(...middlewares))
+      compose(applyMiddleware(...middlewares)),
     );
   sagaMiddleware.run(Locale.sagas);
   sagaMiddleware.run(Login.sagas);

@@ -1,40 +1,13 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true
-    },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        },
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "globals": {
-        "React": true,
-        "Immutable": true
-    },
-    "rules": {
-        "indent": [
-            "error",
-            2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
-    }
+  "extends": "airbnb",
+  "rules": {
+     "quotes": ["error", "double"]
+  },
+  "globals": {
+      "window": true,
+      "Immutable": true,
+      "React": true,
+      "FB": true,
+      "document": true
+  }
 };

@@ -1,22 +1,22 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 
 function mapStateToProps(state, props) {
   return {
-    strings: state.strings
+    strings: state.strings,
   };
 }
 
 class Text extends React.Component {
   render() {
-    return <div className={"text " + (this.props.className || "")}>
+    return (<div className={`text ${this.props.className || ""}`}>
       {this.props.strings.get(this.props.textKey)}
-    </div>;
+    </div>);
   }
 }
 
 Text.propTypes = {
   className: React.PropTypes.string,
-  textKey: React.PropTypes.string.isRequired
+  textKey: React.PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(Text);

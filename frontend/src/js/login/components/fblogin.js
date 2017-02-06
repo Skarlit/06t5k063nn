@@ -2,21 +2,17 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { loginViaFacebook } from "../actions";
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    appId: state.login.getIn(["fbSdk", "appId"]),
-    version: state.login.getIn(["fbSdk", "version"]),
-    oAuthCallbackUrl: state.endpoints.getIn(["oauth", "fbCallback"])
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  appId: state.login.getIn(["fbSdk", "appId"]),
+  version: state.login.getIn(["fbSdk", "version"]),
+  oAuthCallbackUrl: state.endpoints.getIn(["oauth", "fbCallback"]),
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    login: function(user) {
-      dispatch(loginViaFacebook(user));
-    }
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  login(user) {
+    dispatch(loginViaFacebook(user));
+  },
+});
 
 class FbLogin extends React.Component {
   constructor(props) {
@@ -26,18 +22,19 @@ class FbLogin extends React.Component {
   loadFbSdk() {
     window.fbAsyncInit = () => {
       FB.init({
-        status     : true,
-        appId      :  this.props.appId,
-        xfbml      : true,
-        version    :  this.props.version,
-        cookie     : true
+        status: true,
+        appId: this.props.appId,
+        xfbml: true,
+        version: this.props.version,
+        cookie: true,
       });
       FB.AppEvents.logPageView();
       this.parseButton();
-      this.setState({ready: true});
+      this.setState({ ready: true });
     };
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
+    (function (d, s, id) {
+      let js,
+        fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
       js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
@@ -65,17 +62,17 @@ class FbLogin extends React.Component {
           this.props.login(res.data);
           console.log(res.data);   // 'data' contains a 'user' object with 'email' and 'name' in it.
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
         });
       }
-    }, {scope: "public_profile, email"});
+    }, { scope: "public_profile, email" });
   }
   render() {
     if (!window.FB) return null;
-    return <div onClick={this.login} className="fb-login-btn">
-      <i className="fa fa-facebook fa-2x" aria-hidden="true"></i>
-      <div className="text">Log in with Facebook</div></div>;
+    return (<div onClick={this.login} className="fb-login-btn">
+      <i className="fa fa-facebook fa-2x" aria-hidden="true" />
+      <div className="text">Log in with Facebook</div></div>);
   }
 }
 

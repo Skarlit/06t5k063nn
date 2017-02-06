@@ -2,8 +2,8 @@
 
 export default class CharacterCreation extends React.Component {
   render() {
-    return <div>
+    return (<div>
       Character Creation
-    </div>;
+    </div>);
   }
 }

@@ -1,7 +1,7 @@
 export default class MyList extends React.Component {
   render() {
-    return <div>
+    return (<div>
       My List
-    </div>;
+    </div>);
   }
 }

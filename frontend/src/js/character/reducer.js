@@ -1,31 +1,42 @@
-let initialState = Immutable.fromJS({
+const initialState = Immutable.fromJS({
   0: {
     id: 0,
     avatar_img_src: require("../../img/test/yukina_test.jpg"),
-    name: "姫柊雪菜",
-    name_pronounce: "ひめらぎ　ゆきな",
-    name_romaji: "Himeragi Yukina",
-    kind: "human",
-    female: true,
-    height: "156cm",
-    three_size: "B:76(C60)/W:55/H:78",
-    blood_type: "A",
+    name: {
+      first_name: {
+        kanji: "雪菜",
+        jp: "ゆきな",
+        en: "Yukina",
+      },
+      last_name: {
+        kanji: "姫柊",
+        jp: "ひめらぎ",
+        en: "Himeragi",
+      },
+    },
+    bio: {
+      age: "14",
+      race: "human",
+      female: true,
+      height: "156cm",
+      three_size: "B:76/W:55/H:78",
+      blood_type: "A",
+    },
     cvs: [],
     media_types: [
-      {type: "LightNovel", title: "", url: ""},
-      {type: "Anime", title: "", url: ""},
+      { type: "LightNovel", title: "", url: "" },
+      { type: "Anime", title: "", url: "" },
     ], // Manga, Eroge, Game, Original, Novel, LightNovel, Anime
-    personalities: [],
-    attributes: [],
+    personalities: ["MAJIME"],
+    attributes: ["KOUHAI", "JC"],
     description: {
       jp: "",
-      en: ""
+      en: "",
     },
-    age: "14",
     features: {
       hair: {
         type: "Semi Long",
-        colors: []
+        colors: [],
       },
       eyes: {
         shape: "Normal",
@@ -34,7 +45,7 @@ let initialState = Immutable.fromJS({
       },
       facial_proportion: {
 
-      }
+      },
     },
     clothings: {
 
@@ -44,11 +55,10 @@ let initialState = Immutable.fromJS({
     },
     relations: {
 
-    }
-  }
+    },
+  },
 });
 
-export default function characterReducer(state=initialState, action) {
-
+export default function characterReducer(state = initialState, action) {
   return state;
 }

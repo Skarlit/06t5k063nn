@@ -1,14 +1,10 @@
 import * as ActionTypes from "./action_types";
 
-const localeChangeAction = (locale) => {
-  return {type: ActionTypes.REQUEST_STRINGS, locale: locale};
-};
+const localeChangeAction = locale => ({ type: ActionTypes.REQUEST_STRINGS, locale });
 
-const loadStringsAction = (strings) => {
-  return {
-    type: ActionTypes.LOAD_STRINGS,
-    strings: strings
-  };
-};
+const loadStringsAction = strings => ({
+  type: ActionTypes.LOAD_STRINGS,
+  strings,
+});
 
 export default { localeChangeAction, loadStringsAction };

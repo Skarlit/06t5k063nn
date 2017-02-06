@@ -1,6 +1,6 @@
 export function readImageFile(fileBlob, cb, opt) {
   opt = opt || {};
-  var f = new FileReader();
+  const f = new FileReader();
   f.onload = (e) => {
     cb(e, f.result);
   };

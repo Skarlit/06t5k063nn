@@ -1,13 +1,13 @@
 import { fromJS } from "immutable";
-var initialData;
+let initialData;
 
 if (process.env.NODE_ENV == "production") {
   initialData = window.initialDate;
 } else {
   initialData = fromJS({
     characterCreate: {
-      
-    }
+
+    },
   });
 }
 

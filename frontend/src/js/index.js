@@ -4,12 +4,12 @@ import Login from "./login";
 
 export default class extends React.Component {
   render() {
-    return <div className="app">
+    return (<div className="app">
       <NavBar />
       <div className="content">
         { this.props.children }
       </div>
       <Footer />
-    </div>;
+    </div>);
   }
 }

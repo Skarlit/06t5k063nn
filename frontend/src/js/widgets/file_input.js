@@ -9,10 +9,10 @@ class FileInput extends React.Component {
     this.refs.input.click();
   }
   render() {
-    return <div onClick={this.onClick} style={this.props.style || {}} >
-        {this.props.children}
-        <input ref="input" type="file" onChange={this.props.onChange} style={{display: "none"}}/>
-    </div>;
+    return (<div onClick={this.onClick} style={this.props.style || {}} >
+      {this.props.children}
+      <input ref="input" type="file" onChange={this.props.onChange} style={{ display: "none" }} />
+    </div>);
   }
 }
 

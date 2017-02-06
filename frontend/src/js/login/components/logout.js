@@ -1,4 +1,4 @@
-import {logout} from "../api";
+import { logout } from "../api";
 
 export default class LogOut extends React.Component {
   render() {
@@ -9,6 +9,6 @@ export default class LogOut extends React.Component {
       window.location = "/";
       console.warn("logout failed");
     });
-    return <div> </div>;
+    return <div />;
   }
 }

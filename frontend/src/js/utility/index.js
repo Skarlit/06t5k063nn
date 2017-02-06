@@ -12,4 +12,4 @@ function getCSRFToken() {
   return document.querySelector("meta[name=\"csrf-token\"]").getAttribute("content");
 }
 
-export default {nullReducer, filterHttpUrl, getCSRFToken};
+export default { nullReducer, filterHttpUrl, getCSRFToken };

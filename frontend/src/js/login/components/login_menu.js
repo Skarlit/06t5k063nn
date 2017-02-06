@@ -8,17 +8,18 @@ const requestCloseFn = () => {};
 
 export default class LoginMenu extends React.Component {
   render() {
-    return <Modal
-      isOpen={true}
+    return (<Modal
+      isOpen
       className="login-modal"
       overlayClassName="login-modal-overlay"
-      contentLabel="Modal">
+      contentLabel="Modal"
+    >
       <div className="content">
-        <div className="title"><Text textKey="SIGNUP_LOGIN"></Text></div>
+        <div className="title"><Text textKey="SIGNUP_LOGIN" /></div>
         <div className="btn-wrap">
           <FbLogin />
         </div>
       </div>
-    </Modal>;
+    </Modal>);
   }
 }
