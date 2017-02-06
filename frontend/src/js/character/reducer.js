@@ -1,29 +1,29 @@
 const initialState = Immutable.fromJS({
   0: {
     id: 0,
-    avatar_img_src: require("../../img/test/yukina_test.jpg"),
+    avatarImgSrc: require("../../img/test/yukina_test.jpg"),
     name: {
-      first_name: {
+      firstName: {
         kanji: "雪菜",
         jp: "ゆきな",
         en: "Yukina",
       },
-      last_name: {
+      lastName: {
         kanji: "姫柊",
         jp: "ひめらぎ",
         en: "Himeragi",
       },
     },
-    bio: {
+    profile: {
       age: "14",
-      race: "human",
-      female: true,
+      race: "HUMAN",
+      gender: "F",
       height: "156cm",
-      three_size: "B:76/W:55/H:78",
-      blood_type: "A",
+      threeSize: [76, 55, 78], // "B:76/W:55/H:78",
+      bloodType: "A",
     },
     cvs: [],
-    media_types: [
+    mediaTypes: [
       { type: "LightNovel", title: "", url: "" },
       { type: "Anime", title: "", url: "" },
     ], // Manga, Eroge, Game, Original, Novel, LightNovel, Anime
@@ -41,9 +41,9 @@ const initialState = Immutable.fromJS({
       eyes: {
         shape: "Normal",
         pupil: "Round",
-        pupil_colors: [],
+        pupilColors: [],
       },
-      facial_proportion: {
+      facialProportion: {
 
       },
     },

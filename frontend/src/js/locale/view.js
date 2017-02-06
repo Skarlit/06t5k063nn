@@ -1,7 +1,7 @@
 import Actions from "./actions";
 import { connect } from "react-redux";
 import Text from "./components/text";
-import { getCurrentLocale } from "./selectors";
+import { getCurrentLocale } from "../selectors";
 
 class LocaleBtn extends React.Component {
   static mapStateToProps(state, props) {

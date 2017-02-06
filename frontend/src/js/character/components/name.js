@@ -1,17 +1,18 @@
+import Locale from "../../locale";
 
+const { Text } = Locale;
 
 export default class CharacterName extends React.Component {
   render() {
-    return (<div>
-      <div>
-        <div>{this.props.lastNameHiragana}</div>
-        <div>{this.props.lastName}</div>
+    return (<div className="char-name">
+      <div className="name-block">
+        <div className="yomi">{this.props.lastName.yomi}</div>
+        <div className="kanji">{this.props.lastName.kanji}</div>
       </div>
-      <div>
-        <div>{this.props.lastNameHiragana}</div>
-        <div>{this.props.lastName}</div>
+      <div className="name-block">
+        <div className="yomi">{this.props.firstName.yomi}</div>
+        <div className="kanji">{this.props.firstName.kanji}</div>
       </div>
     </div>);
   }
 }
-

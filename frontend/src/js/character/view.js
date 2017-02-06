@@ -1,25 +1,25 @@
 import { connect } from "react-redux";
 import Avatar from "./components/avatar";
 import Name from "./components/name";
-import { FullNameSelector } from "./selectors";
+import Profile from "./components/profile";
+import { getProfile, getFullName, getCurrentLocale, getAvartarData } from "../selectors";
 
 class Character extends React.Component {
   static state2Prop(state, ownProps) {
-    const character = state.characters.get(ownProps.params.characterId);
-
     return {
-      character,
-      name: FullNameSelector(character.get("name"), state.language.get("locale")),
+      avatar: getAvartarData(state, { id: ownProps.params.characterId }),
+      name: getFullName(state, { locale: getCurrentLocale(state), id: ownProps.params.characterId }),
+      profile: getProfile(state, { id: ownProps.params.characterId }),
     };
   }
   render() {
-    console.log(this.props.name);
-    const imageUrl = this.props.character.get("avatar_img_src");
-
     return (<div className="char-content">
       <div className="row">
-        <Avatar imageSrc={imageUrl} />
-        <Name {...this.props.name} />
+        <Avatar imageSrc={this.props.avatar.imageSrc} />
+        <div className="panel">
+          <Name {...this.props.name} />
+          <Profile {...this.props.profile} />
+        </div>
       </div>
     </div>);
   }

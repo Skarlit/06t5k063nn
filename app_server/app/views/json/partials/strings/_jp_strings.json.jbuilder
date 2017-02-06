@@ -16,3 +16,13 @@ json.JAPANESE "日本語"
 json.ENGLISH "English"
 json.DISCLAIMER "このサイトはあくまで個人趣味で作られています"
 json.DISCLAIMER2 "質問があればぜひこの%Q(メール)%Qでご連絡をしてください"
+
+
+json.CHAR_PROFILE "プロフィール"
+json.AGE "年齢"
+json.RACE "種族"
+json.GENDER "性別"
+json.HEIGHT "身長"
+json.THREE_SIZE "スリーサイズ"
+json.BLOOD_TYPE "血液型"
+json.HUMAN "人間"

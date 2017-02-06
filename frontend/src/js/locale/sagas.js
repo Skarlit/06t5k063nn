@@ -2,17 +2,17 @@ import { select, put, takeLatest } from "redux-saga/effects";
 import * as ActionTypes from "./action_types";
 import Api from "./api";
 import Actions from "./actions";
-import * as selectors from "./selectors";
+import { getCurrentLocale, getCachedLanguages } from "../selectors";
 
 
 function* getLocaleStrings(localeChangeAction) {
   // if locale doesn't change, do nothing
-  const currentLocale = yield select(selectors.getCurrentLocale);
+  const currentLocale = yield select(getCurrentLocale);
   if (currentLocale == localeChangeAction.locale) {
     return;
   }
   // if locale not in cache, send ajax
-  const cache = yield select(selectors.getCachedLanguages);
+  const cache = yield select(getCachedLanguages);
   const cacheString = cache.get(localeChangeAction.locale);
   let strings;
   if (!cacheString) {
