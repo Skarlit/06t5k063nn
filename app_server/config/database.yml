@@ -5,16 +5,16 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: postgresql
+  adapter: mysql2
+  encoding: utf8
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
-  url: postgresql://localhost/yflist
   database: yflist
-  username: postgres
-  password: postgres
+  username: yflist
+  password: mysql
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -22,9 +22,8 @@ development:
 test:
   <<: *default
   database: yflist_test
-  url: postgresql://localhost/yflist
-  username: postgres
-  password: postgres
+  username: yflist
+  password: mysql
 
 production:
   <<: *default

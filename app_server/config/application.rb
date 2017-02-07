@@ -18,14 +18,14 @@ module AppServer
     # end
 
 
-    config.generators do |g|
-      g.orm             :neo4j
-    end
+    # config.generators do |g|
+    #   g.orm             :neo4j
+    # end
     # Configure where the embedded neo4j database should exist
     # Notice embedded db is only available for JRuby
     # config.neo4j.session_type = :embedded  # default :http
     # config.neo4j.session_path = File.expand_path('neo4j-db', Rails.root)
-    config.neo4j.session_type = :http
-    config.neo4j.session_path = 'http://neo4j:1234@localhost:7474'
+    # config.neo4j.session_type = :http
+    # config.neo4j.session_path = 'http://neo4j:1234@localhost:7474'
   end
 end

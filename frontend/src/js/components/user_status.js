@@ -14,7 +14,7 @@ export default class UserStatus extends React.Component {
     this.close = this.close.bind(this);
   }
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.toggled != this.state.toggled || nextProps.loggedIn != this.props.loggedIn;
+    return nextState.toggled !== this.state.toggled || nextProps.loggedIn !== this.props.loggedIn;
   }
   toggle(e) {
     e.preventDefault();
@@ -32,7 +32,6 @@ export default class UserStatus extends React.Component {
     </Link>);
   }
   renderLoggedInUI() {
-    const strings = this.props.strings;
     const userImage = Utility.filterHttpUrl(this.props.userImage);
 
     const menuItems = [
@@ -41,8 +40,7 @@ export default class UserStatus extends React.Component {
       this.renderMenuItem("SETTING", "fa fa-cog", "/profile/setting", "user-status-setting"),
       this.renderMenuItem("LOGOUT", "fa fa-sign-out", "/logout", "user-status-logout"),
     ];
-    const backdrop = this.state.toggled ?
-      <div className="backdrop" onClick={this.close} /> : null;
+    const backdrop = this.state.toggled ? <div className="backdrop" onClick={this.close} /> : null;
     return (<div className="user-status">
       <div className={`menu ${this.state.toggled ? "toggled" : ""}`}>
         <div className="slider">
@@ -57,9 +55,8 @@ export default class UserStatus extends React.Component {
     </div>);
   }
   renderGuestUI() {
-    const strings = this.props.strings;
     return (<div className="user-status">
-      <Link className="btn login-btn" to="/login" >{strings.get("LOGIN")}</Link>
+      <Link className="btn login-btn" to="/login" ><Text textKey="LOGIN" /></Link>
     </div>);
   }
   render() {
@@ -73,5 +70,4 @@ export default class UserStatus extends React.Component {
 UserStatus.propTypes = {
   loggedIn: React.PropTypes.bool,
   userName: React.PropTypes.string,
-  strings: React.PropTypes.object,
 };

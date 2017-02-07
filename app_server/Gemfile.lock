@@ -101,6 +101,7 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    mysql2 (0.4.5)
     neo4j (8.0.5)
       activemodel (>= 4.0, < 5.1)
       activesupport (>= 4.0, < 5.1)
@@ -149,7 +150,6 @@ GEM
       rack
     orm_adapter (0.5.0)
     os (0.9.6)
-    pg (0.18.4)
     puma (3.7.0)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -238,11 +238,11 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   json
   listen (~> 3.0.5)
+  mysql2 (~> 0.4.4)
   neo4j (~> 8.0.5)
   omniauth
   omniauth-facebook
   omniauth-twitter
-  pg (~> 0.18.2)
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
   sass-rails (~> 5.0)

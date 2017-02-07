@@ -71,11 +71,11 @@ Rails.application.configure do
 
 
   # Neo4j connection
-  config.neo4j_session_type = :server_db  #lib constant don't change
-  if ENV['NEO4J_URL'].nil?
-    throw "require NEO4J_URL env var"
-  end
-  config.neo4j_session_path = ENV['NEO4J_URL']
+  # config.neo4j_session_type = :server_db  #lib constant don't change
+  # if ENV['NEO4J_URL'].nil?
+  #   throw "require NEO4J_URL env var"
+  # end
+  # config.neo4j_session_path = ENV['NEO4J_URL']
 
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
