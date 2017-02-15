@@ -3,6 +3,7 @@ import { Router, Route } from "react-router";
 import Index from "./index";
 import NotFound from "./errors/404";
 import Login from "./login";
+import Logout from "./login/components/logout"; // TODO: Fix this
 import Character from "./character";
 
 export default (store, history) => (
@@ -12,27 +13,27 @@ export default (store, history) => (
         <Route
           path="create" getComponents={(nextState, cb) => {
             require.ensure([], (require) => {
-              cb(null, require("./character_creation").default.view);
+              cb(null, require("./character_creation").default);
             });
           }}
         />
         <Route
           path="search" getComponents={(nextState, cb) => {
             require.ensure([], (require) => {
-              cb(null, require("./search").default.view);
+              cb(null, require("./search").default);
             });
           }}
         />
         <Route
           path="mylist" getComponents={(nextState, cb) => {
             require.ensure([], (require) => {
-              cb(null, require("./mylist").default.view);
+              cb(null, require("./mylist").default);
             });
           }}
         />
-        <Route path="character/:characterId" component={Character.view} />
-        <Route path="/login" component={Login.view} />
-        <Route path="/logout" component={Login.Logout} />
+        <Route path="character/:characterId" component={Character} />
+        <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
       </Route>
       <Route path="*" component={NotFound} />
     </Router>

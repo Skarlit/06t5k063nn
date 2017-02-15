@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { getText } from "../../selectors";
+import { getText } from "../locale/selectors";
 
 class Text extends React.Component {
   static mapStateToProps(state, props) {

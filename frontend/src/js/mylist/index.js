@@ -1,4 +1,7 @@
-import view from "./view";
-export default {
-  view,
-};
+export default class MyList extends React.Component {
+  render() {
+    return (<div>
+      My List
+    </div>);
+  }
+}

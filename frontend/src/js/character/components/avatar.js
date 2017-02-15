@@ -1,7 +1,4 @@
-import Widgets from "../../widgets";
-
-const Image = Widgets.Image;
-
+import { Image } from "../../widgets";
 
 export default class Avatar extends React.Component {
   render() {

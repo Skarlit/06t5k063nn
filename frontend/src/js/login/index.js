@@ -1,12 +1,11 @@
-import reducer from "./reducer";
-import view from "./view";
-import init from "./init";
+import LoginMenu from "./components/login_menu";
 import Logout from "./components/logout";
+import init from "./init";
 import sagas from "./sagas";
-export default {
-  reducer,
-  view,
-  init,
-  Logout,
-  sagas,
-};
+
+export { Logout, init as loginInit, sagas as loginSagas };
+
+
+export default () => (<div>
+  <LoginMenu />
+</div>);

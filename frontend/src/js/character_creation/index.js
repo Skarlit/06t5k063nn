@@ -1,6 +1,8 @@
-import reducer from "./reducer";
-import view from "./view";
-export default {
-  reducer,
-  view,
-};
+
+export default class CharacterCreation extends React.Component {
+  render() {
+    return (<div>
+      Character Creation
+    </div>);
+  }
+}

@@ -1,3 +1,5 @@
 import Image from "./image";
+import Text from "./text";
 
-export default { Image };
+// Widgets components should have no dependency other than lib
+export { Image, Text };

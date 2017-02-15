@@ -1,7 +1,72 @@
-import reducer from "./reducer";
+import { connect } from "react-redux";
 
-import view from "./view";
-export default {
-  reducer,
-  view,
-};
+const mapStateToProps = (state, ownProps) => ({
+  strings: state.language.get("current"),
+});
+
+const mapDispatchToProps = (state, ownProps) => ({
+
+});
+
+
+class Search extends React.Component {
+  render() {
+    const strings = this.props.strings;
+    return (<div className="pure-form">
+      {strings.get("CHAR_SEARCH_DESCR")}
+      <div className="input-wrap"><input /></div>
+      <div className="option-wrap">
+        <div className="options">
+          {strings.get("CHAR_SEARCH_OPTION")}
+        </div>
+      </div>
+      <div>
+        {strings.get("CHAR_SEARCH_RESULT")}
+        <ul>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 1</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 2</li>
+          <li> {strings.get("CHAR_SEARCH_RESULT")} 3</li>
+        </ul>
+      </div>
+    </div>);
+  }
+}
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Search);

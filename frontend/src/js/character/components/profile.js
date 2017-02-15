@@ -1,5 +1,4 @@
-import Locale from "../../locale";
-const { Text } = Locale;
+import { Text } from "../../widgets";
 
 export default class Profile extends React.Component {
   renderAge() {

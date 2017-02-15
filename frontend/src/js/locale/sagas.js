@@ -1,14 +1,13 @@
 import { select, put, takeLatest } from "redux-saga/effects";
-import * as ActionTypes from "./action_types";
 import Api from "./api";
-import Actions from "./actions";
-import { getCurrentLocale, getCachedLanguages } from "../selectors";
+import { loadStringsAction, REQUEST_STRINGS } from "./duck";
+import { getCurrentLocale, getCachedLanguages } from "./selectors";
 
 
 function* getLocaleStrings(localeChangeAction) {
   // if locale doesn't change, do nothing
   const currentLocale = yield select(getCurrentLocale);
-  if (currentLocale == localeChangeAction.locale) {
+  if (currentLocale === localeChangeAction.locale) {
     return;
   }
   // if locale not in cache, send ajax
@@ -20,10 +19,10 @@ function* getLocaleStrings(localeChangeAction) {
   } else {
     strings = cacheString;
   }
-  yield put(Actions.loadStringsAction(strings));
+  yield put(loadStringsAction(strings));
 }
 
 
-export default function* getLocaleStringsWatcher(pattern, saga, args) {
-  yield takeLatest(ActionTypes.REQUEST_STRINGS, getLocaleStrings);
+export default function* getLocaleStringsWatcher() {
+  yield takeLatest(REQUEST_STRINGS, getLocaleStrings);
 }

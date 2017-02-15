@@ -39,8 +39,8 @@ const initialState = Immutable.fromJS({
         colors: [],
       },
       eyes: {
-        shape: "Normal",
-        pupil: "Round",
+        eyeShape: "Normal",
+        pupilShape: "Round",
         pupilColors: [],
       },
       facialProportion: {

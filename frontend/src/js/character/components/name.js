@@ -1,6 +1,5 @@
 import Locale from "../../locale";
 
-const { Text } = Locale;
 
 export default class CharacterName extends React.Component {
   render() {

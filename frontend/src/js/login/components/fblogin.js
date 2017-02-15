@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import axios from "axios";
-import { loginViaFacebook } from "../actions";
+import { loginViaFacebook } from "../duck";
 
 const mapStateToProps = (state, ownProps) => ({
   appId: state.login.getIn(["fbSdk", "appId"]),

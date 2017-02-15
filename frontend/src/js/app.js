@@ -4,12 +4,14 @@ import { browserHistory } from "react-router";
 import { routerMiddleware, syncHistoryWithStore, routerReducer } from "react-router-redux";
 import createSagaMiddleware from "redux-saga";
 import Routes from "./routes";
-import CharacterCreation from "./character_creation";
-import Login from "./login";
-import Search from "./search";
-import Character from "./character";
-import Locale from "./locale";
-import Utility from "./utility";
+import { nullReducer } from "./utility";
+import CharacterCreationReducer from "./character_creation/duck";
+import LoginReducer from "./login/duck";
+import SearchReducer from "./search/duck";
+import CharacterReducer from "./character/duck";
+import LocaleReducer from "./locale/duck";
+import { loginInit, loginSagas } from "./login";
+import { localeSagas } from "./locale";
 
 const init = () => {
   const rootEl = document.createElement("div");
@@ -31,7 +33,7 @@ const init = () => {
     middlewares.push(logger);
   }
 
-  Login.init(window.storeData.login);
+  loginInit(window.storeData.login);
 
   const initialState = {};
   // TODO: Compose data;
@@ -41,19 +43,19 @@ const init = () => {
 
   const store = createStore(
       combineReducers({
-        language: Locale.reducer,
-        login: Login.reducer,
-        characterCreation: CharacterCreation.reducer,
-        search: Search.reducer,
-        endpoints: Utility.nullReducer,
-        characters: Character.reducer,
+        language: LocaleReducer,
+        login: LoginReducer,
+        characterCreation: CharacterCreationReducer,
+        search: SearchReducer,
+        endpoints: nullReducer,
+        characters: CharacterReducer,
         routing: routerReducer,
       }),
       initialState, // GLOBAL init Store Data
       compose(applyMiddleware(...middlewares)),
     );
-  sagaMiddleware.run(Locale.sagas);
-  sagaMiddleware.run(Login.sagas);
+  sagaMiddleware.run(localeSagas);
+  sagaMiddleware.run(loginSagas);
 
 
     // Create an enhanced history that syncs navigation events with the store
@@ -64,7 +66,7 @@ const init = () => {
 
 
 // Entry Point
-if (document.readyState == "loading") {
+if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", init);
 } else {
   init();

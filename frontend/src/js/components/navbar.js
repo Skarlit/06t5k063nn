@@ -1,9 +1,8 @@
 import { Link } from "react-router";
 import { connect } from "react-redux";
 import UserStatus from "./user_status";
-import Locale from "../locale";
+import { Text } from "../widgets";
 
-const Text = Locale.Text;
 const mapStateToProps = (state, ownProps) => ({
   loggedIn: state.login.getIn(["currentUser", "loggedIn"]),
   userName: state.login.getIn(["currentUser", "name"]),

@@ -1,10 +1,6 @@
 import { Link } from "react-router";
-import Widigets from "../widgets";
-import Utility from "../utility";
-import Locale from "../locale";
-
-const { Text } = Locale;
-const { Image } = Widigets;
+import { Image, Text } from "../widgets";
+import { filterHttpUrl } from "../utility";
 
 export default class UserStatus extends React.Component {
   constructor(props) {
@@ -32,7 +28,7 @@ export default class UserStatus extends React.Component {
     </Link>);
   }
   renderLoggedInUI() {
-    const userImage = Utility.filterHttpUrl(this.props.userImage);
+    const userImage = filterHttpUrl(this.props.userImage);
 
     const menuItems = [
       this.renderMenuItem("MY_LIST", "fa fa-th-list", "/mylist", "user-status-mylist"),
