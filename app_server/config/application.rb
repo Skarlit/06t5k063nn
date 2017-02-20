@@ -27,5 +27,8 @@ module AppServer
     # config.neo4j.session_path = File.expand_path('neo4j-db', Rails.root)
     # config.neo4j.session_type = :http
     # config.neo4j.session_path = 'http://neo4j:1234@localhost:7474'
+    config.generators do |g|
+      g.orm :mongoid
+    end
   end
 end

@@ -1,9 +1,13 @@
-class User < ApplicationRecord
+class User #< ApplicationRecord
+  include Mongoid::Document
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable
 
+  belongs_to :user, dependent: :destroy
+  validates_presence_of :uid, :provider
+  validates_uniqueness_of :uid, :scope => :provider
   has_many :identities
 
    def self.from_omniauth(auth)
