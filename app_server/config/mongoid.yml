@@ -5,7 +5,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: app_server_development
+      database: yflist_dev
       # Provides the hosts the default client can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
@@ -24,10 +24,10 @@ development:
         #     - use: web
 
         # The name of the user for authentication.
-        # user: 'user'
+        user: 'mongo'
 
         # The password of the user for authentication.
-        # password: 'password'
+        password: 'mongo'
 
         # The user's database roles.
         # roles:
@@ -138,7 +138,7 @@ development:
 test:
   clients:
     default:
-      database: app_server_test
+      database: yflist_test
       hosts:
         - localhost:27017
       options:

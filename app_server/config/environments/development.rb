@@ -37,7 +37,6 @@ Rails.application.configure do
   config.active_support.deprecation = :log
 
   # Raise an error on page load if there are pending migrations.
-  config.active_record.migration_error = :page_load
   config.action_mailer.default_url_options = { host: 'localhost', port: 9000 }
 
   logger           = ActiveSupport::Logger.new(STDOUT)
@@ -62,7 +61,7 @@ Rails.application.configure do
   config.asset_host = "https://localhost:8080"
   config.assets.prefix = "assets"
   config.security_policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' " \
-                           "https://localhost:* wss://localhost:8080 https://cdn.fontawesome.com " \
+                           "https://localhost:* wss://localhost:8080 https://cdn.fontawesome.com http://localhost:8080 " \
                            "#{config.asset_host} https://fonts.googleapis.com " \
                            "https://use.fontawesome.com https://fonts.gstatic.com " \
                            "https://connect.facebook.net https://*.facebook.com https://*.fbcdn.net"
