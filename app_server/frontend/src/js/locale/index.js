@@ -7,28 +7,28 @@ import sagas from "./sagas";
 export { sagas as localeSagas };
 
 class LocaleBtn extends React.Component {
-  static mapStateToProps(state, props) {
+  static mapStateToProps (state, props) {
     return {
-      locale: getCurrentLocale(state),
+      locale: getCurrentLocale(state)
     };
   }
-  static mapDispatchToProps(dispatch) {
+  static mapDispatchToProps (dispatch) {
     return {
-      selectLocale: locale => dispatch(localeChangeAction(locale)),
+      selectLocale: locale => dispatch(localeChangeAction(locale))
     };
   }
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.jpLocale = this.jpLocale.bind(this);
     this.enLocale = this.enLocale.bind(this);
   }
-  jpLocale() {
+  jpLocale () {
     this.props.selectLocale("jp");
   }
-  enLocale() {
+  enLocale () {
     this.props.selectLocale("en");
   }
-  render() {
+  render () {
     return (<div className="locale-wrapper">
       <div className="locale-title"><Text textKey="LANGUAGE" /></div>
       <div className="locale-btn">
@@ -47,8 +47,7 @@ class LocaleBtn extends React.Component {
 
 LocaleBtn.propTypes = {
   locale: React.PropTypes.string.isRequired,
-  selectLocale: React.PropTypes.func.isRequired,
+  selectLocale: React.PropTypes.func.isRequired
 };
-
 
 export default connect(LocaleBtn.mapStateToProps, LocaleBtn.mapDispatchToProps)(LocaleBtn);

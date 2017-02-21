@@ -5,8 +5,7 @@ let fs = require("fs");
 let pathConfig = require("./path_config");
 const getWebpackConfig = require("./webpack_config");
 
-
-function log(err, stats) {
+function log (err, stats) {
   if (err) throw new gutil.PluginError("webpack", err);
   gutil.log("[webpack]", stats.toString({}));
 }
@@ -35,7 +34,7 @@ gulp.task("server", () => {
     key: fs.readFileSync(pathConfig.devKey, "utf8"),
     contentBase: "./tmp",
     inline: true,
-    noInfo: true,
+    noInfo: false,
     quiet: false,
     // hot: true,
     setup (app) {
@@ -46,12 +45,12 @@ gulp.task("server", () => {
     clientLogLevel: "info",
     watchOptions: {
       aggregateTimeout: 300,
-      poll: 1000,
+      poll: 1000
     },
         // It's a required option.
     publicPath: "/assets/",
     headers: { "X-Custom-Header": "yes" },
-    stats: { colors: true },
+    stats: { colors: true }
   });
   server.listen(8080, "localhost", () => {});
 });

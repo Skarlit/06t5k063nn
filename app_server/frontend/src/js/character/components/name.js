@@ -1,8 +1,7 @@
 import Locale from "../../locale";
 
-
 export default class CharacterName extends React.Component {
-  render() {
+  render () {
     return (<div className="char-name">
       <div className="name-block">
         <div className="yomi">{this.props.lastName.yomi}</div>

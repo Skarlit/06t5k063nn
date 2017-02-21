@@ -3,8 +3,7 @@ import Api from "./api";
 import { loadStringsAction, REQUEST_STRINGS } from "./duck";
 import { getCurrentLocale, getCachedLanguages } from "./selectors";
 
-
-function* getLocaleStrings(localeChangeAction) {
+function* getLocaleStrings (localeChangeAction) {
   // if locale doesn't change, do nothing
   const currentLocale = yield select(getCurrentLocale);
   if (currentLocale === localeChangeAction.locale) {
@@ -22,7 +21,6 @@ function* getLocaleStrings(localeChangeAction) {
   yield put(loadStringsAction(strings));
 }
 
-
-export default function* getLocaleStringsWatcher() {
+export default function* getLocaleStringsWatcher () {
   yield takeLatest(REQUEST_STRINGS, getLocaleStrings);
 }

@@ -6,13 +6,13 @@ const initialState = Immutable.fromJS({
       firstName: {
         kanji: "雪菜",
         jp: "ゆきな",
-        en: "Yukina",
+        en: "Yukina"
       },
       lastName: {
         kanji: "姫柊",
         jp: "ひめらぎ",
-        en: "Himeragi",
-      },
+        en: "Himeragi"
+      }
     },
     profile: {
       age: "14",
@@ -20,32 +20,32 @@ const initialState = Immutable.fromJS({
       gender: "F",
       height: "156cm",
       threeSize: [76, 55, 78], // "B:76/W:55/H:78",
-      bloodType: "A",
+      bloodType: "A"
     },
     cvs: [],
     mediaTypes: [
       { type: "LightNovel", title: "", url: "" },
-      { type: "Anime", title: "", url: "" },
+      { type: "Anime", title: "", url: "" }
     ], // Manga, Eroge, Game, Original, Novel, LightNovel, Anime
     personalities: ["MAJIME"],
     attributes: ["KOUHAI", "JC"],
     description: {
       jp: "",
-      en: "",
+      en: ""
     },
     features: {
       hair: {
         type: "Semi Long",
-        colors: [],
+        colors: []
       },
       eyes: {
         eyeShape: "Normal",
         pupilShape: "Round",
-        pupilColors: [],
+        pupilColors: []
       },
       facialProportion: {
 
-      },
+      }
     },
     clothings: {
 
@@ -55,10 +55,10 @@ const initialState = Immutable.fromJS({
     },
     relations: {
 
-    },
-  },
+    }
+  }
 });
 
-export default function characterReducer(state = initialState, action) {
+export default function characterReducer (state = initialState, action) {
   return state;
 }

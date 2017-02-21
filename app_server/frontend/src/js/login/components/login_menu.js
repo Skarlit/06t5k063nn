@@ -6,7 +6,7 @@ const noop = () => {};
 const requestCloseFn = () => {};
 
 export default class LoginMenu extends React.Component {
-  render() {
+  render () {
     return (<Modal
       isOpen
       className="login-modal"

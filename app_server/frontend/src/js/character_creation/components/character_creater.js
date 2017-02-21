@@ -1,39 +1,37 @@
-import FileImport from "../widgets/image_import";
+// import { ImageImport } from "../widgets";
 import { connect } from "react-redux";
-import { setCharacterCreationImage } from "../actions";
-
-const mapStateToProps = (state, ownProps) => {
-  console.log(state);
-  return {
-    name: state.characterCreation.get("name"),
-    nameJa: state.characterCreation.get("nameJa"),
-    origin: state.characterCreation.get("origin"),
-    imageBlob: state.characterCreation.get("imageBlob"),
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  setImage: (fileBlob) => {
-    dispatch(setCharacterCreationImage(fileBlob));
-  },
-});
+// import { setCharacterCreationImage } from "../actions";
 
 class CharacterCreater extends React.Component {
-  render() {
-    return (<div className="pure-form"> Character Creater
-      <div>
-        <FileImport onImageLoaded={this.props.setImage} />
-      </div>
-      <img src={this.props.imageBlob} />
-      <input readOnly value={this.props.name} />
-      <input readOnly value={this.props.nameJa} />
-      <input readOnly value={this.props.origin} />
-    </div>);
+  static mapStateToProps (state, ownProps) {
+    return {
+      name: state.characterCreation.get("name"),
+      nameJa: state.characterCreation.get("nameJa"),
+      origin: state.characterCreation.get("origin"),
+      imageBlob: state.characterCreation.get("imageBlob")
+    };
+  }
+  static mapDispatchToProps (dispatch) {
+    return {
+      setImage: (fileBlob) => {
+        // dispatch(setCharacterCreationImage(fileBlob));
+      }
+    };
+  }
+  render () {
+    return (<div className="pure-form">  RWa Character Creater
+            <div>
+              <ImageImport onImageLoaded={this.props.setImage} />
+            </div>
+            <img src={this.props.imageBlob} />
+            <input readOnly value={this.props.name} />
+            <input readOnly value={this.props.nameJa} />
+            <input readOnly value={this.props.origin} />
+          </div>);
   }
 }
 
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+  CharacterCreater.mapStateToProps,
+  CharacterCreater.mapDispatchToProps,
 )(CharacterCreater);

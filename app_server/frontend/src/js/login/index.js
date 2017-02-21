@@ -5,7 +5,6 @@ import sagas from "./sagas";
 
 export { Logout, init as loginInit, sagas as loginSagas };
 
-
 export default () => (<div>
   <LoginMenu />
 </div>);

@@ -6,14 +6,14 @@ import { Text } from "../widgets";
 const mapStateToProps = (state, ownProps) => ({
   loggedIn: state.login.getIn(["currentUser", "loggedIn"]),
   userName: state.login.getIn(["currentUser", "name"]),
-  userImage: state.login.getIn(["currentUser", "image"]),
+  userImage: state.login.getIn(["currentUser", "image"])
 });
 const mapDispatchToProps = dispatch => ({
 
 });
 
 const NavBar = class extends React.Component {
-  render() {
+  render () {
     const strings = this.props.strings;
     return (<div className="nav-bar">
       <div className="row user">
@@ -31,6 +31,5 @@ const NavBar = class extends React.Component {
     </div>);
   }
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

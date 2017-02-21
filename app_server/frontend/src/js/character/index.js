@@ -5,14 +5,14 @@ import Profile from "./components/profile";
 import { getProfile, getFullName, getAvartarData } from "./selectors";
 
 class Character extends React.Component {
-  static state2Prop(state, ownProps) {
+  static state2Prop (state, ownProps) {
     return {
       avatar: getAvartarData(state, { id: ownProps.params.characterId }),
       name: getFullName(state, { id: ownProps.params.characterId }),
-      profile: getProfile(state, { id: ownProps.params.characterId }),
+      profile: getProfile(state, { id: ownProps.params.characterId })
     };
   }
-  render() {
+  render () {
     return (<div className="char-content">
       <div className="row">
         <Avatar imageSrc={this.props.avatar.imageSrc} />
@@ -24,6 +24,5 @@ class Character extends React.Component {
     </div>);
   }
 }
-
 
 export default connect(Character.state2Prop)(Character);

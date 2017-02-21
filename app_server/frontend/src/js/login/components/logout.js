@@ -1,7 +1,7 @@
 import { logout } from "../api";
 
 export default class LogOut extends React.Component {
-  render() {
+  render () {
     logout().then(() => {
       window.location = "/";
     })

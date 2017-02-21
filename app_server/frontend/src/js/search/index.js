@@ -1,16 +1,15 @@
 import { connect } from "react-redux";
 
 const mapStateToProps = (state, ownProps) => ({
-  strings: state.language.get("current"),
+  strings: state.language.get("current")
 });
 
 const mapDispatchToProps = (state, ownProps) => ({
 
 });
 
-
 class Search extends React.Component {
-  render() {
+  render () {
     const strings = this.props.strings;
     return (<div className="pure-form">
       {strings.get("CHAR_SEARCH_DESCR")}
@@ -64,7 +63,6 @@ class Search extends React.Component {
     </div>);
   }
 }
-
 
 export default connect(
   mapStateToProps,

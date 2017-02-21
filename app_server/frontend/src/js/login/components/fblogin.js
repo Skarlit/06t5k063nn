@@ -5,28 +5,28 @@ import { loginViaFacebook } from "../duck";
 const mapStateToProps = (state, ownProps) => ({
   appId: state.login.getIn(["fbSdk", "appId"]),
   version: state.login.getIn(["fbSdk", "version"]),
-  oAuthCallbackUrl: state.endpoints.getIn(["oauth", "fbCallback"]),
+  oAuthCallbackUrl: state.endpoints.getIn(["oauth", "fbCallback"])
 });
 
 const mapDispatchToProps = dispatch => ({
-  login(user) {
+  login (user) {
     dispatch(loginViaFacebook(user));
-  },
+  }
 });
 
 class FbLogin extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.login = this.login.bind(this);
   }
-  loadFbSdk() {
+  loadFbSdk () {
     window.fbAsyncInit = () => {
       FB.init({
         status: true,
         appId: this.props.appId,
         xfbml: true,
         version: this.props.version,
-        cookie: true,
+        cookie: true
       });
       FB.AppEvents.logPageView();
       this.parseButton();
@@ -41,17 +41,17 @@ class FbLogin extends React.Component {
       fjs.parentNode.insertBefore(js, fjs);
     }(document, "script", "facebook-jssdk"));
   }
-  parseButton() {
+  parseButton () {
     if (window.FB) {
       FB.XFBML.parse(this.refs.button);
     }
   }
-  componentDidMount() {
+  componentDidMount () {
     if (!window.FB) {
       this.loadFbSdk();
     }
   }
-  login() {
+  login () {
     FB.login((response) => {
       if (response.authResponse) {
         console.log(response.authResponse);
@@ -68,7 +68,7 @@ class FbLogin extends React.Component {
       }
     }, { scope: "public_profile, email" });
   }
-  render() {
+  render () {
     if (!window.FB) return null;
     return (<div onClick={this.login} className="fb-login-btn">
       <i className="fa fa-facebook fa-2x" aria-hidden="true" />

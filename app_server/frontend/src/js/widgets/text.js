@@ -2,12 +2,12 @@ import { connect } from "react-redux";
 import { getText } from "../locale/selectors";
 
 class Text extends React.Component {
-  static mapStateToProps(state, props) {
+  static mapStateToProps (state, props) {
     return {
-      text: getText(state, props.textKey),
+      text: getText(state, props.textKey)
     };
   }
-  render() {
+  render () {
     let classNames = "text ";
     if (this.props.className) classNames += this.props.className;
     return (<div className={classNames}>
@@ -18,7 +18,7 @@ class Text extends React.Component {
 
 Text.propTypes = {
   className: React.PropTypes.string,
-  textKey: React.PropTypes.string.isRequired,
+  textKey: React.PropTypes.string.isRequired
 };
 
 export default connect(Text.mapStateToProps)(Text);

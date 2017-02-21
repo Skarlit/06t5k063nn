@@ -1,5 +1,5 @@
 export default class MyList extends React.Component {
-  render() {
+  render () {
     return (<div>
       My List
     </div>);

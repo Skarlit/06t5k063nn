@@ -1,18 +1,18 @@
 class FileInput extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.onClick = this.onClick.bind(this);
   }
-  componentWillUnmount() {
+  componentWillUnmount () {
   }
-  onClick() {
+  onClick () {
     this.refs.input.click();
   }
-  render() {
+  render () {
     return (<div onClick={this.onClick} style={this.props.style || {}} >
-      {this.props.children}
-      <input ref="input" type="file" onChange={this.props.onChange} style={{ display: "none" }} />
-    </div>);
+          {this.props.children}
+          <input ref="input" type="file" onChange={this.props.onChange} style={{ display: "none" }} />
+        </div>);
   }
 }
 

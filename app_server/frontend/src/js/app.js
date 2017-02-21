@@ -27,8 +27,8 @@ const init = () => {
     const logger = createLogger({
       actionTransformer: action => ({
         ...action,
-        type: String(action.type),
-      }),
+        type: String(action.type)
+      })
     });
     middlewares.push(logger);
   }
@@ -49,7 +49,7 @@ const init = () => {
         search: SearchReducer,
         endpoints: nullReducer,
         characters: CharacterReducer,
-        routing: routerReducer,
+        routing: routerReducer
       }),
       initialState, // GLOBAL init Store Data
       compose(applyMiddleware(...middlewares)),
@@ -57,13 +57,11 @@ const init = () => {
   sagaMiddleware.run(localeSagas);
   sagaMiddleware.run(loginSagas);
 
-
     // Create an enhanced history that syncs navigation events with the store
   const history = syncHistoryWithStore(browserHistory, store);
 
   render(Routes(store, history), rootEl);
 };
-
 
 // Entry Point
 if (document.readyState === "loading") {

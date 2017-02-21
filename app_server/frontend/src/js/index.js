@@ -3,7 +3,7 @@ import Footer from "./components/footer";
 import Login from "./login";
 
 export default class extends React.Component {
-  render() {
+  render () {
     return (<div className="app">
       <NavBar />
       <div className="content">

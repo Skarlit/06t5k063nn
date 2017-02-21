@@ -5,7 +5,7 @@ import { getCurrentLanguageString, getCurrentLocale } from "../locale/selectors"
 export const getAvartarData = (state, props) => {
   const { id } = props;
   return {
-    imageSrc: state.characters.getIn([id, "avatarImgSrc"]),
+    imageSrc: state.characters.getIn([id, "avatarImgSrc"])
   };
 };
 
@@ -22,14 +22,13 @@ export const getFullName = createSelector(
     return {
       firstName: {
         kanji: name.getIn(["firstName", "kanji"]),
-        yomi: name.getIn(["firstName", locale]),
+        yomi: name.getIn(["firstName", locale])
       },
       lastName: {
         kanji: name.getIn(["lastName", "kanji"]),
-        yomi: name.getIn(["lastName", locale]),
+        yomi: name.getIn(["lastName", locale])
       } };
   });
-
 
 export const getProfile = createSelector(
   getCharacter,
@@ -46,10 +45,9 @@ export const getProfile = createSelector(
       gender: profile.get("gender"),
       height: profile.get("height"),
       threeSize,
-      bloodType: profile.get("bloodType"),
+      bloodType: profile.get("bloodType")
     };
   });
-
 
 export const getFeatures = createSelector(
   getCharacter,
@@ -58,7 +56,7 @@ export const getFeatures = createSelector(
     return {
       hairType: features.getIn(["hair", "type"]),
       hairColor: features.getIn(["hair", "colors"]),
-      eyeShape: features.getIn(),
+      eyeShape: features.getIn()
     };
   },
 );

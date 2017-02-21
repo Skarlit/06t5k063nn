@@ -2,7 +2,7 @@
 const noop = () => {};
 
 class Image extends React.Component {
-  render() {
+  render () {
     const style = { backgroundImage: `url(${this.props.src})` };
     if (this.props.width) style.width = this.props.width;
     if (this.props.height) style.height = this.props.height;
@@ -14,13 +14,12 @@ class Image extends React.Component {
   }
 }
 
-
 Image.propTypes = {
   src: React.PropTypes.string.isRequired,
   width: React.PropTypes.string,
   height: React.PropTypes.string,
   classNames: React.PropTypes.string,
-  onClick: React.PropTypes.func,
+  onClick: React.PropTypes.func
 };
 
 export default Image;

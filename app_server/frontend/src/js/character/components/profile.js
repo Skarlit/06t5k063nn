@@ -1,10 +1,10 @@
 import { Text } from "../../widgets";
 
 export default class Profile extends React.Component {
-  renderAge() {
+  renderAge () {
 
   }
-  render() {
+  render () {
     console.log(this.props);
     return (<div className="char-profile">
       <Text textKey={"PROFILE"} className="title" />

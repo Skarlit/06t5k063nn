@@ -3,7 +3,7 @@ export const ORIGIN = {
   EROGE: "EROGE",
   GAME: "GAME",
   MANGA: "MANGA",
-  UNKNOWN: "UNKNOWN",
+  UNKNOWN: "UNKNOWN"
 };
 
 // Colors
