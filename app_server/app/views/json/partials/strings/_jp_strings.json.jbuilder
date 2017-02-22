@@ -26,3 +26,5 @@ json.HEIGHT "身長"
 json.THREE_SIZE "スリーサイズ"
 json.BLOOD_TYPE "血液型"
 json.HUMAN "人間"
+
+json.DROP_FILE_MSG "画像をここでドロップ"

@@ -11,9 +11,15 @@ class FileInput extends React.Component {
   render () {
     return (<div onClick={this.onClick} style={this.props.style || {}} >
           {this.props.children}
-          <input ref="input" type="file" onChange={this.props.onChange} style={{ display: "none" }} />
-        </div>);
+      <input ref="input" type="file"
+            accept={this.props.accept || ""}
+            onChange={this.props.onChange} style={{ display: "none" }} />
+    </div>);
   }
 }
+
+FileInput.propTypes = {
+  onChange: React.PropTypes.func.isRequired
+};
 
 export default FileInput;

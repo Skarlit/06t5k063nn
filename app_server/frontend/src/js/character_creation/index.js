@@ -1,6 +1,7 @@
-import { ImageImport } from "../widgets";
+import { ImageImport, FileInput } from "../widgets";
 import { connect } from "react-redux";
 // import { setCharacterCreationImage } from "../actions";
+const noop = () => {};
 
 class CharacterCreater extends React.Component {
   static mapStateToProps (state, ownProps) {
@@ -14,6 +15,7 @@ class CharacterCreater extends React.Component {
   static mapDispatchToProps (dispatch) {
     return {
       setImage: (fileBlob) => {
+        console.log(fileBlob);
         // dispatch(setCharacterCreationImage(fileBlob));
       }
     };
@@ -21,7 +23,12 @@ class CharacterCreater extends React.Component {
   render () {
     return (<div className="pure-form">  RWa Character Creater
             <div>
-              <ImageImport onImageLoaded={this.props.setImage} />
+              <ImageImport onImageLoaded={this.props.setImage} onDropError={noop}>
+                <FileInput accept="image/*"
+                          onChange={this.props.setImage} >
+                   <div>Drag or click here to import an image</div>
+                </FileInput>
+              </ImageImport>
             </div>
             <img src={this.props.imageBlob} />
             <input readOnly value={this.props.name} />

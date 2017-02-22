@@ -16,7 +16,7 @@ module.exports = {
   extractTextLoader: function () {
     return {
       test: /\.scss$/,
-      loader: ExtractTextPlugin.extract({fallback: "style-loader", use: "css-loader!postcss-loader!sass-loader!stylus-loader"})
+      loader: ExtractTextPlugin.extract({fallback: "sass-loader", use: "css-loader!postcss-loader!sass-loader"})
     };
   },
   babelLoader: function () {

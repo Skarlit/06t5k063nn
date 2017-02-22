@@ -1,0 +1,42 @@
+@import "../constants.scss";
+
+.image-import {
+  .dropzone {
+    display: none;
+
+    &.drag-start {
+      display: block;
+      z-index: $backdrop-layer;
+      position: fixed;
+      right: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      box-sizing: border-box;
+      border: 2px solid $light-green;
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    .status-message {
+      
+      color: white;
+      white-space: nowrap;
+      position: absolute;
+      top: 30%;
+      transform: translate(-50%);
+      left: 50%;
+      
+      i {
+        font-size: 72px;
+        text-align: center;
+        display: block;
+        margin-bottom: 20px;
+      }
+
+      .text {
+        font-size: 32px;
+        text-align: center;
+      }
+    }
+  }
+}
