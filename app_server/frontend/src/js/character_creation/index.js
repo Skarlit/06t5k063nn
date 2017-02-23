@@ -1,6 +1,9 @@
 import { ImageImport, FileInput } from "../widgets";
 import { connect } from "react-redux";
-// import { setCharacterCreationImage } from "../actions";
+import { IMPORT_IMAGE_BLOB } from "./duck";
+import {ImageCropperModel} from "../models";
+import { ImageCropper } from "../widgets";
+import { getImageCropperModel } from "./selectors";
 const noop = () => {};
 
 class CharacterCreater extends React.Component {
@@ -9,14 +12,16 @@ class CharacterCreater extends React.Component {
       name: state.characterCreation.get("name"),
       nameJa: state.characterCreation.get("nameJa"),
       origin: state.characterCreation.get("origin"),
-      imageBlob: state.characterCreation.get("imageBlob")
+      imageCropperModel: getImageCropperModel(state)
     };
   }
   static mapDispatchToProps (dispatch) {
     return {
       setImage: (fileBlob) => {
-        console.log(fileBlob);
-        // dispatch(setCharacterCreationImage(fileBlob));
+        dispatch({
+          type: IMPORT_IMAGE_BLOB,
+          image: new ImageCropperModel({imageBlob: fileBlob})
+        });
       }
     };
   }
@@ -30,7 +35,7 @@ class CharacterCreater extends React.Component {
                 </FileInput>
               </ImageImport>
             </div>
-            <img src={this.props.imageBlob} />
+            <ImageCropper model={this.props.imageCropperModel} />
             <input readOnly value={this.props.name} />
             <input readOnly value={this.props.nameJa} />
             <input readOnly value={this.props.origin} />

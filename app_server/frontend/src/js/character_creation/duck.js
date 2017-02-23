@@ -1,13 +1,14 @@
 import Immutable from "immutable";
-import { ORIGIN } from "../app_const";
-import { SET_CHARACTER_CREATION_IMAGE } from "../actions";
+import {ImageCropperModel} from "../models";
+export const IMPORT_IMAGE_BLOB = "CHARACTER_CREATION/IMPORT_IMAGE_BLOB";
 
 // Session
 const initialState = Immutable.fromJS({
   name: "Nanashi",
   nameJa: "名無し",
-  origin: ORIGIN.UNKNOWN,
-  imageBlob: null
+  session: {
+    imageCropper: new ImageCropperModel()
+  }
 });
 
 export default function (state, action) {
@@ -16,8 +17,8 @@ export default function (state, action) {
   }
 
   switch (action.type) {
-  case SET_CHARACTER_CREATION_IMAGE:
-    state = state.set("imageBlob", action.imageBlob);
+  case IMPORT_IMAGE_BLOB:
+    state = state.updateIn(["session", "imageCropper"], () => action.image);
     break;
   }
 

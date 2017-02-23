@@ -64,5 +64,6 @@ Rails.application.configure do
                            "https://localhost:* wss://localhost:8080 https://cdn.fontawesome.com http://localhost:8080 " \
                            "#{config.asset_host} https://fonts.googleapis.com " \
                            "https://use.fontawesome.com https://fonts.gstatic.com " \
-                           "https://connect.facebook.net https://*.facebook.com https://*.fbcdn.net"
+                           "https://connect.facebook.net https://*.facebook.com https://*.fbcdn.net " \
+                           ";img-src 'self' * data:; media-src *"
 end

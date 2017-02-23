@@ -64,14 +64,30 @@ class ImageImport extends React.Component {
   onDrop (e) {
     e.preventDefault();
     e.stopPropagation();
-    const file = e.nativeEvent.dataTransfer.files[0];
-    if (/image/.test(file.type)) {
-      readImageFile(file, (e, fileBlob) => {
-        this.props.onImageLoaded(fileBlob);
-      });
-    } else {
-      this.props.onDropError(e);
+    const data = e.nativeEvent.dataTransfer;
+    if (data.files.length > 0) {
+      const file = data.files[0];
+      if (/image/.test(file.type)) {
+        readImageFile(file, (e, fileBlob) => {
+          this.props.onImageLoaded(fileBlob);
+        });
+      } else {
+        this.props.onDropError(e);
+      }
+    } else if (data.items.length > 0) {
+      let src = data.getData("text/html").match(/src=["'](.*?)["']/);
+      if (src.length > 0) {
+        let blob = src[1];
+        if (/^data:/.test(blob)) {
+          // base64
+          this.props.onImageLoaded(blob);
+        } else if (/^http/.test(blob)) {
+          // url
+          this.props.onImageLoaded(blob.replace(/^https?/, "https"));
+        }
+      }
     }
+
     this.rescueBadState();
   }
   onDragOver (e) {
