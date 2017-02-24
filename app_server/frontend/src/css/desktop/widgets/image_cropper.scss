@@ -1,0 +1,11 @@
+@import "../base.scss";
+@import "../constants.scss";
+
+.image-cropper {
+  z-index: $backdrop-layer;
+  
+  .backdrop {
+    background: rgba(0,0,0, 0.9);
+    
+  }
+}

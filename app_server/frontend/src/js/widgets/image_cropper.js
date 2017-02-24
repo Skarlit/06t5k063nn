@@ -1,3 +1,5 @@
+import CircularSlider from "./circular_slider";
+import HorizontalSlider from "./horizontal_slider";
 
 const PREVIEW = "preview";
 const EDIT = "edit";
@@ -8,6 +10,8 @@ export default class extends React.Component {
       mode: this.props.startWithEdit ? EDIT : PREVIEW
     };
     this.initCanvasState(this.props.model);
+    this.rotateImage = this.rotateImage.bind(this);
+    this.scaleImage = this.scaleImage.bind(this);
   }
   shouldComponentUpdate (nextProp, nextState) {
     return this.props.model !== nextProp.model ||
@@ -29,11 +33,9 @@ export default class extends React.Component {
     };
     img.src = this.props.model.imageBlob;
   }
-  renderPreview () {
-    return <canvas ref="canvas" width={this.cropW} height={this.cropH} className="preview"></canvas>;
-  }
   renderEditor () {
-    return <canvas ref="canvas" width={this.cropW} height={this.cropH} className="editor"></canvas>;
+    ;
+    return;
   }
   componentDidUpdate () {
     this.initCanvasImage();
@@ -41,10 +43,21 @@ export default class extends React.Component {
   componentDidMount () {
     this.initCanvasImage();
   }
+  rotateImage (deg) {
+
+  }
+  scaleImage (factor) {
+
+  }
   render () {
-    const view = this.mode === PREVIEW ? this.renderPreview() : this.renderEditor();
     return <div className="image-cropper">
-      {view}
+      <div className="backdrop"></div>
+      <div ref="edit-view">
+        <canvas ref="canvas" width={this.cropW} height={this.cropH} className="editor"></canvas>
+      </div>
+      <CircularSlider size={120} knobSize={16} onUpdate={this.rotateImage} />
+      <HorizontalSlider pipeHeight={8} width={300} height={24} high={3} low={0.1} start={1} onUpdate={this.scaleImage} />
     </div>;
   }
 }
+
