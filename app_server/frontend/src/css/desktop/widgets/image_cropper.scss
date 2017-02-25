@@ -20,7 +20,7 @@
     position: relative;
     margin: 0 auto;
     border: 2px solid #aeaeae;
-    padding: 7px;
+    padding: 15px;
     background-color: rgba(41, 37, 37, 0.83);
     border-radius: 6px;
 
@@ -42,5 +42,34 @@
       box-sizing: border-box;
       border: 1px solid #eee;
     }
+
+    .rot-wrap {
+      position: absolute;
+      right: 0;
+      z-index: 1;
+    }
+    .bottom-wrap {
+      position: absolute;
+      bottom: 0;
+      padding: 0 15px 20px 15px;
+      right: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+
+      .reset-btn {
+        position: absolute;
+      }
+
+      .horizontal-slider {
+        margin: 0 auto;
+      }
+    }
+  }
+  .reset-btn, .flip-btn {
+    color: white;
+    background: $red;
+    padding: 4px 8px;
+    border-radius: 4px;
   }
 }

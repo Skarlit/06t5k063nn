@@ -18,6 +18,8 @@ export default class extends React.Component {
     this.move = this.move.bind(this);
     this.release = this.release.bind(this);
     this.drawFrame = this.drawFrame.bind(this);
+    this.reset = this.reset.bind(this);
+    this.flipY = this.flipY.bind(this);
   }
   shouldComponentUpdate (nextProp, nextState) {
     return this.props.model !== nextProp.model ||
@@ -33,16 +35,28 @@ export default class extends React.Component {
     this.canvasWidth = Math.min(window.innerWidth, 600);
     this.canvasHeight = Math.min(window.innerHeight - 300, 600);
 
+    this.srcCanvas = document.createElement("canvas");
+    this.srcCtx = this.srcCanvas.getContext("2d");
+
     this.ctxTransform = mat2d.identity(mat2d.create());
     this._prevScale = this.scale;
     this._prevRot = this.rot;
+    this._srcCenter = vec2.create();
+    this._negSrcCenter = vec2.create();
+    this._canvasCenter = [this.canvasWidth * 0.5, this.canvasHeight * 0.5];
+    this._invCtxTransform = mat2d.create();
+    this._updateComputationCache();
 
-    this.cropArea = {
-      width: this.cropW,
-      height: this.cropH,
-      top: 0.5 * (this.canvasHeight - this.cropH),
-      left: 0.5 * (this.canvasWidth - this.cropW)
-    };
+    /* pre initialized dummy local variables */
+    this._d = vec2.create();
+    this._scaleMatrix = mat2d.create();
+  }
+  _updateComputationCache () {
+    mat2d.invert(this._invCtxTransform, this.ctxTransform);
+    this._srcCenter[0] = 0.5 * this.scale * this.srcWidth;
+    this._srcCenter[1] = 0.5 * this.scale * this.srcHeight;
+    this._negSrcCenter[0] = -this._srcCenter[0];
+    this._negSrcCenter[1] = -this._srcCenter[1];
   }
   initCanvasImage () {
     this.ctx = this.refs.canvas.getContext("2d");
@@ -50,18 +64,14 @@ export default class extends React.Component {
     img.crossOrigin = "Anonymous";
     let $this = this;
     img.onload = function () {
-      $this.srcCanvas = document.createElement("canvas");
       $this.srcCanvas.width = this.width;
       $this.srcCanvas.height = this.height;
-      $this.srcCtx = $this.srcCanvas.getContext("2d");
+      $this.srcWidth = this.width;
+      $this.srcHeight = this.height;
       $this.srcCtx.drawImage(img, 0, 0);
       $this.ctx.drawImage(img, 0, 0);
     };
     img.src = require("../../img/test/yukina_test.jpg");  // this.props.model.imageBlob;
-  }
-  renderEditor () {
-    ;
-    return;
   }
   componentDidUpdate () {
     this.initCanvasImage();
@@ -70,28 +80,46 @@ export default class extends React.Component {
     this.initCanvasImage();
   }
   rotateImage (rad) {
-    this.rot = -rad; // it rotates clockwise in context hence negative.
+    this.rot = -rad; // negative to adjust clockwise direction
     let dRad = this.rot - this._prevRot;
-    // this.ctx.translate(this.canvasWidth / 2, this.canvasHeight / 2);
-    // this.ctx.rotate(dRad);
-    // this.ctx.translate(-this.canvasWidth / 2, -this.canvasHeight / 2);
-    let centerX = 0.5 * this.scale * this.canvasWidth;
-    let centerY = 0.5 * this.scale * this.canvasHeight;
-    let inverseD = [-centerX, -centerY];
-    mat2d.translate(this.ctxTransform, this.ctxTransform, [centerX, centerY]);
+    mat2d.translate(this.ctxTransform, this.ctxTransform, this._srcCenter);
     mat2d.rotate(this.ctxTransform, this.ctxTransform, dRad);
-    console.log(mat2d);
-
-    // vec2.transformMat2(inverseD, inverseD, );
-    mat2d.translate(this.ctxTransform, this.ctxTransform, inverseD);
+    mat2d.translate(this.ctxTransform, this.ctxTransform, this._negSrcCenter);
     this._prevRot = this.rot;
     window.requestAnimationFrame(this.drawFrame);
   }
   scaleImage (factor) {
-    this.scale = Math.sign(this.scale) * factor;
-    mat2d.scale(this.ctxTransform, this.ctxTransform, [this.scale / this._prevScale, this.scale / this._prevScale]);
+    this.scale = factor;
+    let ds = this.scale / this._prevScale;
+    vec2.transformMat2(this._d, this._canvasCenter, this._invCtxTransform);
+    this._scaleMatrix[0] = ds; this._scaleMatrix[2] = 0; this._scaleMatrix[4] = this._d[0] * (1 - ds);
+    this._scaleMatrix[1] = 0; this._scaleMatrix[3] = ds; this._scaleMatrix[5] = this._d[1] * (1 - ds);
+
+    mat2d.mul(this.ctxTransform, this.ctxTransform, this._scaleMatrix);
     this._prevScale = this.scale;
     window.requestAnimationFrame(this.drawFrame);
+  }
+  flipY () {
+    mat2d.scale(this.ctxTransform, this.ctxTransform, [-1, 1]);
+    mat2d.translate(this.ctxTransform, this.ctxTransform, [-this.srcWidth * 0.5, 0]);
+    window.requestAnimationFrame(this.drawFrame);
+  }
+  reset () {
+    this.ctxTransform = mat2d.create();
+    window.requestAnimationFrame(this.drawFrame);
+  }
+  move (e) {
+    if (this._hold) {
+      let evt = e.nativeEvent;
+      let dx = evt.clientX - this._prevX;
+      let dy = evt.clientY - this._prevY;
+      this._prevX = evt.clientX;
+      this._prevY = evt.clientY;
+
+      vec2.transformMat2(this._d, [dx, dy], this._invCtxTransform);
+      mat2d.translate(this.ctxTransform, this.ctxTransform, this._d);
+      window.requestAnimationFrame(this.drawFrame);
+    }
   }
   start (e) {
     this._hold = true;
@@ -101,44 +129,30 @@ export default class extends React.Component {
   release () {
     this._hold = false;
   }
-  move (e) {
-    if (this._hold) {
-      let evt = e.nativeEvent;
-      let dx = evt.clientX - this._prevX;
-      let dy = evt.clientY - this._prevY;
-      this._prevX = evt.clientX;
-      this._prevY = evt.clientY;
-      let displacement = vec2.create();
-      console.log([dx, dy]);
-      vec2.transformMat2(displacement, [dx, dy], this.ctxTransform);
-      console.log(vec2.str(displacement));
-      mat2d.translate(this.ctxTransform, this.ctxTransform, displacement);
-      // mat2d.translate(this.ctxTransform, this.ctxTransform, [dx, dy]);
-      window.requestAnimationFrame(this.drawFrame);
-    }
-  }
   drawFrame () {
-    this.ctx.save();
-    this.ctx.setTransform(1, 0, 0, 1, 0, 0);
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
-    this.ctx.restore();
-    // this.ctx.drawImage(this.srcCanvas,
-    // 0, 0, this.srcCanvas.width, this.srcCanvas.height,
-    // 0, 0, this.scale * this.srcCanvas.width, this.srcCanvas.height);
-    console.log(mat2d.str(this.ctxTransform));
+    this.ctx.save();
     this.ctx.setTransform.apply(this.ctx, this.ctxTransform);
-    // this.ctx.translate(-this.scale * 0.5 * this.canvasWidth, -this.scale * 0.5 * this.canvasHeight);
     this.ctx.drawImage(this.srcCanvas, 0, 0);
+    this.ctx.restore();
+    this._updateComputationCache();
   }
-  render () {
-    const editDim = {width: this.canvasWidth, height: this.canvasHeight};
-    const cropAreaStyle = this.cropArea;
-    return <div className="image-cropper">
-      <div className="backdrop"></div>
-      <div className="container">
-        <CircularSlider size={120} knobSize={16} onUpdate={this.rotateImage} />
-        <div ref="edit-view" className="frame-wrap" style={editDim}>
-          <div ref="frame" className="frame" style={editDim}>
+  renderResetBtn () {
+    return <a className="reset-btn" onClick={this.reset}>Reset</a>;
+  }
+  renderFlipBtn () {
+    return null;
+    // return <a className="flip-btn" onClick={this.flipY}>Mirror</a>;
+  }
+  renderEditor () {
+    const cropAreaStyle = {
+      width: this.cropW,
+      height: this.cropH,
+      top: 0.5 * (this.canvasHeight - this.cropH),
+      left: 0.5 * (this.canvasWidth - this.cropW),
+      boxShadow: `0 0 0 ${0.5 * (this.canvasWidth - this.cropW)}px rgba(0, 0, 0, 0.67)`
+    };
+    return <div ref="frame" className="frame" style={{width: this.canvasWidth, height: this.canvasHeight}}>
             <canvas ref="canvas" className="editor"
                 width={this.canvasWidth} height={this.canvasHeight}
                 onMouseDown={this.start}
@@ -147,8 +161,22 @@ export default class extends React.Component {
                 onClick={this.release}
                 onMouseUp={this.release}></canvas>
             <div ref="croparea" className="crop-area" style={cropAreaStyle}></div>
+          </div>;
+  }
+  render () {
+    return <div className="image-cropper">
+      <div className="backdrop"></div>
+      <div className="container">
+        <div ref="edit-view" className="frame-wrap" style={{width: this.canvasWidth, height: this.canvasHeight}}>
+          <div className="rot-wrap">
+            <CircularSlider size={120} knobSize={16} onUpdate={this.rotateImage} />
           </div>
-          <HorizontalSlider pipeHeight={8} width={300} height={24} high={3} low={0.1} start={1} onUpdate={this.scaleImage} />
+          {this.renderEditor()}
+          <div className="bottom-wrap">
+            {this.renderResetBtn()}
+            <HorizontalSlider pipeHeight={8} width={300} height={24} high={3} low={0.1} start={1} onUpdate={this.scaleImage} />
+            {this.renderFlipBtn()}
+          </div>
         </div>
       </div>
     </div>;
