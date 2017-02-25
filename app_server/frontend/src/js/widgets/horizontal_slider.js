@@ -13,7 +13,7 @@ export default class HorizontalSlider extends React.Component {
     return this.props.start !== nextState.start;
   }
   round (dec) {
-    return parseInt(dec * 10) / 10;
+    return parseInt(dec * 100) / 100;
   }
   start (e) {
     this._hold = true;

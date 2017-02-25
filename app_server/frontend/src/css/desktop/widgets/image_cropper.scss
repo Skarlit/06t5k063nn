@@ -2,10 +2,45 @@
 @import "../constants.scss";
 
 .image-cropper {
-  z-index: $backdrop-layer;
-  
+
   .backdrop {
     background: rgba(0,0,0, 0.9);
-    
+    z-index: $backdrop-layer;
+  }
+  .container {
+    position: fixed;
+    z-index: $backdrop-layer + 100;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  .frame-wrap {
+    position: relative;
+    margin: 0 auto;
+    border: 2px solid #aeaeae;
+    padding: 7px;
+    background-color: rgba(41, 37, 37, 0.83);
+    border-radius: 6px;
+
+    .frame {
+      display: inline-block;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .editor {
+      background-color: black;
+    }
+
+    .crop-area {
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      box-sizing: border-box;
+      border: 1px solid #eee;
+    }
   }
 }

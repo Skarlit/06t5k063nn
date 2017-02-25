@@ -21,8 +21,9 @@ export default class CircularSlider extends React.Component {
       let dim = this.refs.ui.getBoundingClientRect();
       let x = evt.clientX - dim.left - this.props.size / 2;
       let y = evt.clientY - dim.top - this.props.size / 2;
-      let deg = this.rad2Deg(Math.atan2(-y, x));
-      this.props.onUpdate(deg);
+      let rad = Math.atan2(-y, x);
+      let deg = this.rad2Deg(rad);
+      this.props.onUpdate(rad);
       this.setState({deg: deg});
     }
   }
