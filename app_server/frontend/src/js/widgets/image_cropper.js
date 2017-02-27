@@ -40,6 +40,8 @@ export default class extends React.Component {
 
     this.srcCanvas = document.createElement("canvas");
     this.srcCtx = this.srcCanvas.getContext("2d");
+    this.srcWidth = this.canvasWidth;
+    this.srcHeight = this.canvasHeight;
 
     this.ctxTransform = mat2d.identity(mat2d.create());
     this._prevScale = this.scale;
@@ -56,8 +58,8 @@ export default class extends React.Component {
   }
   _updateComputationCache () {
     mat2d.invert(this._invCtxTransform, this.ctxTransform);
-    this._srcCenter[0] = 0.5 * this.scale * this.srcWidth;
-    this._srcCenter[1] = 0.5 * this.scale * this.srcHeight;
+    this._srcCenter[0] = 0.5 * this.srcWidth;
+    this._srcCenter[1] = 0.5 * this.srcHeight;
     this._negSrcCenter[0] = -this._srcCenter[0];
     this._negSrcCenter[1] = -this._srcCenter[1];
   }
@@ -73,6 +75,7 @@ export default class extends React.Component {
       $this.srcHeight = this.height;
       $this.srcCtx.drawImage(img, 0, 0);
       $this.ctx.drawImage(img, 0, 0);
+      $this._updateComputationCache();
     };
     img.src = this.props.model.imageBlob;
   }
@@ -85,6 +88,8 @@ export default class extends React.Component {
   rotateImage (rad) {
     this.rot = -rad; // negative to adjust clockwise direction
     let dRad = this.rot - this._prevRot;
+    // Note: no need to scale srcCenter, the scaling is entailed in ctxTranform,
+    // when we draw the image, it will scale the it.
     mat2d.translate(this.ctxTransform, this.ctxTransform, this._srcCenter);
     mat2d.rotate(this.ctxTransform, this.ctxTransform, dRad);
     mat2d.translate(this.ctxTransform, this.ctxTransform, this._negSrcCenter);
@@ -94,10 +99,14 @@ export default class extends React.Component {
   scaleImage (factor) {
     this.scale = factor;
     let ds = this.scale / this._prevScale;
-    vec2.transformMat2(this._d, this._canvasCenter, this._invCtxTransform);
+    // we use transforMat2d because we want to exact coordinate of the center in the frame of the image.
+    // we must consider translation as well.
+    vec2.transformMat2d(this._d, this._canvasCenter, this._invCtxTransform);
+    // Find the offset by setting the fixed point of the scaling to the center
     this._scaleMatrix[0] = ds; this._scaleMatrix[2] = 0; this._scaleMatrix[4] = this._d[0] * (1 - ds);
     this._scaleMatrix[1] = 0; this._scaleMatrix[3] = ds; this._scaleMatrix[5] = this._d[1] * (1 - ds);
 
+    // Apply the scaling matrix as passive transformation.
     mat2d.mul(this.ctxTransform, this.ctxTransform, this._scaleMatrix);
     this._prevScale = this.scale;
     window.requestAnimationFrame(this.drawFrame);
@@ -118,8 +127,11 @@ export default class extends React.Component {
       let dy = evt.clientY - this._prevY;
       this._prevX = evt.clientX;
       this._prevY = evt.clientY;
-
+      // we use mat2 instead of mat2d here because we are only interested in
+      // the direction of the vertical vector on screen written in image frame.
       vec2.transformMat2(this._d, [dx, dy], this._invCtxTransform);
+      // If we use mat2d above, this._id will be mapped to some random location
+      // which will mess up ctxTranform when we translate.
       mat2d.translate(this.ctxTransform, this.ctxTransform, this._d);
       window.requestAnimationFrame(this.drawFrame);
     }
