@@ -28,3 +28,7 @@ json.BLOOD_TYPE "血液型"
 json.HUMAN "人間"
 
 json.DROP_FILE_MSG "画像をここでドロップ"
+json.CANCEL "キャンセル"
+json.SAVE "セーブ"
+json.RESET "リセット"
+json.IMAGE_CROPPER_DESC "画像を編集"

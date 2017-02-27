@@ -6,7 +6,7 @@
   position: relative;
   user-select: none;
   cursor: default;
-  padding: 20px 0;
+  padding: 30px 20px;
 
   .slide-mask {
     top: 0;
@@ -31,20 +31,15 @@
   .stats {
     position: absolute;
     background: $dark;
-    width: 30px;
+    width: 60px;
+    font-weight: bold;
     height: 20px;
     border-radius: 4px;
     left: 50%;
-    margin-left: -15px;
+    margin-left: -30px;
     text-align: center;
     font-size: 14px;
     color: white;
-    opacity: 1;
-    
-    &.fade {
-      opacity: 0;
-      transition: opacity 1s;
-    }
 
     &:before {
       content: "";

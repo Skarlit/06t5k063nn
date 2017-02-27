@@ -26,5 +26,8 @@ json.THREE_SIZE "3 Sizes"
 json.BLOOD_TYPE "Blood Type"
 json.HUMAN "Human"
 
-
 json.DROP_FILE_MSG "Drop image here..."
+json.CANCEL "Cancel"
+json.SAVE "Save"
+json.RESET "Reset"
+json.IMAGE_CROPPER_DESC "Edit Image"

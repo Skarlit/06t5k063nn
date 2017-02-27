@@ -2,6 +2,7 @@ import CircularSlider from "./circular_slider";
 import HorizontalSlider from "./horizontal_slider";
 import mat2d from "gl-matrix-mat2d";
 import vec2 from "gl-matrix-vec2";
+import Text from "./text";
 
 const PREVIEW = "preview";
 const EDIT = "edit";
@@ -20,6 +21,8 @@ export default class extends React.Component {
     this.drawFrame = this.drawFrame.bind(this);
     this.reset = this.reset.bind(this);
     this.flipY = this.flipY.bind(this);
+    this.save = this.save.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
   shouldComponentUpdate (nextProp, nextState) {
     return this.props.model !== nextProp.model ||
@@ -71,7 +74,7 @@ export default class extends React.Component {
       $this.srcCtx.drawImage(img, 0, 0);
       $this.ctx.drawImage(img, 0, 0);
     };
-    img.src = require("../../img/test/yukina_test.jpg");  // this.props.model.imageBlob;
+    img.src = this.props.model.imageBlob;
   }
   componentDidUpdate () {
     this.initCanvasImage();
@@ -137,8 +140,27 @@ export default class extends React.Component {
     this.ctx.restore();
     this._updateComputationCache();
   }
+  save () {
+    let data = this.ctx.getImageData(
+      this._canvasCenter[0] - 0.5 * this.cropW,
+      this._canvasCenter[1] - 0.5 * this.cropH,
+      this.cropW, this.cropH);
+    let tmpCanvas = document.createElement("canvas");
+    let ctx = tmpCanvas.getContext("2d");
+    ctx.putImageData(data, 0, 0);
+    this.props.onSave({
+      croppedImage: tmpCanvas.toDataURL()
+    });
+  }
+  cancel () {
+    this.props.onCancel();
+  }
   renderResetBtn () {
-    return <a className="reset-btn" onClick={this.reset}>Reset</a>;
+    return <a className="reset-btn" onClick={this.reset}>
+        <Text textKey="RESET">
+          <i className="fa fa-undo"></i>
+        </Text>
+    </a>;
   }
   renderFlipBtn () {
     return null;
@@ -163,13 +185,19 @@ export default class extends React.Component {
             <div ref="croparea" className="crop-area" style={cropAreaStyle}></div>
           </div>;
   }
+  renderWindowControl () {
+    return <div className="window-control-wrap" style={{width: this.canvasWidth}}>
+      <a className="save-btn" onClick={this.save} href="javascript://"><Text textKey="SAVE" /></a>
+      <a className="cancel-btn" onClick={this.cancel} href="javascript://"><Text textKey="CANCEL" /></a>
+    </div>;
+  }
   render () {
     return <div className="image-cropper">
       <div className="backdrop"></div>
       <div className="container">
         <div ref="edit-view" className="frame-wrap" style={{width: this.canvasWidth, height: this.canvasHeight}}>
           <div className="rot-wrap">
-            <CircularSlider size={120} knobSize={16} onUpdate={this.rotateImage} />
+            <CircularSlider size={80} knobSize={16} onUpdate={this.rotateImage} />
           </div>
           {this.renderEditor()}
           <div className="bottom-wrap">
@@ -178,6 +206,7 @@ export default class extends React.Component {
             {this.renderFlipBtn()}
           </div>
         </div>
+        {this.renderWindowControl()}
       </div>
     </div>;
   }

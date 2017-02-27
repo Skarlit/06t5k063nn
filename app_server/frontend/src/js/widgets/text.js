@@ -11,6 +11,7 @@ class Text extends React.Component {
     let classNames = "text ";
     if (this.props.className) classNames += this.props.className;
     return (<div className={classNames}>
+      {this.props.children}
       {this.props.text}
     </div>);
   }

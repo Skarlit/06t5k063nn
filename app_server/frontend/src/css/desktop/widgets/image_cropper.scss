@@ -2,18 +2,23 @@
 @import "../constants.scss";
 
 .image-cropper {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: $backdrop-layer;
 
   .backdrop {
     background: rgba(0,0,0, 0.9);
-    z-index: $backdrop-layer;
   }
+
   .container {
     position: fixed;
-    z-index: $backdrop-layer + 100;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    display: inline-block;
   }
 
   .frame-wrap {
@@ -66,10 +71,24 @@
       }
     }
   }
-  .reset-btn, .flip-btn {
+  .window-control-wrap {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 20px;
+    position: relative;
+    margin: 0 auto;
+  }
+  .reset-btn, .flip-btn, .save-btn, .cancel-btn {
     color: white;
     background: $red;
     padding: 4px 8px;
     border-radius: 4px;
+    font-weight: bold;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  .save-btn {
+    background-color: $mid-green
   }
 }

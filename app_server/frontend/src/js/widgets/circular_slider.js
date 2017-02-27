@@ -31,7 +31,7 @@ export default class CircularSlider extends React.Component {
     return deg / 180 * Math.PI;
   }
   rad2Deg (rad) {
-    return parseInt((rad / Math.PI * 180) * 2) / 2;
+    return parseInt((rad / Math.PI * 180));
   }
   render () {
     const size = this.props.size;
