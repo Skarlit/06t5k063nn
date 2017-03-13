@@ -1,9 +1,8 @@
 let webpack = require("webpack");
 let gulp = require("gulp");
 let gutil = require("gutil");
-let fs = require("fs");
-let pathConfig = require("./path_config");
 const getWebpackConfig = require("./webpack_config");
+const getServerConfig = require("./webpack.config.server");
 
 function log (err, stats) {
   if (err) throw new gutil.PluginError("webpack", err);
@@ -27,30 +26,6 @@ gulp.task("server", () => {
   config.entry.lib.unshift("webpack-dev-server/client?http://localhost:8080/");
   // config.entry.app.unshift("react-hot-loader/patch");
   let compiler = webpack(config);
-  let server = new WebpackDevServer(compiler, {
-        // webpack-dev-server options
-    https: true,
-    cert: fs.readFileSync(pathConfig.devCert, "utf8"),
-    key: fs.readFileSync(pathConfig.devKey, "utf8"),
-    contentBase: "./tmp",
-    inline: true,
-    noInfo: false,
-    quiet: false,
-    // hot: true,
-    setup (app) {
-    },
-    staticOptions: {
-    },
-    historyApiFallback: true,
-    clientLogLevel: "info",
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: 1000
-    },
-        // It's a required option.
-    publicPath: "/assets/",
-    headers: { "X-Custom-Header": "yes" },
-    stats: { colors: true }
-  });
+  let server = new WebpackDevServer(compiler, getServerConfig);
   server.listen(8080, "localhost", () => {});
 });

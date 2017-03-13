@@ -1,6 +1,6 @@
 class AuthStrategy
   include Mongoid::Document
-  belongs_to :user
+  belongs_to :user, inverse_of: :authstrategy
 
   field :provider, type: String
   field :uid, type: String

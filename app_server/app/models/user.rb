@@ -29,7 +29,7 @@ class User #< ApplicationRecord
   field :image, type: String
   field :name, type: String
 
-  has_many :auth_strategies, :autosave => true
+  has_many :auth_strategies, :autosave => true, inverse_of: :user
 
   index({email: 1}, {unique: true, background: true})
 
