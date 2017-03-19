@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CharacterTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "Character creation" do
+    c = Character.new(name: "Yukina Himeragi")
+  end
 end

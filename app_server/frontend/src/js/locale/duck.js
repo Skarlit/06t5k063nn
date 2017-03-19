@@ -22,7 +22,6 @@ export default function (state = initialState, action) {
     }
 
     newState = newState.update("current", () => Immutable.fromJS(action.strings));
-    Cookie.set("locale", newState.getIn(["current", "locale"]), { secure: true });
     break;
   }
   default:

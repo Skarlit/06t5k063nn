@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   end
 
   namespace :api, :defaults => { :format => 'json' } do
-    get 'strings/:locale' => 'app_strings#index', as: :get_strings_api
+    get 'strings' => 'app_strings#index', as: :get_strings_api
+
+    get 'search/va' => 'search#va'
+    get 'search/char' => 'search#char'
+    get 'search/all' => 'search#all'
+    get 'search/medium' => 'search#medium'
   end
 
   devise_for :users, :controllers => { omniauth_callbacks: 'users/omniauth_callbacks' }

@@ -63,7 +63,6 @@ class User #< ApplicationRecord
         user.password = Devise.friendly_token[0,20]
         user.name = user_data[:name]   # assuming the user model has a name
         user.image = user_data[:image]
-        user.skip_confirmation!
         user.save!
         user
       end

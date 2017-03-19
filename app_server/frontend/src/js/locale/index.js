@@ -19,11 +19,11 @@ class LocaleBtn extends React.Component {
   }
   constructor (props) {
     super(props);
-    this.jpLocale = this.jpLocale.bind(this);
+    this.jaLocale = this.jaLocale.bind(this);
     this.enLocale = this.enLocale.bind(this);
   }
-  jpLocale () {
-    this.props.selectLocale("jp");
+  jaLocale () {
+    this.props.selectLocale("ja");
   }
   enLocale () {
     this.props.selectLocale("en");
@@ -36,7 +36,7 @@ class LocaleBtn extends React.Component {
           <div className="icn-en" />
           <div>English</div>
         </a>
-        <a href="javascript://" className={`item ${this.props.locale === "jp" ? "current" : ""}`} onClick={this.jpLocale}>
+        <a href="javascript://" className={`item ${this.props.locale === "ja" ? "current" : ""}`} onClick={this.jaLocale}>
           <div className="icn-jp" />
           <div>日本語</div>
         </a>

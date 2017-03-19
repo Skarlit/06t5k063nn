@@ -1,8 +1,8 @@
 class Medium
   include Mongoid::Document
-  field :medium_type, type: String # VN, 18+VN, Game, Manga, Anime, 18+Anime, Other
-  field :name_jp, type: String
-  field :name_en, type: String
+  field :medium_type, type: String # VN, Eroge, Game, Manga, Anime, EroAnime, Novel, LightNovel, Other
+  field :mature, type: Boolean
+  field :name, type: String, localize: true
   embeds_many :links
   has_many :characters, inverse_of: :medium
 end

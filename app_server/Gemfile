@@ -27,7 +27,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'browser', '~> 2.3.0'
 gem 'json', '~> 2.0.3'
 
-
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'neo4j', '~> 8.0.5'
@@ -43,6 +44,7 @@ gem 'dotenv-rails', group: [:development, :test]
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'mongoid-rspec'
 end
 
 group :development do

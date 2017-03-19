@@ -1,4 +1,5 @@
 import { select, put, takeLatest } from "redux-saga/effects";
+import Cookie from "js-cookie";
 import Api from "./api";
 import { loadStringsAction, REQUEST_STRINGS } from "./duck";
 import { getCurrentLocale, getCachedLanguages } from "./selectors";
@@ -6,8 +7,11 @@ import { getCurrentLocale, getCachedLanguages } from "./selectors";
 function* getLocaleStrings (localeChangeAction) {
   // if locale doesn't change, do nothing
   const currentLocale = yield select(getCurrentLocale);
-  if (currentLocale === localeChangeAction.locale) {
+  const newLocale = localeChangeAction.locale;
+  if (currentLocale === newLocale) {
     return;
+  } else {
+    Cookie.set("locale", newLocale, { secure: true });
   }
   // if locale not in cache, send ajax
   const cache = yield select(getCachedLanguages);

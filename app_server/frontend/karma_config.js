@@ -30,12 +30,7 @@ module.exports = function (config) {
       "test/**/*.js": ["webpack", "sourcemap"]
     },
 
-    webpack: {
-      devtool: "inline-source-map", // just do inline source maps instead of the default
-      module: {
-        loaders: [{ test: /\.js$/, loader: "babel-loader" }]
-      }
-    },
+    webpack: require("./webpack.config.dev"),
 
     webpackMiddleware: {
   // webpack-dev-middleware configuration

@@ -5,4 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Character.create({name: "姫柊雪菜"})
+I18n.locale = :en
+Character.create({name: "Yukina Himeragi", name_hira: "Yukina Himeragi"})
+I18n.locale = :ja
+Character.create({name: "姫柊雪菜", name_hira: "ひめらぎゆきな"})

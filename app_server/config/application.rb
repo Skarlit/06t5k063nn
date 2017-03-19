@@ -41,5 +41,7 @@ module AppServer
     config.generators do |g|
       g.orm :mongoid
     end
+
+    I18n.available_locales = [:en, :ja]
   end
 end

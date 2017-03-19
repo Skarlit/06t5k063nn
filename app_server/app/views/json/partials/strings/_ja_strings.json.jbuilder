@@ -1,4 +1,4 @@
-json.locale "jp"
+json.locale "ja"
 json.HOME "ホーム"
 json.CHAR_SEARCH_DESCR "キャラ検索"
 json.CHAR_SEARCH_OPTION "オプション"
