@@ -1,4 +1,11 @@
 require 'elasticsearch/model'
+
+
+Rails.application.config.elasticsearch = {
+  index: "yflist-#{Rails.env}"
+}
+
+
 # config = {
 #   hosts: ENV['ELASTICSEARCH_URL'] || "http://localhost:9200/"
 # }
