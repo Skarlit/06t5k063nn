@@ -1,5 +1,5 @@
 import Immutable from "immutable";
-import {ImageCropperModel} from "../models";
+import {ImageCropperModel, Character } from "../models";
 export const IMPORT_IMAGE_BLOB = "CHARACTER_CREATION/IMPORT_IMAGE_BLOB";
 export const IMAGE_CROPPER_OPEN = "CHARACTER_CREATION/IMAGE_CROPPER_OPEN";
 export const IMAGE_CROPPER_CLOSE = "CHARACTER_CREATION/IMAGE_CROPPER_CLOSE";
@@ -27,15 +27,22 @@ export function imageCropperClose (currentSession) {
   };
 }
 
-// Session
+// State schema
 const initialState = Immutable.fromJS({
-  name: "Nanashi",
-  nameJa: "名無し",
   ui: {
     imageCropper: false
   },
   session: {
-    imageCropper: new ImageCropperModel()
+    characterSession: {
+      imageCropper: new ImageCropperModel(),
+      character: new Character()
+    },
+    seiyuu: {
+
+    },
+    medium: {
+
+    }
   }
 });
 

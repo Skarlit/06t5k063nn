@@ -8,8 +8,8 @@ class Character
   index_name Rails.application.config.elasticsearch[:index]
   document_type "character"
 
-  # has_and_belongs_to_many :medium, inverse_of: :character
-  # has_and_belongs_to_many :seiyuu, inverse_of: :seiyuu
+  has_many :medium, inverse_of: :character
+  has_many :seiyuu, inverse_of: :seiyuu
 
   # Paperclip 
   has_attached_file :avatar, :storage => :s3,

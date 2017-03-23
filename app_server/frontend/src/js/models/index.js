@@ -1,3 +1,4 @@
 import ImageCropperModel from "./image_cropper";
+import Character from "./character";
 
-export { ImageCropperModel };
+export { ImageCropperModel, Character };
