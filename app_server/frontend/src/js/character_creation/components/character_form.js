@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { imageCropperOpen, imageCropperSave, imageCropperClose } from "../duck";
 import { getCharacterImageCropperSession, getCharacter, getUIState } from "../selectors";
-import { FormInput, ImageImport, FileInput } from "../../widgets/";
+import { FormInput, ImageImport, FileInput, Avatar } from "../../widgets/";
 
 const noop = () => {};
 
@@ -42,7 +42,9 @@ class CharacterForm extends React.Component {
         <ImageImport onImageLoaded={this.props.setImage} onDropError={noop}>
           <FileInput accept="image/*"
                     onChange={this.props.setImage} >
-              <div>Drag or click here to import an image</div>
+              <Avatar width={300} height={300} image={null}>
+                <div>Drag or click here to import an image</div>
+              </Avatar>
           </FileInput>
         </ImageImport>
       </div>
