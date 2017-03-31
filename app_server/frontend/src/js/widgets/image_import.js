@@ -1,4 +1,4 @@
-import { readImageFile } from "../utility";
+import { readImageFile, imgUrl2Blob } from "../utility";
 import { Text } from "../widgets";
 
 const DEFAULT = "default";
@@ -83,7 +83,10 @@ class ImageImport extends React.Component {
           this.props.onImageLoaded(blob);
         } else if (/^http/.test(blob)) {
           // url
-          this.props.onImageLoaded(blob.replace(/^https?/, "https"));
+          let url = blob.replace(/^https?/, "https");
+          imgUrl2Blob(url, (blob, w, h) => {
+            this.props.onImageLoaded(blob);
+          });
         }
       }
     }

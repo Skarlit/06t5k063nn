@@ -23,3 +23,14 @@ export function readImageFile (fileBlob, cb, opt) {
   };
   f.readAsDataURL(fileBlob);
 }
+
+export function imgUrl2Blob (url, cb) {
+  let img = new Image();
+  img.crossOrigin = "Anonymous";
+  img.onload = function () {
+    let c = document.createElement("canvas");
+    let ctx = c.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    cb(c.toDataURL, this.width, this.height);
+  };
+}

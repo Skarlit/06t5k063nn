@@ -1,6 +1,3 @@
-// Karma configuration
-// Generated on Sun Sep 18 2016 21:09:32 GMT-0700 (PDT)
-
 module.exports = function (config) {
   config.set({
 
@@ -12,10 +9,7 @@ module.exports = function (config) {
 
     // list of files / patterns to load in the browser
     files: [
-      "test/test-main.js",
-      "test/hello_world_spec.js",
-             {pattern: "src/**/*.js", watched: false},
-            {pattern: "test/**/*_spec.js", watched: false}
+      {pattern: "test/**/*_spec.js", watched: false}
     ],
 
     // list of files to exclude
@@ -30,7 +24,7 @@ module.exports = function (config) {
       "test/**/*.js": ["webpack", "sourcemap"]
     },
 
-    webpack: require("./webpack.config.dev"),
+    webpack: require("./webpack.config.karma"),
 
     webpackMiddleware: {
   // webpack-dev-middleware configuration

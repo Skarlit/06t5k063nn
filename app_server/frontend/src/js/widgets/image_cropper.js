@@ -33,8 +33,8 @@ export default class extends React.Component {
     this.x = 0;
     this.y = 0;
     this.scale = 1;
-    this.cropW = model.cropWidth;
-    this.cropH = model.cropHeight;
+    this.cropW = model.get("cropWidth");
+    this.cropH = model.get("cropHeight");
     this.canvasWidth = Math.min(window.innerWidth, 600);
     this.canvasHeight = Math.min(window.innerHeight - 300, 600);
 
@@ -66,8 +66,9 @@ export default class extends React.Component {
   initCanvasImage () {
     this.ctx = this.refs.canvas.getContext("2d");
     let img = new Image();
-    img.crossOrigin = "Anonymous";
+
     let $this = this;
+
     img.onload = function () {
       $this.srcCanvas.width = this.width;
       $this.srcCanvas.height = this.height;
@@ -77,7 +78,7 @@ export default class extends React.Component {
       $this.ctx.drawImage(img, 0, 0);
       $this._updateComputationCache();
     };
-    img.src = this.props.model.imageBlob;
+    img.src = this.props.model.get("imageBlob");
   }
   componentDidUpdate () {
     this.initCanvasImage();

@@ -1,29 +1,31 @@
 import Immutable from "immutable";
 import {ImageCropperModel, Character } from "../models";
 export const IMPORT_IMAGE_BLOB = "CHARACTER_CREATION/IMPORT_IMAGE_BLOB";
-export const IMAGE_CROPPER_OPEN = "CHARACTER_CREATION/IMAGE_CROPPER_OPEN";
+export const SET_CHAR_IMAGE = "CHARACTER_CREATION/SET_CHAR_IMAGE";
 export const IMAGE_CROPPER_CLOSE = "CHARACTER_CREATION/IMAGE_CROPPER_CLOSE";
-export const IMAGE_CROPPER_SAVE = "CHARACTER_CREATION/IMAGE_CROPPER_SAVE";
+export const IMG_CROPPER_LOAD_CHAR = "CHARACTER_CREATION/IMG_CROPPER_LOAD_CHAR";
 
 // actionc creator
-export function imageCropperOpen (imageBlob) {
-  return {
-    type: IMAGE_CROPPER_OPEN,
-    imageCropperModel: new ImageCropperModel({imageBlob: imageBlob})
-  };
-}
-
-export function imageCropperSave (croppedImage) {
-  return {
-    type: IMAGE_CROPPER_SAVE,
-    image: croppedImage
-  };
-}
-
 export function imageCropperClose (currentSession) {
   return {
-    type: IMAGE_CROPPER_CLOSE,
-    session: currentSession
+    type: IMAGE_CROPPER_CLOSE
+  };
+}
+
+export function imageCropperLoadCharacter (imageBlob, imageBaseWidth, imageBaseHeight) {
+  return {
+    type: IMG_CROPPER_LOAD_CHAR,
+    imageCropperModel: new ImageCropperModel({
+      imageBlob: imageBlob,
+      imageBaseWidth: imageBaseWidth,
+      imageBaseHeight: imageBaseHeight})
+  };
+}
+
+export function setCharacterFormImage (croppedImage) {
+  return {
+    type: SET_CHAR_IMAGE,
+    croppedImage: croppedImage
   };
 }
 
@@ -52,15 +54,15 @@ export default function (state, action) {
   }
 
   switch (action.type) {
-  case IMAGE_CROPPER_OPEN:
-    state = state.updateIn(["ui", "imageCropper"], () => true);
-    state = state.updateIn(["session", "imageCropper"], () => action.imageCropperModel);
-    break;
   case IMAGE_CROPPER_CLOSE:
     state = state.updateIn(["ui", "imageCropper"], () => false);
     break;
-  case IMAGE_CROPPER_SAVE:
+  case SET_CHAR_IMAGE:
     // state = state;
+    break;
+  case IMG_CROPPER_LOAD_CHAR:
+    state = state.updateIn(["session", "characterSession", "imageCropper"], () => action.imageCropperModel);
+    state = state.updateIn(["ui", "imageCropper"], () => true);
   }
 
   // For now, don't handle any actions

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
-import { imageCropperOpen, imageCropperSave, imageCropperClose } from "../duck";
+import { imageCropperLoadCharacter, imageCropperClose, setCharacterFormImage } from "../duck";
 import { getCharacterImageCropperSession, getCharacter, getUIState } from "../selectors";
-import { FormInput, ImageImport, FileInput, Avatar } from "../../widgets/";
+import { FormInput, ImageCropper, ImageImport, FileInput, Avatar } from "../../widgets/";
 
 const noop = () => {};
 
@@ -15,8 +15,8 @@ class CharacterForm extends React.Component {
   }
   static mapDispatchToProps (dispatch) {
     return {
-      setImage: (fileBlob) => dispatch(imageCropperOpen(fileBlob)),
-      imageCropperOnSave: (croppedImage) => dispatch(imageCropperSave(croppedImage)),
+      importImage: (fileBlob) => dispatch(imageCropperLoadCharacter(fileBlob)),
+      imageCropperOnSave: (croppedImage) => dispatch(setCharacterFormImage(croppedImage)),
       imageCropperOnCancel: (currentSession) => dispatch(imageCropperClose(currentSession))
     };
   }
@@ -39,7 +39,7 @@ class CharacterForm extends React.Component {
   render () {
     return <div><h2>Character Form</h2>
       <div>
-        <ImageImport onImageLoaded={this.props.setImage} onDropError={noop}>
+        <ImageImport onImageLoaded={this.props.importImage} onDropError={noop}>
           <FileInput accept="image/*"
                     onChange={this.props.setImage} >
               <Avatar width={300} height={300} image={null}>
