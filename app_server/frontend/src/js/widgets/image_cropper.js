@@ -6,7 +6,7 @@ import Text from "./text";
 
 const PREVIEW = "preview";
 const EDIT = "edit";
-export default class extends React.Component {
+export default class ImageCropper extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -159,11 +159,11 @@ export default class extends React.Component {
       this._canvasCenter[1] - 0.5 * this.cropH,
       this.cropW, this.cropH);
     let tmpCanvas = document.createElement("canvas");
+    tmpCanvas.width = this.cropW;
+    tmpCanvas.height = this.cropH;
     let ctx = tmpCanvas.getContext("2d");
     ctx.putImageData(data, 0, 0);
-    this.props.onSave({
-      croppedImage: tmpCanvas.toDataURL()
-    });
+    this.props.onSave(tmpCanvas.toDataURL());
   }
   cancel () {
     this.props.onCancel();
@@ -225,3 +225,9 @@ export default class extends React.Component {
   }
 }
 
+ImageCropper.propTypes = {
+  model: React.PropTypes.object.isRequired,
+  onSave: React.PropTypes.func.isRequired,
+  onCancel: React.PropTypes.func.isRequired
+}
+;

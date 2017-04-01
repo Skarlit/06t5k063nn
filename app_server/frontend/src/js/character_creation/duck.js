@@ -58,7 +58,10 @@ export default function (state, action) {
     state = state.updateIn(["ui", "imageCropper"], () => false);
     break;
   case SET_CHAR_IMAGE:
-    // state = state;
+    state = state.updateIn([
+      "session", "characterSession", "character", "avatarImgBlob"],
+       () => action.croppedImage);
+    state = state.updateIn(["ui", "imageCropper"], () => false);
     break;
   case IMG_CROPPER_LOAD_CHAR:
     state = state.updateIn(["session", "characterSession", "imageCropper"], () => action.imageCropperModel);
