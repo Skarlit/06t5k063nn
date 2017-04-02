@@ -19,5 +19,5 @@ Elasticsearch::Model.client = Elasticsearch::Client.new
 
 unless Character.__elasticsearch__.index_exists?
   Character.__elasticsearch__.create_index! force: true
-  Character.import
+  Character.import force: true
 end

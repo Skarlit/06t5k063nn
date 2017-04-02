@@ -8,20 +8,19 @@ class Character
   index_name Rails.application.config.elasticsearch[:index]
   document_type "character"
 
-  has_many :medium, inverse_of: :character
-  has_many :seiyuu, inverse_of: :seiyuu
+  has_many :media, inverse_of: :character
+  has_many :voices, inverse_of: :character
 
-  # Paperclip 
+  # Paperclip
+  validates :avatar, attachment_presence: false
+
   has_attached_file :avatar, :storage => :s3,
-                    :s3_credentials => Rails.application.config.s3_credentials
-
-  validates_attachment :avatar,
-    styles: { medium: "300x300>", thumb: "100x100>" }, 
-    default_url: "/images/missing.png",
-    content_type: { content_type: "image/jpeg" },
-    size: { in: 0..500.kilobytes }
-
-
+                    styles: { medium: "300x300#", thumb: "50x50#" },
+                    default_url: "/images/missing.png",
+                    content_type: { content_type: "image/jpeg" },
+                    size: { in: 0..500.kilobytes },
+                    s3_credentialsL: Rails.application.config.s3_credentials
+  
   field :name, localize: true
   field :name_hira, localize: true
 

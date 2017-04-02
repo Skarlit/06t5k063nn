@@ -1,7 +1,7 @@
-class Seiyuu
+class Voice
   include Mongoid::Document
   field :name, type: String, localize: true
   field :name_hira, type: String, localize: true
 
-  has_many :characters, inverse_of: seiyuu
+  # has_many :characters, inverse_of: voice
 end

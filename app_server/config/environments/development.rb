@@ -1,3 +1,4 @@
+require 'elasticsearch/rails/instrumentation'
 require 'dotenv/load'
 
 Rails.application.configure do
