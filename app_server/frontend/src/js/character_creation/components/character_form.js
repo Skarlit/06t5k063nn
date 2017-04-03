@@ -1,7 +1,4 @@
-// import { connect } from "react-redux";
-// import { imageCropperLoadCharacter, imageCropperClose, setCharacterFormImage } from "../duck";
-// import { getCharacterImageCropperSession, getCharacter, getUIState, getCharacterAvatarImage } from "../selectors";
-import { FormInput } from "../../widgets/";
+import CharacterAttr from "./character_attr";
 import CharacterImageEditor from "./character_image_editor";
 
 class CharacterForm extends React.Component {
@@ -14,9 +11,12 @@ class CharacterForm extends React.Component {
   }
   render () {
     return <div><h2>Character Form</h2>
-      <CharacterImageEditor />
-      <label>Name
-      </label>
+      <div className="form-body">
+        <div className="row">
+          <CharacterImageEditor />
+          <CharacterAttr />
+        </div>
+      </div>
     </div>;
   }
 }

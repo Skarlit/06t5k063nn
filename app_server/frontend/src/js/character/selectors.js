@@ -5,7 +5,7 @@ import { getCurrentLanguageString, getCurrentLocale } from "../locale/selectors"
 export const getAvartarData = (state, props) => {
   const { id } = props;
   return {
-    imageSrc: state.characters.getIn([id, "avatarImgSrc"])
+    imageSrc: state.characters.getIn([id, "avatar"])
   };
 };
 

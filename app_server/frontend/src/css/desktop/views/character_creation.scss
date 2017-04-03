@@ -1,8 +1,21 @@
 @import "../constants.scss";
 
 .character-creation {
+  margin: 0 auto;
+  max-width: 765px;
+
+  .row {
+    display: flex;
+  }
+  
   .image-editor {
     position: relative;
+    border-radius: 2%;
+    border: 2px solid $grey;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     .image-import {
       position: absolute;

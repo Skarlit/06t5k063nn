@@ -5,6 +5,8 @@ import FileInput from "./file_input";
 import ImageCropper from "./image_cropper";
 import FormInput from "./form_input";
 import Avatar from "./avatar";
+import FluxInput from "./flux_input";
+import Button from "./button";
 
 // Widgets components should have no dependency other than lib
-export { Image, Text, ImageImport, FileInput, ImageCropper, FormInput, Avatar };
+export { Image, Text, ImageImport, FileInput, ImageCropper, FormInput, FluxInput, Avatar, Button };

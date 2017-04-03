@@ -24,6 +24,12 @@ export function readImageFile (fileBlob, cb, opt) {
   f.readAsDataURL(fileBlob);
 }
 
+export function base64ToPng (base64Str) {
+  var png = base64Str.split(",")[1];
+
+  return new Blob([window.atob(png)], {type: "image/png", encoding: "utf-8"});
+}
+
 export function imgUrl2Blob (url, cb) {
   let img = new Image();
   img.crossOrigin = "Anonymous";

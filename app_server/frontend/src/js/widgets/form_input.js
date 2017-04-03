@@ -10,7 +10,7 @@ export default class FormInput extends React.Component {
       style = {style}
       value = {this.props.value || ""}
       className={className}
-      onChange={this.props.onInput || noop}
+      onChange={this.props.onChange || noop}
       onFocus={this.props.onFocus || noop}
       onBlur ={this.props.onBlur || noop}
       name={this.props.name}
@@ -19,6 +19,5 @@ export default class FormInput extends React.Component {
 }
 
 FormInput.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  type: React.PropTypes.string.isRequired
+  type: React.PropTypes.string
 };

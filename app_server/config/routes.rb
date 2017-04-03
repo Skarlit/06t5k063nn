@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   namespace :api, :defaults => { :format => 'json' } do
     get 'strings' => 'app_strings#index', as: :get_strings_api
 
-    get 'c/create' => 'character#create', via: :post
-    get 'c/update' => 'character#update', via: :post
+    post 'c/create' => 'character#create'
+    post 'c/update' => 'character#update'
     get 'c/:id' => 'character#show', via: :get
 
     get 'search/va' => 'search#va'

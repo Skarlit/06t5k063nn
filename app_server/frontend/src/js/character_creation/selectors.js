@@ -17,9 +17,13 @@ export const getCharacterImageCropperSession = createSelector(getCharacterSessio
 });
 
 export const getCharacterAvatarImage = createSelector(getCharacter, (characterModel) => {
-  return characterModel.get("avatarImgBlob");
+  return characterModel.get("avatar");
 });
 
 export const getImageCropperVisible = createSelector(getUIState, (ui) => {
   return ui.get("imageCropper");
 });
+
+export const getCharacterName = createSelector(getCharacter, (characterModel) => characterModel.get("name"));
+
+export const getCharacterNameHira = createSelector(getCharacter, (characterModel) => characterModel.get("nameHira"));

@@ -1,9 +1,8 @@
 export default new Immutable.Record({
   id: 0,
-  avatarImgSrc: require("../../img/test/yukina_test.jpg"),
-  avatarImgBlob: null,
+  avatar: null,
   name: "姫柊雪菜",
-  name_hira: "himeragi yukina"
+  nameHira: "himeragi yukina"
   // profile: {
   //   age: "14",
   //   race: "HUMAN",
