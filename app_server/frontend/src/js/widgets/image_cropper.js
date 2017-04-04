@@ -163,7 +163,7 @@ export default class ImageCropper extends React.Component {
     tmpCanvas.height = this.cropH;
     let ctx = tmpCanvas.getContext("2d");
     ctx.putImageData(data, 0, 0);
-    this.props.onSave(tmpCanvas.toDataURL());
+    this.props.onSave(tmpCanvas.toDataURL("image/png"));
   }
   cancel () {
     this.props.onCancel();

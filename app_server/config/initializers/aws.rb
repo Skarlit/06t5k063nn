@@ -16,5 +16,10 @@ else
 end
 
 Rails.application.config.s3_credentials = {
-  :bucket => bucket_name, :access_key_id => creds[0], :secret_access_key => creds[1]
+  :bucket => bucket_name, :access_key_id => creds[0], :secret_access_key => creds[1], :s3_region => "us-west-1"
 }
+
+Paperclip::Attachment.default_options[:url] = ':s3_domain_url'
+Paperclip::Attachment.default_options[:path] = "/image/:class/:basename-:id-:style.:extension"
+Paperclip::Attachment.default_options[:s3_host_name] = 's3-us-west-1.amazonaws.com'
+Paperclip::Attachment.default_options[:s3_protocol] = 'https'

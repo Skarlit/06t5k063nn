@@ -23,7 +23,13 @@ class Api::SearchController < ApplicationController
                }
              },
              size: limit
-
+    es_result.each do |item|
+      c = Character.where({id: item["_id"]}).first
+      puts c.avatar.url
+      item[:url] = c.avatar.url
+    end
+    # c = Character.where({id: es_result["_id"]}).first
+    # es_result[:url] = c.avatar.url(:thumb)
     render json: es_result
   end
 end
