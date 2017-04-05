@@ -2,7 +2,6 @@ class Character
   include Mongoid::Document
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
-  include Paperclip::Glue
 
   attr_accessor :avatar_file_name
 
@@ -14,17 +13,17 @@ class Character
   has_many :voices, inverse_of: :character
   
   # Paperclip
-  validates :avatar, attachment_presence: false
-  has_attached_file :avatar, :storage => :s3,
-                    styles: { medium: "150x150#", thumb: "50x50#" },
-                    # path: "/image/:class/:basename-:id-:style.:extension",
-                    # url: ":s3_domain_url",
-                    # s3_protocol: "https",
-                    # default_url: "/images/missing_:class.png",
-                    size: { in: 0..500.kilobytes },
-                    s3_credentials: Rails.application.config.s3_credentials
+  # validates :avatar, attachment_presence: false
+  # has_attached_file :avatar, :storage => :s3,
+  #                   styles: { medium: "150x150#", thumb: "50x50#" },
+  #                   path: "/image/:class/:basename-:id-:style.:extension",
+  #                   url: ":s3_domain_url",
+  #                   s3_protocol: "https",
+  #                   default_url: "/images/missing_:class.png",
+  #                   size: { in: 0..500.kilobytes },
+  #                   s3_credentials: Rails.application.config.s3_credentials
   
-  do_not_validate_attachment_file_type :avatar
+  # do_not_validate_attachment_file_type :avatar
   
   field :name, localize: true, type: String
   field :name_hira, localize: true, type: String

@@ -1,25 +1,31 @@
-CRED_DIR = "/data/creds/aws"
-CRED_FILE = "s3_bucket.csv"
-unless File.exists?(File.join(CRED_DIR, CRED_FILE))
-  throw "Cannot find #{CRED_FILE} under #{CRED_DIR}"
+CarrierWave.configure do |config|
+  config.storage    = :aws
+  config.aws_bucket = ENV.fetch('s3_bucket_name')
+  config.aws_acl    = 'public-read'
+
+  # Optionally define an asset host for configurations that are fronted by a
+  # content host, such as CloudFront.
+  # config.asset_host = 'http://example.com'
+
+  # The maximum period for authenticated_urls is only 7 days.
+  config.aws_authenticated_url_expiration = 60 * 60 * 24 * 7
+
+  # Set custom options such as cache control to leverage browser caching
+  config.aws_attributes = {
+    expires: 1.week.from_now.httpdate,
+    cache_control: 'max-age=604800'
+  }
+
+  config.aws_credentials = {
+    access_key_id:     ENV.fetch('s3_access_key_id'),
+    secret_access_key: ENV.fetch('s3_secret_access_key'),
+    region:            ENV.fetch('s3_region') # Required
+  }
+
+  # Optional: Signing of download urls, e.g. for serving private content through
+  # CloudFront. Be sure you have the `cloudfront-signer` gem installed and
+  # configured:
+  # config.aws_signer = -> (unsigned_url, options) do
+  #   Aws::CF::Signer.sign_url(unsigned_url, options)
+  # end
 end
-
-creds = File.readlines(File.join(CRED_DIR, CRED_FILE)).pop.chomp.split(',')
-if creds.length != 2
-  throw "Wrong format in file #{CRED_FILE}"
-end
-
-if Rails.env == 'production'
-  bucket_name = ""
-else
-  bucket_name = "char-list-test"
-end
-
-Rails.application.config.s3_credentials = {
-  :bucket => bucket_name, :access_key_id => creds[0], :secret_access_key => creds[1], :s3_region => "us-west-1"
-}
-
-Paperclip::Attachment.default_options[:url] = ':s3_domain_url'
-Paperclip::Attachment.default_options[:path] = "/image/:class/:basename-:id-:style.:extension"
-Paperclip::Attachment.default_options[:s3_host_name] = 's3-us-west-1.amazonaws.com'
-Paperclip::Attachment.default_options[:s3_protocol] = 'https'

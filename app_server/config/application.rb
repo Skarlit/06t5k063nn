@@ -28,7 +28,6 @@ module AppServer
     #   g.orm :active_record
     # end
 
-
     # config.generators do |g|
     #   g.orm             :neo4j
     # end

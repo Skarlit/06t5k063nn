@@ -10,9 +10,8 @@ class Api::CharacterController < ApplicationController
         
       avatar = nil
       if params[:avatar]
-        avatar = Paperclip.io_adapters.for(params[:avatar])
-        avatar.original_filename = "#{SecureRandom.hex(5)}.png"
-        puts avatar.path
+        # avatar = Paperclip.io_adapters.for(params[:avatar])
+        # avatar.original_filename = "#{SecureRandom.hex(5)}.png"
       end
       c = Character.new({
         name: params[:name],
