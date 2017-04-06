@@ -2,8 +2,9 @@ class Character
   include Mongoid::Document
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
+  mount_base64_uploader :avatar, AvatarUploader, file_name: -> (u) { u.id }
 
-  attr_accessor :avatar_file_name
+  # attr_accessor :avatar_file_name
 
   # index name for keeping consistency among existing environments
   index_name Rails.application.config.elasticsearch[:index]

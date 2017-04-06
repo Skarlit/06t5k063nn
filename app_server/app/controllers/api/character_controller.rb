@@ -16,8 +16,8 @@ class Api::CharacterController < ApplicationController
       c = Character.new({
         name: params[:name],
         name_hira: params[:name_hira],
-        avatar: avatar
       })
+      c.avatar = params[:avatar]
       if c.save
         render json: c, :status => 200
       else 

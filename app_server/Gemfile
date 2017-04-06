@@ -31,6 +31,9 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
 gem 'carrierwave-aws'
+gem 'carrierwave-base64'
+gem 'carrierwave-mongoid'
+gem "mini_magick"
 # Use Redis adapter to run Action Cable in production
 # gem 'neo4j', '~> 8.0.5'
 # gem 'redis', '~> 3.0'
