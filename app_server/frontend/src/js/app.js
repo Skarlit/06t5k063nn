@@ -8,6 +8,7 @@ import Routes from "./routes";
 import { nullReducer, getCSRFToken } from "./utility";
 import CharacterCreationReducer from "./character_creation/duck";
 import characterCreationSaga from "./character_creation/sagas";
+import CharacterSaga from "./character/sagas";
 import LoginReducer from "./login/duck";
 import SearchReducer from "./search/duck";
 import CharacterReducer from "./character/duck";
@@ -66,6 +67,7 @@ const init = () => {
   sagaMiddleware.run(localeSagas);
   sagaMiddleware.run(loginSagas);
   sagaMiddleware.run(characterCreationSaga);
+  sagaMiddleware.run(CharacterSaga);
 
     // Create an enhanced history that syncs navigation events with the store
   const history = syncHistoryWithStore(browserHistory, store);

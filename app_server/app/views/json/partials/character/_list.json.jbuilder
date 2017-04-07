@@ -1,0 +1,1 @@
+json.array! characters, partial: 'json/partials/character/thumb', as: :character

@@ -26,11 +26,6 @@ class Api::SearchController < ApplicationController
 
     ids = es_result.collect { |s| s["_id"] }
     characters = Character.where({:_id.in => ids})
-    result = characters.map do |c|  
-      {thumb: c.avatar.url(:small), name: c.name, id: c._id.to_s}
-    end
-    # c = Character.where({id: es_result["_id"]}).first
-    # es_result[:url] = c.avatar.url(:thumb)
-    render json: result
+    render file: "json/partials/character/_list.json.jbuilder", locals: {characters: characters}
   end
 end

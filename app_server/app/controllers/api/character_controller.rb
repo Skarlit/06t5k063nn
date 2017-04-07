@@ -32,7 +32,8 @@ class Api::CharacterController < ApplicationController
   end
 
   def show
-    render json: Character.where(id: params[:id]).first
+    c = Character.where(id: params[:id]).first
+    render file: "json/partials/character/_character.json.jbuilder", locals: {character: c}
   end
 
   class MissingAttribute < ActionController::BadRequest 

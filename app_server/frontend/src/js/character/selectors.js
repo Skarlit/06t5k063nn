@@ -49,14 +49,14 @@ export const getProfile = createSelector(
     };
   });
 
-export const getFeatures = createSelector(
-  getCharacter,
-  (character) => {
-    const features = character.get("features");
-    return {
-      hairType: features.getIn(["hair", "type"]),
-      hairColor: features.getIn(["hair", "colors"]),
-      eyeShape: features.getIn()
-    };
-  },
-);
+// export const getFeatures = createSelector(
+//   getCharacter,
+//   (character) => {
+//     const features = character.get("features");
+//     return {
+//       hairType: features.getIn(["hair", "type"]),
+//       hairColor: features.getIn(["hair", "colors"]),
+//       eyeShape: features.getIn()
+//     };
+//   },
+// );
