@@ -31,7 +31,7 @@ export default (store, history) => (
             });
           }}
         />
-        <Route path="character/:characterId(/:characterName)" component={Character} />
+        <Route path="char/:id(/:characterName)" component={Character} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
       </Route>

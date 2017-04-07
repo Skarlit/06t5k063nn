@@ -3,5 +3,5 @@ class Voice
   field :name, type: String, localize: true
   field :name_hira, type: String, localize: true
 
-  # has_many :characters, inverse_of: voice
+  has_many :characters
 end

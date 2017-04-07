@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     post 'c/update' => 'character#update'
     get 'c/:id' => 'character#show', via: :get
 
-    get 'search/va' => 'search#va'
+    get 'search/cv' => 'search#cv'
     get 'search/char' => 'search#char'
     get 'search/all' => 'search#all'
     get 'search/medium' => 'search#medium'
@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     get "/test" => 'page#test'
   end
   # get '/', to: 'page#home'
-
+  get '/media/:id(/:name)' => 'page#media'
+  get '/cv/:id(/:name)' => 'page#voice'
+  get '/char/:id(/:name)' => 'page#character'
+  get '/artist/:id(/:name)' => 'page#artist'
   get '(*url)' => 'page#home', :constraints => XHRConstraint.new
 end

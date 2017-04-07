@@ -4,6 +4,7 @@
     <%= yield :head %>
     <%= csrf_meta_tags %>
     <meta http-equiv="Content-Security-Policy" content="<%= Rails.application.config.security_policy %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <%= yield :content %>
