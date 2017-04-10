@@ -1,0 +1,6 @@
+{
+  "properties": {
+    "name": { "type": "text" },
+    "name_hira": { "type" : "text"}
+  }
+}

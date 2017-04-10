@@ -7,7 +7,7 @@ export default class ResultEntry extends React.Component {
     const name = result.name;
     let link = `/char/${result.id}/${name}`;
     return <Link to={link}>
-      <Avatar width={50} height={50} image={image} />
+      <Avatar width={64} height={64} image={image} />
       <div>{name}</div>
     </Link>;
   }
