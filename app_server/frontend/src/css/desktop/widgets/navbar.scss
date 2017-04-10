@@ -27,7 +27,7 @@
         text-align: center;
         font-weight: 600;
         color: $site-text-dim;
-        transition: background-color  250ms;
+        transition: background-color, color 350ms;
         border-bottom: 1px solid $site-very-dim;
       }
 

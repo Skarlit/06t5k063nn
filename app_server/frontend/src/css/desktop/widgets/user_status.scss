@@ -74,7 +74,11 @@
     &.toggled {
       height: auto;
       .slider {
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
+
+        a {
+          transform: translate3d(0, 0, 0) !important;
+        }
       }
     }
 
@@ -83,11 +87,10 @@
       width: 100%;
       z-index: $navbar-layer - 1;
       position: absolute;
-      transform: translatex(100%);
+      transform: translate3d(100%, 0, 0);
       transition: transform 250ms ease;
       display: flex;
       flex-direction: column;
-      background-color: $menu-background;
 
       a {
         display: block;
@@ -96,13 +99,34 @@
         text-align: right;
         line-height: 50px;
         box-sizing: border-box;
-
+        background-color: $menu-background;
+        
         &:hover, &:hover .text {
           color: $site-link-hover;
         }
 
         &:not(:last-child) {
           border-bottom: 1px solid $border-color;
+        }
+
+        &:nth-child(1) {
+          transform: translate3d(40%, 0, 0);
+          transition: transform 700ms ease;
+        }
+
+        &:nth-child(2) {
+          transform: translate3d(80%, 0, 0);
+          transition: transform 700ms ease;
+        }
+
+        &:nth-child(3) {
+          transform: translate3d(160%, 0, 0);
+          transition: transform 700ms ease;
+        }
+
+        &:nth-child(4) {
+          transform: translate3d(320%, 0, 0);
+          transition: transform 700ms ease;
         }
 
         i {
