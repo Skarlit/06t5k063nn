@@ -3,6 +3,7 @@ import Cookie from "js-cookie";
 import Api from "./api";
 import { loadStringsAction, REQUEST_STRINGS } from "./duck";
 import { getCurrentLocale, getCachedLanguages } from "./selectors";
+import { killCharacterCache } from "../character/duck";
 
 function* getLocaleStrings (localeChangeAction) {
   // if locale doesn't change, do nothing
@@ -23,6 +24,7 @@ function* getLocaleStrings (localeChangeAction) {
     strings = cacheString;
   }
   yield put(loadStringsAction(strings));
+  yield put(killCharacterCache());
 }
 
 export default function* getLocaleStringsWatcher () {

@@ -9,8 +9,7 @@ export const getAvartarData = (state, props) => {
   };
 };
 
-export const getCharacter = (state, props) => {
-  const { id } = props;
+export const getCharacter = (state, id) => {
   return state.characters.get(id);
 };
 

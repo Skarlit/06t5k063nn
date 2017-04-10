@@ -35,7 +35,7 @@ class CharacterImageEditor extends React.Component {
   render () {
     return <div className="image-editor">
       <Avatar width={300} height={300} image={this.props.avatarImage}>
-        <div>Drag or click here to import an image</div>
+        <div className="import-msg" >Drag or click here to import an image</div>
       </Avatar>
       <ImageImport onImageLoaded={this.props.importImage} onDropError={noop}>
         <FileInput accept="image/*" onChange={this.props.importImage} >

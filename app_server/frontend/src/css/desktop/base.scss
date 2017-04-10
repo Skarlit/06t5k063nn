@@ -4,10 +4,13 @@
 
 html {
   font-family: 'Rounded Mplus 1c', helvetica, arial, 'hiragino kaku gothic pro', meiryo, 'ms pgothic', sans-serif;
+  background-color: $site-background;
+  color: $site-text;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
 .image {
@@ -16,7 +19,7 @@ body {
 
 a {
   text-decoration: none;
-  color: black;
+  color: $site-link;
 }
 
 .fadeIn {
@@ -42,13 +45,12 @@ a {
   bottom: 0;
   width: 100%;
   height: $footer-height;
-  background-color: $main-color;
   text-align: center;
-  color: $grey;
+  background-color: #2c2c2c;
 
   .disclaimer {
-    font-size: 12px;
-    padding: 15px 0;
+    font-size: 8px;
+    margin: 12px 0px;
   }
 }
 
@@ -65,4 +67,20 @@ a {
   left: 0;
   top: 0;
   bottom: 0;
+}
+
+input:focus {
+  outline-color: $input-focus-outline;
+  color: $site-highlight;
+  background-color: $input-background-highlight;
+}
+
+input {
+  background-color: $input-background;
+  font-size: $input-font-size;
+  height: $input-height;
+  line-height: $input-height - 4px;
+  padding: 4px;
+  border: 1px solid $site-link;
+  color: $site-text-dim;
 }

@@ -5,7 +5,6 @@ import { Character } from "../models";
 
 function* loadCharacterAjax (loadCharAction) {
   const result = yield call(loadCharacter, loadCharAction.id);
-
   if (result.status == 200) {
     const model = new Character(result.data);
     yield put(setCharacter(model));

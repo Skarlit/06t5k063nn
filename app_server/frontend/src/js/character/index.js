@@ -4,11 +4,14 @@ import Name from "./components/name";
 import Profile from "./components/profile";
 import { getCharacter } from "./selectors";
 import { loadCharacter } from "./duck";
+import { getCurrentLocale } from "../locale/selectors";
 
 class Character extends React.Component {
   static state2Prop (state, ownProps) {
+    const locale = getCurrentLocale(state);
     return {
-      character: getCharacter(state, { id: ownProps.params.id })
+      character: getCharacter(state, ownProps.params.id),
+      locale: locale
     };
   }
   static action2Prop (dispatch) {
@@ -16,7 +19,13 @@ class Character extends React.Component {
       loadCharacter: (id) => dispatch(loadCharacter(id))
     };
   }
+  componentDidUpdate () {
+    this.loadCharacter();
+  }
   componentDidMount () {
+    this.loadCharacter();
+  }
+  loadCharacter () {
     if (!this.props.character) {
       this.props.loadCharacter(this.props.params.id);
     }
@@ -28,7 +37,7 @@ class Character extends React.Component {
       <div className="row">
         <Avatar imageSrc={c.get("avatar")} />
         <div className="panel">
-          <div> {c.get("name")} </div>
+          <Name name={c.get("name")} nameHira={c.get("nameHira")} locale={this.props.locale} />
         </div>
       </div>
     </div>);

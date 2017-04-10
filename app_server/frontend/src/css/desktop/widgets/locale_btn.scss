@@ -1,21 +1,24 @@
 @import "../constants.scss";
 
 .locale-wrapper {
+  margin-top: 15px;
 
   .locale-title {
     width: 250px;
-    padding: 20px 0 10px 0;
+    padding: 2px 0 5px 0;
     margin: 0 auto;
     border-bottom: 1px solid;
+    font-size: 14px;
   }
 
   .locale-btn {
-    padding-top: 15px;
+    padding-top: 18px;
     display: flex;
     width: 200px;
     justify-content: space-around;
     margin: 0 auto;
-    font-size: 12px;
+    font-size: 14px;
+    height: 40px;
     font-weight: 600;
 
     .item {
@@ -25,14 +28,15 @@
       flex-grow: 1;
 
       &.current {
-        color: white;
+        color: $site-highlight;
+        background: #222;
       }
     }
 
     .icn-jp, .icn-en {
       margin: 0 auto;
-      width: 32px;
-      height: 32px;
+      height: 100%;
+      line-height: 40px;
     }
   }
 

@@ -6,9 +6,8 @@
       width: 100%;
       height: 64px;
       position: relative;
-      background-color: $main-color;
       a, div {
-        color: white;
+        color: $site-header;
       }
     }
 
@@ -16,24 +15,26 @@
       width: 100%;
       height: 30px;
       position: relative;
-      height: 40px;
-      line-height: 40px;
+      height: 46px;
+      line-height: 46px;
       box-sizing: border-box;
       display: flex;
       align-items: center;
       box-sizing: border-box;
-      border-bottom: 2px solid $red;
-
+      
       a {
         flex-grow: 1;
         text-align: center;
         font-weight: 600;
-        background-color: white;
-        transition: background-color 500ms;
+        color: $site-text-dim;
+        transition: background-color  250ms;
+        border-bottom: 1px solid $site-very-dim;
       }
 
       a:hover {
-        background-color: $red;
+        cursor: pointer;
+        color: $site-highlight;
+        background-color: #2c2c2c;
       }
     }
   }

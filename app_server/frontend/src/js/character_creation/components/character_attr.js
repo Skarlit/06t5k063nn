@@ -23,14 +23,20 @@ class CharacterAttr extends React.Component {
     };
   }
   render () {
-    return <div>
-      <label><Text textKey="NAME" />
-        <FluxInput onChange={this.props.updateName} value={this.props.name} />
-      </label>
-      <label><Text textKey="NAME_HIRA" />
-        <FluxInput onChange={this.props.updateNameHira} value={this.props.nameHira} />
-      </label>
-      <Button onClick={this.props.submitCharacter} type="confirm">Create</Button>
+    return <div className="attr-inputs" >
+      <div className="cell">
+        <label><Text textKey="NAME" />
+          <FluxInput onChange={this.props.updateName} value={this.props.name} />
+        </label>
+      </div>
+      <div className="cell">
+        <label><Text textKey="NAME_HIRA" />
+          <FluxInput onChange={this.props.updateNameHira} value={this.props.nameHira} />
+        </label>
+      </div>
+      <div className="cell">
+        <Button onClick={this.props.submitCharacter} type="confirm">Create</Button>
+      </div>
     </div>;
   }
 }

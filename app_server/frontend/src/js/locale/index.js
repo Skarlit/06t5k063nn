@@ -33,12 +33,10 @@ class LocaleBtn extends React.Component {
       <div className="locale-title"><Text textKey="LANGUAGE" /></div>
       <div className="locale-btn">
         <a href="javascript://" className={`item ${this.props.locale === "en" ? "current" : ""}`} onClick={this.enLocale}>
-          <div className="icn-en" />
-          <div>English</div>
+          <div className="icn-en">English</div>
         </a>
         <a href="javascript://" className={`item ${this.props.locale === "ja" ? "current" : ""}`} onClick={this.jaLocale}>
-          <div className="icn-jp" />
-          <div>日本語</div>
+          <div className="icn-jp" >日本語</div>
         </a>
       </div>
     </div>);
