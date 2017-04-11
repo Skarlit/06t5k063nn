@@ -1,18 +1,15 @@
 import CircularSlider from "./circular_slider";
 import HorizontalSlider from "./horizontal_slider";
-import mat2d from "gl-matrix-mat2d";
-import vec2 from "gl-matrix-vec2";
 import Text from "./text";
+import {ImageTransform} from "../utility";
 
-const PREVIEW = "preview";
-const EDIT = "edit";
 export default class ImageCropper extends React.Component {
   constructor (props) {
     super(props);
-    this.state = {
-      mode: this.props.startWithEdit ? EDIT : PREVIEW
-    };
-    this.initCanvasState(this.props.model);
+    this.state = {ready: false};
+    this.bindActions();
+  }
+  bindActions () {
     this.rotateImage = this.rotateImage.bind(this);
     this.scaleImage = this.scaleImage.bind(this);
     this.start = this.start.bind(this);
@@ -20,7 +17,6 @@ export default class ImageCropper extends React.Component {
     this.release = this.release.bind(this);
     this.drawFrame = this.drawFrame.bind(this);
     this.reset = this.reset.bind(this);
-    this.flipY = this.flipY.bind(this);
     this.save = this.save.bind(this);
     this.cancel = this.cancel.bind(this);
   }
@@ -28,97 +24,44 @@ export default class ImageCropper extends React.Component {
     return this.props.model !== nextProp.model ||
        (this.state.mode !== nextState.mode);
   }
-  initCanvasState (model) {
-    this.rot = 0;
-    this.x = 0;
-    this.y = 0;
-    this.scale = 1;
-    this.cropW = model.get("cropWidth");
-    this.cropH = model.get("cropHeight");
-    this.canvasWidth = Math.min(window.innerWidth, 600);
-    this.canvasHeight = Math.min(window.innerHeight - 300, 600);
-
-    this.srcCanvas = document.createElement("canvas");
-    this.srcCtx = this.srcCanvas.getContext("2d");
-    this.srcWidth = this.canvasWidth;
-    this.srcHeight = this.canvasHeight;
-
-    this.ctxTransform = mat2d.identity(mat2d.create());
-    this._prevScale = this.scale;
-    this._prevRot = this.rot;
-    this._srcCenter = vec2.create();
-    this._negSrcCenter = vec2.create();
-    this._canvasCenter = [this.canvasWidth * 0.5, this.canvasHeight * 0.5];
-    this._invCtxTransform = mat2d.create();
-    this._updateComputationCache();
-
-    /* pre initialized dummy local variables */
-    this._d = vec2.create();
-    this._scaleMatrix = mat2d.create();
-  }
-  _updateComputationCache () {
-    mat2d.invert(this._invCtxTransform, this.ctxTransform);
-    this._srcCenter[0] = 0.5 * this.srcWidth;
-    this._srcCenter[1] = 0.5 * this.srcHeight;
-    this._negSrcCenter[0] = -this._srcCenter[0];
-    this._negSrcCenter[1] = -this._srcCenter[1];
-  }
   initCanvasImage () {
-    this.ctx = this.refs.canvas.getContext("2d");
+    let self = this;
     let img = new Image();
 
-    let $this = this;
-
     img.onload = function () {
-      $this.srcCanvas.width = this.width;
-      $this.srcCanvas.height = this.height;
-      $this.srcWidth = this.width;
-      $this.srcHeight = this.height;
-      $this.srcCtx.drawImage(img, 0, 0);
-      $this.ctx.drawImage(img, 0, 0);
-      $this._updateComputationCache();
+      // Load source image into source canvas
+      self.srcCanvas = document.createElement("canvas");
+      self.srcCtx = self.srcCanvas.getContext("2d");
+      self.srcCanvas.width = this.width;
+      self.srcCanvas.height = this.height;
+      self.srcCtx.drawImage(img, 0, 0);
+
+      // Draw source image to display canvas
+      self.ctx = self.refs.canvas.getContext("2d");
+      self.ctx.drawImage(img, 0, 0);
+
+      // Init transform of the display image.
+      self.imageTransform = new ImageTransform(self.srcCanvas.width, self.srcCanvas.height, self.canvasWidth, self.canvasHeight);
+
+      self.setState({ready: true});
     };
     img.src = this.props.model.get("imageBlob");
   }
-  componentDidUpdate () {
-    this.initCanvasImage();
-  }
   componentDidMount () {
-    this.initCanvasImage();
+    if (!this.state.ready) {
+      this.initCanvasImage();
+    }
   }
   rotateImage (rad) {
-    this.rot = -rad; // negative to adjust clockwise direction
-    let dRad = this.rot - this._prevRot;
-    // Note: no need to scale srcCenter, the scaling is entailed in ctxTranform,
-    // when we draw the image, it will scale the it.
-    mat2d.translate(this.ctxTransform, this.ctxTransform, this._srcCenter);
-    mat2d.rotate(this.ctxTransform, this.ctxTransform, dRad);
-    mat2d.translate(this.ctxTransform, this.ctxTransform, this._negSrcCenter);
-    this._prevRot = this.rot;
+    this.imageTransform.rotate(rad);
     window.requestAnimationFrame(this.drawFrame);
   }
   scaleImage (factor) {
-    this.scale = factor;
-    let ds = this.scale / this._prevScale;
-    // we use transforMat2d because we want to exact coordinate of the center in the frame of the image.
-    // we must consider translation as well.
-    vec2.transformMat2d(this._d, this._canvasCenter, this._invCtxTransform);
-    // Find the offset by setting the fixed point of the scaling to the center
-    this._scaleMatrix[0] = ds; this._scaleMatrix[2] = 0; this._scaleMatrix[4] = this._d[0] * (1 - ds);
-    this._scaleMatrix[1] = 0; this._scaleMatrix[3] = ds; this._scaleMatrix[5] = this._d[1] * (1 - ds);
-
-    // Apply the scaling matrix as passive transformation.
-    mat2d.mul(this.ctxTransform, this.ctxTransform, this._scaleMatrix);
-    this._prevScale = this.scale;
-    window.requestAnimationFrame(this.drawFrame);
-  }
-  flipY () {
-    mat2d.scale(this.ctxTransform, this.ctxTransform, [-1, 1]);
-    mat2d.translate(this.ctxTransform, this.ctxTransform, [-this.srcWidth * 0.5, 0]);
+    this.imageTransform.zoom(factor);
     window.requestAnimationFrame(this.drawFrame);
   }
   reset () {
-    this.ctxTransform = mat2d.create();
+    this.imageTransform.reset();
     window.requestAnimationFrame(this.drawFrame);
   }
   move (e) {
@@ -128,12 +71,7 @@ export default class ImageCropper extends React.Component {
       let dy = evt.clientY - this._prevY;
       this._prevX = evt.clientX;
       this._prevY = evt.clientY;
-      // we use mat2 instead of mat2d here because we are only interested in
-      // the direction of the vertical vector on screen written in image frame.
-      vec2.transformMat2(this._d, [dx, dy], this._invCtxTransform);
-      // If we use mat2d above, this._id will be mapped to some random location
-      // which will mess up ctxTranform when we translate.
-      mat2d.translate(this.ctxTransform, this.ctxTransform, this._d);
+      this.imageTransform.move(dx, dy);
       window.requestAnimationFrame(this.drawFrame);
     }
   }
@@ -148,15 +86,15 @@ export default class ImageCropper extends React.Component {
   drawFrame () {
     this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
     this.ctx.save();
-    this.ctx.setTransform.apply(this.ctx, this.ctxTransform);
+    this.ctx.setTransform.apply(this.ctx, this.imageTransform.transform);
     this.ctx.drawImage(this.srcCanvas, 0, 0);
     this.ctx.restore();
-    this._updateComputationCache();
+    this.imageTransform.updateInvertCache();
   }
   save () {
     let data = this.ctx.getImageData(
-      this._canvasCenter[0] - 0.5 * this.cropW,
-      this._canvasCenter[1] - 0.5 * this.cropH,
+      0.5 * (this.canvasWidth - this.cropW),
+      0.5 * (this.canvasHeight - this.cropH),
       this.cropW, this.cropH);
     let tmpCanvas = document.createElement("canvas");
     tmpCanvas.width = this.cropW;
@@ -174,10 +112,6 @@ export default class ImageCropper extends React.Component {
           <i className="fa fa-undo"></i>
         </Text>
     </a>;
-  }
-  renderFlipBtn () {
-    return null;
-    // return <a className="flip-btn" onClick={this.flipY}>Mirror</a>;
   }
   renderEditor () {
     const cropAreaStyle = {
@@ -205,6 +139,15 @@ export default class ImageCropper extends React.Component {
     </div>;
   }
   render () {
+    // Init dimensions
+    this.cropW = this.props.model.get("cropWidth");
+    this.cropH = this.props.model.get("cropHeight");
+    this.canvasWidth = Math.min(window.innerWidth, 600);
+    this.canvasHeight = Math.min(window.innerHeight - 300, 600);
+
+    let hSliderHigh = 5;
+    let hSliderLow = 0.1;
+
     return <div className="image-cropper">
       <div className="backdrop"></div>
       <div className="container">
@@ -215,8 +158,7 @@ export default class ImageCropper extends React.Component {
           {this.renderEditor()}
           <div className="bottom-wrap">
             {this.renderResetBtn()}
-            <HorizontalSlider pipeHeight={8} width={300} height={24} high={3} low={0.1} start={1} onUpdate={this.scaleImage} />
-            {this.renderFlipBtn()}
+            <HorizontalSlider pipeHeight={8} width={300} height={24} high={hSliderHigh} low={hSliderLow} start={1} onUpdate={this.scaleImage} />
           </div>
         </div>
         {this.renderWindowControl()}

@@ -1,5 +1,9 @@
 const httpRegex = /^(http)([^s])/;
 
+import ImageTransform from "./image_transform";
+
+export {ImageTransform};
+
 export function filterHttpUrl (url) {
   if (httpRegex.test(url)) {
     return url.replace(httpRegex, "$1s$2");
