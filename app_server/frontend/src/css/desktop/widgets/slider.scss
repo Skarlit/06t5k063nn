@@ -7,6 +7,12 @@
   user-select: none;
   cursor: default;
   padding: 30px 20px;
+  opacity: 0.8;
+  transition: opacity 300ms ease;
+
+  &:hover {
+    opacity: 1;
+  }
 
   .slide-mask {
     top: 0;
@@ -19,13 +25,13 @@
     position: relative;
     border-radius: 8px;
     box-shadow: 0px 0px 23px 4px rgba(0,0,0,0.28);
-    background-color: $red;
+    background-color: #333333;
   }
   .knob {
     position: absolute;
     border-radius: 100%;
     top: 50%;
-    background-color: white;
+    background-color: #dddddd;
     transition: left 10ms;
   }
   .stats {
@@ -39,7 +45,7 @@
     margin-left: -30px;
     text-align: center;
     font-size: 14px;
-    color: white;
+    color: #dddddd;
 
     &:before {
       content: "";
@@ -62,12 +68,18 @@
   padding: 20px;
   user-select: none;
   cursor: default;
+  opacity: 0.8;
+  transition: opacity 300ms ease;
+
+  &:hover {
+    opacity: 1;
+  }
 
   .bg-disk {
-    fill: $red;
+    fill: $site-link;
   }
   .front-disk {
-    fill: $dark;
+    fill: #333333;
   }
   .spin-mask {
     top: 0;
@@ -81,14 +93,15 @@
     }
   }
   .knob {
-    fill: white;
+    fill: #dddddd;
   }
   .knob-mask {
     fill: transparent;
   }
   .stats {
     font-size: 16px;
-    fill: white;
+    fill: #dddddd;
+    font-weight: bold;
     stroke: none;
     alignment-baseline: central;
   }

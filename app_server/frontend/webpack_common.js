@@ -11,7 +11,8 @@ module.exports = {
       "react-redux", "react-router-redux", "axios",
       "react-router", "immutable", "redux-saga", "reselect", "babel-polyfill"],
     app_style: ["./src/css/desktop.js"],
-    mobile_style: ["./src/css/mobile.js"]
+    mobile_style: ["./src/css/mobile.js"],
+    test: ["./src/js/test.js"] // for testing individual components
   },
   extractTextLoader: function () {
     return {

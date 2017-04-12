@@ -1,11 +1,34 @@
-button {
-  padding: 4px 8px;
-  background-color: #444;
-  border: none;
-  color: #bbbbbb;
-  font-size: 16px;
+@import "../constants.scss";
 
-  &:hover {
+button {
+  border: none;
+}
+
+.save-btn:hover {
+  color: #73c8d0;
+}
+
+.cancel-btn:hover {
+  color: #f97575;
+}
+
+.reset-btn:hover {
+  color: #97ffad;
+}
+
+button, .reset-btn, .flip-btn, .save-btn, .cancel-btn {
+  color: #dddddd;
+  background-color: #444444;
+  font-weight: bold;
+  padding: 4px 8px;
+  font-size: 16px;
+  user-select: none;
+  cursor: pointer;
+  transition: color, background-color 500ms ease;
+  text-align: center;
+
+   &:hover {
     cursor: pointer;
+    background-color: #333333;
   }
 }

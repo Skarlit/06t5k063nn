@@ -133,7 +133,7 @@ export default class ImageCropper extends React.Component {
           </div>;
   }
   renderWindowControl () {
-    return <div className="window-control-wrap" style={{width: this.canvasWidth}}>
+    return <div className="window-control-wrap" >
       <a className="save-btn" onClick={this.save} href="javascript://"><Text textKey="SAVE" /></a>
       <a className="cancel-btn" onClick={this.cancel} href="javascript://"><Text textKey="CANCEL" /></a>
     </div>;

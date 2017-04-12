@@ -11,9 +11,9 @@
   left: 0;
   top: 0;
   z-index: $backdrop-layer;
-
+  
   .backdrop {
-    background: rgba(0,0,0, 0.9);
+    background: rgba(0, 0, 0, 0.8);
   }
 
   .container {
@@ -22,6 +22,7 @@
   }
 
   .frame-wrap {
+    width: 100%;
     position: relative;
     margin: 0 auto;
     border: 2px solid #aeaeae;
@@ -74,21 +75,19 @@
   .window-control-wrap {
     display: flex;
     justify-content: space-around;
-    padding: 10px 20px;
+    padding: 8px 4px;
     position: relative;
     margin: 0 auto;
   }
-  .reset-btn, .flip-btn, .save-btn, .cancel-btn {
-    color: white;
-    background: $red;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: bold;
-    user-select: none;
-    cursor: pointer;
-  }
 
+  .save-btn, .cancel-btn {
+    flex-grow: 1;
+    padding: 8px 16px;
+  }
   .save-btn {
-    background-color: $mid-green
+    margin-right: 2px;
+  }
+  .cancel-btn {
+    margin-left: 2px;
   }
 }
