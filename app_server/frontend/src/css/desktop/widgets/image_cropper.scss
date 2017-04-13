@@ -22,7 +22,6 @@
   }
 
   .frame-wrap {
-    width: 100%;
     position: relative;
     margin: 0 auto;
     border: 2px solid #aeaeae;
@@ -73,6 +72,7 @@
     }
   }
   .window-control-wrap {
+    width: 100%;
     display: flex;
     justify-content: space-around;
     padding: 8px 4px;

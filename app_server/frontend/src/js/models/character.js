@@ -2,7 +2,7 @@ export default new Immutable.Record({
   id: 0,
   avatar: null,
   name: "姫柊雪菜",
-  nameHira: "himeragi yukina"
+  nameHira: "himeragi yukina",
   // profile: {
   //   age: "14",
   //   race: "HUMAN",
@@ -22,20 +22,23 @@ export default new Immutable.Record({
   //   jp: "",
   //   en: ""
   // },
-  // features: {
-  //   hair: {
-  //     type: "Semi Long",
-  //     colors: []
-  //   },
-  //   eyes: {
-  //     eyeShape: "Normal",
-  //     pupilShape: "Round",
-  //     pupilColors: []
-  //   },
-  //   facialProportion: {
+  features: {
+    hair: {
+      type: "Semi Long",
+      colors: []
+    },
+    eyes: {
+      eyeShape: "Normal",
+      pupilShape: "Round",
+      pupilColors: []
+    },
+    facialProportion: {
 
-  //   }
-  // },
+    }
+  },
+  tags: {
+
+  }
   // clothings: {
 
   // },

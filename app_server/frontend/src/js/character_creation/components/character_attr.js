@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { setCharacterAttr, submitCharacter } from "../duck";
 import { getCharacterName, getCharacterNameHira } from "../selectors";
-import { FluxInput, Text, Button } from "../../widgets";
+import { FluxInput, Text, Button, DropDown } from "../../widgets";
 
 class CharacterAttr extends React.Component {
   static mapState2Props (state) {
@@ -37,6 +37,7 @@ class CharacterAttr extends React.Component {
       <div className="cell">
         <Button onClick={this.props.submitCharacter} type="confirm">Create</Button>
       </div>
+      <DropDown options={[{text: "Long", value: "long"}, {text: "Semi", value: "semi"}, {text: "twin tail", value: "twin"}]} onSelect={() => {}} />
     </div>;
   }
 }
