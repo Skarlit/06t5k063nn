@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import axios from "axios";
 import ResultEntry from "./components/result_entry";
+import { Grid, Row, Col } from "react-flexbox-grid";
 
 const mapStateToProps = (state, ownProps) => ({
   strings: state.language.get("current")
@@ -33,23 +34,31 @@ class Search extends React.Component {
     for (let i = 0; i < this.state.searchResults.length; i++) {
       results.push(<ResultEntry key={"result-" + i} result = {this.state.searchResults[i]} />);
     }
-    return (<div className="pure-form">
-      {strings.get("CHAR_SEARCH_DESCR")}
-      <div className="input-wrap">
-        <input type="text" onChange={this.onChange} placeholder="Search here ..." />
-      </div>
-      <div className="option-wrap">
-        <div className="options">
-          {strings.get("CHAR_SEARCH_OPTION")}
+    return (<Grid fluid>
+      <Row center="xs">
+        {strings.get("CHAR_SEARCH_DESCR")}
+      </Row>
+      <Row center="xs">
+        <div className="input-wrap">
+          <input type="text" onChange={this.onChange} placeholder="Search here ..." />
         </div>
-      </div>
-      <div>
-        {strings.get("CHAR_SEARCH_RESULT")}
-        <ul>
-          {results}
-        </ul>
-      </div>
-    </div>);
+      </Row>
+      <Row center="xs">
+        <div className="option-wrap">
+          <div className="options">
+            {strings.get("CHAR_SEARCH_OPTION")}
+          </div>
+        </div>
+      </Row>
+      <Row center="xs">
+        <div>
+          {strings.get("CHAR_SEARCH_RESULT")}
+          <ul>
+            {results}
+          </ul>
+        </div>
+      </Row>
+    </Grid>);
   }
 }
 

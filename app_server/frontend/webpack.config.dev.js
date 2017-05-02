@@ -1,5 +1,4 @@
 const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const pathConfig = require("./path_config");
 const commonConfig = require("./webpack_common");
@@ -20,6 +19,7 @@ module.exports = {
     loaders: [
       commonConfig.babelLoader(),
       commonConfig.extractTextLoader(),
+      commonConfig.flexGridLoader(),
       {
         test: /\.off(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "url-loader?limit=10000&mimetype=application/font-woff"
@@ -42,7 +42,6 @@ module.exports = {
   plugins: [
     commonConfig.commonChunk("dev"),
     new webpack.ProvidePlugin({React: "react", Immutable: "immutable"}),
-    new ExtractTextPlugin("[name].css"),
     new ManifestPlugin({fileName: "manifest.json", writeToFileEmit: true})
   ]
 };

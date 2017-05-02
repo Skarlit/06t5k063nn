@@ -16,6 +16,8 @@ import LocaleReducer from "./locale/duck";
 import { loginInit, loginSagas } from "./login";
 import { localeSagas } from "./locale";
 
+require("../css/app.scss");
+
 const axiosSetting = () => {
   axios.defaults.headers.post["X-CSRF-Token"] = getCSRFToken();
   axios.defaults.headers.delete["X-CSRF-Token"] = getCSRFToken();

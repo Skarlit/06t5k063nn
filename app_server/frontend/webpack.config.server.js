@@ -3,6 +3,9 @@ let pathConfig = require("./path_config");
 
 module.exports = {
         // webpack-dev-server options
+  headers: {
+    "Access-Control-Allow-Origin": "https://localhost:9000"
+  },
   https: true,
   cert: fs.readFileSync(pathConfig.devCert, "utf8"),
   key: fs.readFileSync(pathConfig.devKey, "utf8"),
@@ -21,6 +24,5 @@ module.exports = {
   },
         // It's a required option.
   publicPath: "/assets/",
-  headers: { "X-Custom-Header": "yes" },
   stats: { colors: true }
 };

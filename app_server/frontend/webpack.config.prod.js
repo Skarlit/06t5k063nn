@@ -1,7 +1,4 @@
-const path = require("path");
 const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const UglifyJsPlugin = require("webpack/lib/optimize/UglifyJsPlugin");
 const pathConfig = require("./path_config");
@@ -22,7 +19,7 @@ module.exports = {
     loaders: [
       commonConfig.babelLoader(),
       commonConfig.extractTextLoader(),
-      // { test: /\.png$/, loader: "url-loader?limit=100000" },
+      commonConfig.flexGridLoader(),
       { test: /\.off(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
       { test: /\.styl$/,
@@ -42,11 +39,10 @@ module.exports = {
   watch: false,
   plugins: [
     commonConfig.commonChunk("prod"),
-    new webpack.ProvidePlugin({ React: "react", Immutable: "immutable"}),
-    new ExtractTextPlugin("[name]_[hash].css"),
+    new webpack.ProvidePlugin({React: "react", Immutable: "immutable"}),
     new webpack.DefinePlugin({
       "process.env": {
-        NODE_ENV: PRODUCTION
+        NODE_ENV: "production"
       }
     }),
     new UglifyJsPlugin({
