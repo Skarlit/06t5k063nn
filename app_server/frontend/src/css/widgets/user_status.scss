@@ -1,4 +1,3 @@
-@import "../constants.scss";
 
 .user-status {
   position: relative;
@@ -30,7 +29,7 @@
     right: 5px;
     background-position: center;
     background-size: contain;
-    border: 2px solid $avatar-border;
+    border: 2px solid $blue;
     border-radius: 100%;
     width: 50px;
     height: 50px;
@@ -38,8 +37,13 @@
   }
 
   .user-name {
+    max-width: 148px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 18px;
     font-weight: 600;
+    color: $blue;
 
     .user-icon:hover & {
       color: $site-link-hover;
@@ -51,6 +55,12 @@
     display: block;
     position: relative;
     padding-right: 64px;
+    padding-left: 8px;
+    background: $dark;
+
+    &:hover {
+      background: $darker;
+    }
   }
 
   .backdrop {
@@ -82,6 +92,10 @@
       }
     }
 
+    &.toggled ~ .status {
+      background-color: $darker;
+    }
+
     .slider {
       position: absolute;
       width: 100%;
@@ -98,11 +112,17 @@
         padding: 4px 64px 4px 0px;
         text-align: right;
         line-height: 50px;
+        color: $bright;
         box-sizing: border-box;
-        background-color: $menu-background;
+        background-color: $dark;
+        border-left: 1px solid $bright;
         
         &:hover, &:hover .text {
-          color: $site-link-hover;
+          color: $brightest;
+        }
+
+        &:last-child {
+          border-bottom: 1px solid $bright;
         }
 
         &:not(:last-child) {

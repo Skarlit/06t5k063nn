@@ -1,11 +1,9 @@
 @import url(https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css);
-@import "./constants.scss";
-
 
 html {
   font-family: 'Rounded Mplus 1c', helvetica, arial, 'hiragino kaku gothic pro', meiryo, 'ms pgothic', sans-serif;
   background-color: $site-background;
-  color: $site-text;
+  color: $grey;
 }
 
 body {

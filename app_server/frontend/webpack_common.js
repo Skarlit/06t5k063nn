@@ -8,7 +8,8 @@ module.exports = {
     character_creation: ["./src/js/character_creation/index.js"],
     lib: ["react", "react-dom", "redux", "react-modal",
       "react-redux", "react-router-redux", "axios",
-      "react-router", "immutable", "redux-saga", "reselect", "babel-polyfill", "react-flexbox-grid", "js-cookie", "ramda", "prop-types"],
+      "react-router", "immutable", "redux-saga", "reselect", "babel-polyfill",
+      "js-cookie", "ramda", "prop-types"],
     test: ["./src/js/test.js"] // for testing individual components
   },
   extractTextLoader: function () {
